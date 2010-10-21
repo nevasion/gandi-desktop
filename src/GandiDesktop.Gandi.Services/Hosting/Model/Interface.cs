@@ -5,34 +5,48 @@ namespace GandiDesktop.Gandi.Services.Hosting.Model
 {
     public class Interface
     {
-        [XmlRpcMember("id")]
+        private class XmlRpcMappingNames
+        {
+            public const string Id = "id";
+            public const string DataCenterId = "datacenter_id";
+            public const string Created = "date_created";
+            public const string LastUpdated = "date_updated";
+            public const string Num = "num"; 
+            public const string State = "state";
+            public const string Bandwidth = "bandwidth";
+            public const string Type = "type";
+            public const string VirtualMachineId = "vm_id";
+            public const string IpAddressIds = "ips";
+        }
+
+        [XmlRpcMember(XmlRpcMappingNames.Id)]
         public int Id { get; set; }
 
-        [XmlRpcMember("datacenter_id")]
+        [XmlRpcMember(XmlRpcMappingNames.DataCenterId)]
         public int DataCenterId { get; set; }
 
-        [XmlRpcMember("date_created")]
+        [XmlRpcMember(XmlRpcMappingNames.Created)]
         public DateTime Created { get; set; }
 
-        [XmlRpcMember("date_updated")]
+        [XmlRpcMember(XmlRpcMappingNames.LastUpdated)]
         public DateTime LastUpdated { get; set; }
 
-        [XmlRpcMember("num")]
+        [XmlRpcMember(XmlRpcMappingNames.Num)]
         public int Num { get; set; }
 
-        [XmlRpcMember("state")]
-        public object State { get; set; }
+        [XmlRpcMember(XmlRpcMappingNames.State)]
+        public string State { get; set; }
 
-        [XmlRpcMember("bandwidth")]
-        public object Bandwidth { get; set; }
+        [XmlRpcMember(XmlRpcMappingNames.Bandwidth)]
+        public string Bandwidth { get; set; }
 
-        [XmlRpcMember("type")]
-        public object Type { get; set; }
+        [XmlRpcMember(XmlRpcMappingNames.Type)]
+        public string Type { get; set; }
 
-        [XmlRpcMember("vm_id")]
+        [XmlRpcMember(XmlRpcMappingNames.VirtualMachineId)]
         public int VirtualMachineId { get; set; }
 
-        [XmlRpcMember("ips")]
-        public int[] IpIds { get; set; }
+        [XmlRpcMember(XmlRpcMappingNames.IpAddressIds)]
+        public int[] IpAddressIds { get; set; }
     }
 }

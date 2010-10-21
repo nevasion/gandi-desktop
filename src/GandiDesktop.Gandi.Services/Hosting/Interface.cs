@@ -17,7 +17,7 @@ namespace GandiDesktop.Gandi.Services.Hosting
         public object Bandwidth { get; private set; }
         public object Type { get; private set; }
         public VirtualMachine VirtualMachine { get; internal set; }
-        public IpAddress[] Ips { get; private set; }
+        public IpAddress[] IpAddresses { get; private set; }
 
         public Interface(Mapping.Interface iface, DataCenter[] dataCenters, IpAddress[] ips)
         {
@@ -32,16 +32,16 @@ namespace GandiDesktop.Gandi.Services.Hosting
             this.VirtualMachine = null;
 
             List<IpAddress> ipList = new List<IpAddress>();
-            foreach (int ipId in iface.IpIds)
+            foreach (int ipId in iface.IpAddressIds)
             {
-                IpAddress ip = ips.SingleOrDefault(i => i.Id == ipId);
+                IpAddress ipAddress = ips.SingleOrDefault(i => i.Id == ipId);
 
-                if (ip.Interface == null)
-                    ip.Interface = this;
+                if (ipAddress.Interface == null)
+                    ipAddress.Interface = this;
 
-                ipList.Add(ip);
+                ipList.Add(ipAddress);
             }
-            this.Ips = ipList.ToArray();
+            this.IpAddresses = ipList.ToArray();
         }
     }
 }

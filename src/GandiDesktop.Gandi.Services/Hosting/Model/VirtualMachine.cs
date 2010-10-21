@@ -38,7 +38,7 @@ namespace GandiDesktop.Gandi.Services.Hosting.Model
         public string Description { get; set; }
 
         [XmlRpcMember(XmlRpcMappingNames.State)]
-        public object State { get; set; }
+        public string State { get; set; }
 
         [XmlRpcMember(XmlRpcMappingNames.Memory)]
         public int Memory { get; set; }

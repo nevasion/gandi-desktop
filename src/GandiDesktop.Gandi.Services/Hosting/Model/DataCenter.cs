@@ -4,13 +4,20 @@ namespace GandiDesktop.Gandi.Services.Hosting.Model
 {
     public class DataCenter
     {
-        [XmlRpcMember("id")]
+        private class XmlRpcMappingNames
+        {
+            public const string Id = "id";
+            public const string Name = "name";
+            public const string Country = "country";
+        }
+
+        [XmlRpcMember(XmlRpcMappingNames.Id)]
         public int Id { get; set; }
 
-        [XmlRpcMember("name")]
+        [XmlRpcMember(XmlRpcMappingNames.Name)]
         public string Name { get; set; }
 
-        [XmlRpcMember("country")]
+        [XmlRpcMember(XmlRpcMappingNames.Country)]
         public string Country { get; set; }
     }
 }

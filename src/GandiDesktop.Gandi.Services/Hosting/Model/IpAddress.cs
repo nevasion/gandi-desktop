@@ -5,31 +5,44 @@ namespace GandiDesktop.Gandi.Services.Hosting.Model
 {
     public class IpAddress 
     {
-        [XmlRpcMember("id")]
+        private class XmlRpcMappingNames
+        {
+            public const string Id = "id";
+            public const string DataCenterId = "datacenter_id";
+            public const string InterfaceId = "iface_id";
+            public const string Created = "date_created";
+            public const string LastUpdated = "date_updated";
+            public const string Ip = "ip";
+            public const string Reverse = "reverse";
+            public const string State = "state";
+            public const string Version = "version";
+        }
+
+        [XmlRpcMember(XmlRpcMappingNames.Id)]
         public int Id { get; set; }
 
-        [XmlRpcMember("datacenter_id")]
+        [XmlRpcMember(XmlRpcMappingNames.DataCenterId)]
         public int DataCenterId { get; set; }
 
-        [XmlRpcMember("iface_id")]
+        [XmlRpcMember(XmlRpcMappingNames.InterfaceId)]
         public int InterfaceId { get; set; }
 
-        [XmlRpcMember("date_created")]
+        [XmlRpcMember(XmlRpcMappingNames.Created)]
         public DateTime Created { get; set; }
 
-        [XmlRpcMember("date_updated")]
+        [XmlRpcMember(XmlRpcMappingNames.LastUpdated)]
         public DateTime LastUpdated { get; set; }
 
-        [XmlRpcMember("ip")]
+        [XmlRpcMember(XmlRpcMappingNames.Ip)]
         public string Ip { get; set; }
 
-        [XmlRpcMember("reverse")]
+        [XmlRpcMember(XmlRpcMappingNames.Reverse)]
         public string Reverse { get; set; }
 
-        [XmlRpcMember("state")]
-        public object State { get; set; }
+        [XmlRpcMember(XmlRpcMappingNames.State)]
+        public string State { get; set; }
 
-        [XmlRpcMember("version")]
-        public object Version { get; set; }
+        [XmlRpcMember(XmlRpcMappingNames.Version)]
+        public string Version { get; set; }
     }
 }
