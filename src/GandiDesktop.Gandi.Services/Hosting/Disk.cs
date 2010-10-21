@@ -11,9 +11,9 @@ namespace GandiDesktop.Gandi.Services.Hosting
         public DateTime Created { get; private set; }
         public DateTime LastUpdated { get; private set; }
         public int Size { get; private set; }
-        public object State { get; private set; }
-        public object Visibility { get; private set; }
-        public object Type { get; private set; }
+        public string State { get; private set; }
+        public string Visibility { get; private set; }
+        public string Type { get; private set; }
         public bool IsBootDisk { get; private set; }
         public VirtualMachine[] VirtualMachines { get; internal set; }
         public string KernelVersion { get; private set; }

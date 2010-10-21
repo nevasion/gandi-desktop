@@ -14,8 +14,8 @@ namespace GandiDesktop.Gandi.Services.Hosting
         public DateTime LastUpdated { get; private set; }
         public IPAddress Ip { get; private set; }
         public string Reverse { get; private set; }
-        public object State { get; private set; }
-        public object Version { get; private set; }
+        public string State { get; private set; }
+        public string Version { get; private set; }
 
         public IpAddress(Mapping.IpAddress ipAddress, DataCenter[] dataCenters)
         {

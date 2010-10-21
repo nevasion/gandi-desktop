@@ -11,7 +11,7 @@ namespace GandiDesktop.Gandi.Services.Hosting
         public DataCenter DataCenter { get; set; }
         public string Hostname { get; set; }
         public string Description { get; set; }
-        public object State { get; set; }
+        public string State { get; set; }
         public int Memory { get; set; }
         public int MaxMemory { get; set; }
         public int Shares { get; set; }

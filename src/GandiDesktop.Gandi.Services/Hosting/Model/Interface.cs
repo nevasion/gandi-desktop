@@ -38,7 +38,7 @@ namespace GandiDesktop.Gandi.Services.Hosting.Model
         public string State { get; set; }
 
         [XmlRpcMember(XmlRpcMappingNames.Bandwidth)]
-        public string Bandwidth { get; set; }
+        public double Bandwidth { get; set; }
 
         [XmlRpcMember(XmlRpcMappingNames.Type)]
         public string Type { get; set; }

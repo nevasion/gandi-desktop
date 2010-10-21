@@ -13,9 +13,9 @@ namespace GandiDesktop.Gandi.Services.Hosting
         public DateTime Created { get; private set; }
         public DateTime LastUpdated { get; private set; }
         public int Index { get; private set; }
-        public object State { get; private set; }
-        public object Bandwidth { get; private set; }
-        public object Type { get; private set; }
+        public string State { get; private set; }
+        public double Bandwidth { get; private set; }
+        public string Type { get; private set; }
         public VirtualMachine VirtualMachine { get; internal set; }
         public IpAddress[] IpAddresses { get; private set; }
 
