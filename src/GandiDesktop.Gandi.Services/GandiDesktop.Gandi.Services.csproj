@@ -5,23 +5,20 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{159EA6B2-9811-4ED0-8BE0-3D6509937455}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <ProjectGuid>{651729A1-9BE4-4A9E-A98E-8DB807BF308C}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GandiDesktop</RootNamespace>
-    <AssemblyName>GandiDesktop</AssemblyName>
+    <RootNamespace>GandiDesktop.Gandi.Services</RootNamespace>
+    <AssemblyName>GandiDesktop.Gandi.Services</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <WarningLevel>4</WarningLevel>
     <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>GandiDesktop.pfx</AssemblyOriginatorKeyFile>
-    <StartupObject>GandiDesktop.App</StartupObject>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>true</Optimize>
+    <Optimize>false</Optimize>
     <OutputPath>..\..\bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
@@ -48,52 +45,35 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="UIAutomationProvider">
-      <RequiredTargetFramework>3.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="WindowsBase">
-      <RequiredTargetFramework>3.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="PresentationCore">
-      <RequiredTargetFramework>3.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="PresentationFramework">
-      <RequiredTargetFramework>3.0</RequiredTargetFramework>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="GandiService.cs" />
+    <Compile Include="Hosting\DataCenter.cs" />
+    <Compile Include="Hosting\DataCenterService.cs" />
+    <Compile Include="Hosting\Disk.cs" />
+    <Compile Include="Hosting\DiskService.cs" />
+    <Compile Include="Hosting\HostingService.cs" />
+    <Compile Include="Hosting\IHostingService.cs" />
+    <Compile Include="Hosting\Interface.cs" />
+    <Compile Include="Hosting\InterfaceService.cs" />
+    <Compile Include="Hosting\IpAddress.cs" />
+    <Compile Include="Hosting\IpAddressService.cs" />
+    <Compile Include="Hosting\Model\Disk.cs" />
+    <Compile Include="Hosting\Model\Interface.cs" />
+    <Compile Include="Hosting\Model\IpAddress.cs" />
+    <Compile Include="Hosting\Model\VirtualMachine.cs" />
+    <Compile Include="Hosting\VirtualMachine.cs" />
+    <Compile Include="Hosting\VirtualMachineService.cs" />
+    <Compile Include="Hosting\Model\DataCenter.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="ViewModel\RelayCommand.cs" />
-    <Compile Include="ViewModel\ViewModelBase.cs" />
-    <Compile Include="View\MainView.xaml.cs">
-      <DependentUpon>MainView.xaml</DependentUpon>
-    </Compile>
     <None Include="GandiDesktop.pfx" />
-    <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="View\MainView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\GandiDesktop.Gandi.Services\GandiDesktop.Gandi.Services.csproj">
-      <Project>{651729A1-9BE4-4A9E-A98E-8DB807BF308C}</Project>
-      <Name>GandiDesktop.Gandi.Services</Name>
+    <ProjectReference Include="..\CookComputing\XmlRpc-2.5.0\xmlrpc.csproj">
+      <Project>{1B4B0A58-0AFB-4090-91DD-18912CC7DE65}</Project>
+      <Name>xmlrpc</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

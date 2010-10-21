@@ -3,3 +3,5 @@
 /src/GandiDesktop/obj
 /src/CookComputing/XmlRpc-2.5.0/obj
 /bin
+/src/GandiDesktop.Gandi.Services/bin
+/src/GandiDesktop.Gandi.Services/obj
