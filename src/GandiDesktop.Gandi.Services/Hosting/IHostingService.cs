@@ -1,5 +1,4 @@
 ﻿using CookComputing.XmlRpc;
-using Mapping = GandiDesktop.Gandi.Services.Hosting.Model;
 
 namespace GandiDesktop.Gandi.Services.Hosting
 {
@@ -14,6 +13,9 @@ namespace GandiDesktop.Gandi.Services.Hosting
 
         [XmlRpcMethod("iface.list")]
         Mapping.Interface[] iface_list(string apiKey);
+
+        [XmlRpcMethod("image.list")]
+        Mapping.Image[] image_list(string apiKey);
 
         [XmlRpcMethod("ip.list")]
         Mapping.IpAddress[] ip_list(string apiKey);

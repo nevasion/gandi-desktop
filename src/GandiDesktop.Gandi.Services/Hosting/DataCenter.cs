@@ -1,6 +1,4 @@
-﻿using Mapping = GandiDesktop.Gandi.Services.Hosting.Model;
-
-namespace GandiDesktop.Gandi.Services.Hosting
+﻿namespace GandiDesktop.Gandi.Services.Hosting
 {
     public class DataCenter
     {

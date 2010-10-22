@@ -1,6 +1,6 @@
 ﻿using CookComputing.XmlRpc;
 
-namespace GandiDesktop.Gandi.Services.Hosting.Model
+namespace GandiDesktop.Gandi.Services.Hosting.Mapping
 {
     public class DataCenter
     {

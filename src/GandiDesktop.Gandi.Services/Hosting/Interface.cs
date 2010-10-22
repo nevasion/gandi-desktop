@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Mapping = GandiDesktop.Gandi.Services.Hosting.Model;
 
 namespace GandiDesktop.Gandi.Services.Hosting
 {
