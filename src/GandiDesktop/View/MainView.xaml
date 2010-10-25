@@ -1,8 +1,13 @@
 ﻿<Window x:Class="GandiDesktop.View.MainView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Title="MainView" Height="300" Width="300">
+    xmlns:v="clr-namespace:GandiDesktop.View"
+    xmlns:vm="clr-namespace:GandiDesktop.ViewModel"
+    SnapsToDevicePixels="True" Height="480" Width="640"
+    Title="Gandi Desktop">
+    
     <Grid>
-        
+        <v:DesktopView DataContext="{Binding DesktopViewModel}" />
     </Grid>
+    
 </Window>

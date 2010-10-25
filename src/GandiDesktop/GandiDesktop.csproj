@@ -72,20 +72,42 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\DiskResource.cs" />
+    <Compile Include="Model\InterfaceResource.cs" />
+    <Compile Include="Model\IResource.cs" />
+    <Compile Include="Model\ResourceType.cs" />
+    <Compile Include="Model\VirtualMachineResource.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ViewModel\DesktopViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
+    <Compile Include="ViewModel\ResourceDetailViewModel.cs" />
+    <Compile Include="ViewModel\ResourceViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="View\DesktopView.xaml.cs">
+      <DependentUpon>DesktopView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ResourceView.xaml.cs">
+      <DependentUpon>ResourceView.xaml</DependentUpon>
     </Compile>
     <None Include="GandiDesktop.pfx" />
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="View\DesktopView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ResourceView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

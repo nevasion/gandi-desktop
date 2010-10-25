@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="GandiDesktop.View.DesktopView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:v="clr-namespace:GandiDesktop.View"
+    xmlns:vm="clr-namespace:GandiDesktop.ViewModel">
+    
+    <Grid>
+        <ItemsControl ItemsSource="{Binding ResourceViewModeCollection}">
+            <ItemsControl.Template>
+                <ControlTemplate TargetType="ItemsControl">
+                    <Canvas IsItemsHost="True" />
+                </ControlTemplate>
+            </ItemsControl.Template>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate DataType="{x:Type vm:ResourceViewModel}">
+                    <v:ResourceView
+                        MouseEnter="OnResourceViewMouseEnter"
+                        MouseLeave="OnResourceViewMouseLeave"
+                        MouseLeftButtonDown="OnResourceViewMouseLeftButtonDown" 
+                        MouseMove="OnResourceViewMouseMove" 
+                        MouseLeftButtonUp="OnResourceViewMouseLeftButtonUp" />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+            <ItemsControl.ItemContainerStyle>
+                <Style TargetType="ContentPresenter">
+                    <Setter Property="Canvas.Left" Value="{Binding Left}" />
+                    <Setter Property="Canvas.Top" Value="{Binding Top}" />
+                    <Setter Property="Canvas.ZIndex" Value="{Binding ZIndex}" />
+                </Style>
+            </ItemsControl.ItemContainerStyle>
+        </ItemsControl>
+    </Grid>
+    
+</UserControl>
