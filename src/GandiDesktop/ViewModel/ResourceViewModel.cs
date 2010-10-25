@@ -1,5 +1,5 @@
-﻿using GandiDesktop.Model;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
+using GandiDesktop.Model;
 
 namespace GandiDesktop.ViewModel
 {
