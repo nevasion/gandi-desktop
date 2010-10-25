@@ -4,11 +4,7 @@ namespace GandiDesktop.Model
 {
     public class VirtualMachineResource : IResource
     {
-        public string Name
-        {
-            get;
-            private set;
-        }
+        public string Name { get; private set; }
 
         public ResourceType Type
         {
