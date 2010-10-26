@@ -64,7 +64,10 @@
     <Compile Include="Hosting\InterfaceService.cs" />
     <Compile Include="Hosting\InterfaceUpdate.cs" />
     <Compile Include="Hosting\IpAddress.cs" />
+    <Compile Include="Hosting\IpAddressCreation.cs" />
     <Compile Include="Hosting\IpAddressService.cs" />
+    <Compile Include="Hosting\IpAddressUpdate.cs" />
+    <Compile Include="Hosting\IpVersion.cs" />
     <Compile Include="Hosting\Mapping\Disk.cs" />
     <Compile Include="Hosting\Mapping\DiskCopy.cs" />
     <Compile Include="Hosting\Mapping\DiskCreation.cs" />
@@ -74,6 +77,8 @@
     <Compile Include="Hosting\Mapping\InterfaceCreation.cs" />
     <Compile Include="Hosting\Mapping\InterfaceUpdate.cs" />
     <Compile Include="Hosting\Mapping\IpAddress.cs" />
+    <Compile Include="Hosting\Mapping\IpAddressCreation.cs" />
+    <Compile Include="Hosting\Mapping\IpAddressUpdate.cs" />
     <Compile Include="Hosting\Mapping\VirtualMachine.cs" />
     <Compile Include="Hosting\VirtualMachine.cs" />
     <Compile Include="Hosting\VirtualMachineService.cs" />

@@ -42,8 +42,19 @@ namespace GandiDesktop.Gandi.Services.Hosting
         [XmlRpcMethod("image.list")]
         Mapping.Image[] image_list(string apiKey);
 
+        #region IpAddress
         [XmlRpcMethod("ip.list")]
         Mapping.IpAddress[] ip_list(string apiKey);
+
+        [XmlRpcMethod("ip.create")]
+        object ip_create(string apiKey, Mapping.IpAddressCreation ipAddressCreation);
+
+        [XmlRpcMethod("ip.update")]
+        object ip_update(string apiKey, int ipAddressId, Mapping.IpAddressUpdate ipAddressUpdate);
+
+        [XmlRpcMethod("ip.delete")]
+        object ip_delete(string apiKey, int ipAddressId);
+        #endregion
 
         [XmlRpcMethod("vm.list")]
         Mapping.VirtualMachine[] vm_list(string apiKey);

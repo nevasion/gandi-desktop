@@ -25,7 +25,7 @@ namespace GandiDesktop.Gandi.Services.Hosting.Mapping
         public int DataCenterId { get; set; }
 
         [XmlRpcMember(XmlRpcMappingNames.InterfaceId)]
-        public int InterfaceId { get; set; }
+        public int? InterfaceId { get; set; }
 
         [XmlRpcMember(XmlRpcMappingNames.Created)]
         public DateTime Created { get; set; }
