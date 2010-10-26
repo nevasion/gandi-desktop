@@ -25,8 +25,19 @@ namespace GandiDesktop.Gandi.Services.Hosting
         object disk_delete(string apiKey, int diskId);
         #endregion
 
+        #region Interface
         [XmlRpcMethod("iface.list")]
         Mapping.Interface[] iface_list(string apiKey);
+
+        [XmlRpcMethod("iface.create")]
+        object iface_create(string apiKey, Mapping.InterfaceCreation ifaceCreation);
+
+        [XmlRpcMethod("iface.update")]
+        object iface_update(string apiKey, int ifaceId, Mapping.InterfaceUpdate ifaceUpdate);
+
+        [XmlRpcMethod("iface.delete")]
+        object iface_delete(string apiKey, int ifaceId);
+        #endregion
 
         [XmlRpcMethod("image.list")]
         Mapping.Image[] image_list(string apiKey);

@@ -60,7 +60,9 @@
     <Compile Include="Hosting\Image.cs" />
     <Compile Include="Hosting\ImageService.cs" />
     <Compile Include="Hosting\Interface.cs" />
+    <Compile Include="Hosting\InterfaceCreation.cs" />
     <Compile Include="Hosting\InterfaceService.cs" />
+    <Compile Include="Hosting\InterfaceUpdate.cs" />
     <Compile Include="Hosting\IpAddress.cs" />
     <Compile Include="Hosting\IpAddressService.cs" />
     <Compile Include="Hosting\Mapping\Disk.cs" />
@@ -69,6 +71,8 @@
     <Compile Include="Hosting\Mapping\DiskUpdate.cs" />
     <Compile Include="Hosting\Mapping\Image.cs" />
     <Compile Include="Hosting\Mapping\Interface.cs" />
+    <Compile Include="Hosting\Mapping\InterfaceCreation.cs" />
+    <Compile Include="Hosting\Mapping\InterfaceUpdate.cs" />
     <Compile Include="Hosting\Mapping\IpAddress.cs" />
     <Compile Include="Hosting\Mapping\VirtualMachine.cs" />
     <Compile Include="Hosting\VirtualMachine.cs" />

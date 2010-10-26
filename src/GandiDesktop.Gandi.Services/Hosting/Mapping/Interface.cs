@@ -16,7 +16,7 @@ namespace GandiDesktop.Gandi.Services.Hosting.Mapping
             public const string Bandwidth = "bandwidth";
             public const string Type = "type";
             public const string VirtualMachineId = "vm_id";
-            public const string IpAddressIds = "ips";
+            public const string IpAddressIds = "ips_id";
         }
 
         [XmlRpcMember(XmlRpcMappingNames.Id)]
@@ -32,7 +32,7 @@ namespace GandiDesktop.Gandi.Services.Hosting.Mapping
         public DateTime LastUpdated { get; set; }
 
         [XmlRpcMember(XmlRpcMappingNames.Num)]
-        public int Num { get; set; }
+        public int? Num { get; set; }
 
         [XmlRpcMember(XmlRpcMappingNames.State)]
         public string State { get; set; }
@@ -44,7 +44,7 @@ namespace GandiDesktop.Gandi.Services.Hosting.Mapping
         public string Type { get; set; }
 
         [XmlRpcMember(XmlRpcMappingNames.VirtualMachineId)]
-        public int VirtualMachineId { get; set; }
+        public int? VirtualMachineId { get; set; }
 
         [XmlRpcMember(XmlRpcMappingNames.IpAddressIds)]
         public int[] IpAddressIds { get; set; }
