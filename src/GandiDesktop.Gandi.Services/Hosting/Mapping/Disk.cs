@@ -42,7 +42,7 @@ namespace GandiDesktop.Gandi.Services.Hosting.Mapping
         public string State { get; set; }
 
         [XmlRpcMember(XmlRpcMappingNames.Source)]
-        public int Source { get; set; }
+        public int? Source { get; set; }
 
         [XmlRpcMember(XmlRpcMappingNames.Visibility)]
         public string Visibility { get; set; }

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-
-namespace GandiDesktop.Gandi.Services.Hosting
+﻿namespace GandiDesktop.Gandi.Services.Hosting
 {
     public class DiskUpdate
     {
