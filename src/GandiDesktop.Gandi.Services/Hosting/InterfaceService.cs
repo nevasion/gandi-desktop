@@ -32,6 +32,20 @@ namespace GandiDesktop.Gandi.Services.Hosting
             object mappingOperation = this.service.iface_delete(this.apiKey, iface.Id);
         }
 
+        public void AttachIpAddress(Interface iface, IpAddress ipAddress)
+        {
+            throw new System.NotImplementedException();
+
+            //object mappingOperation = this.service.iface_ip_attach(this.apiKey, iface.Id, ipAddress.Id);
+        }
+
+        public void DetachIpAddress(Interface iface, IpAddress ipAddress)
+        {
+            throw new System.NotImplementedException();
+
+            //object mappingOperation = this.service.iface_ip_detach(this.apiKey, iface.Id, ipAddress.Id);
+        }
+
         public Interface[] List()
         {
             return this.List(null, null);

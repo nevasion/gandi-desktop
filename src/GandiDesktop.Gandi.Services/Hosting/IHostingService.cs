@@ -37,6 +37,12 @@ namespace GandiDesktop.Gandi.Services.Hosting
 
         [XmlRpcMethod("iface.delete")]
         object iface_delete(string apiKey, int ifaceId);
+
+        [XmlRpcMethod("iface.ip_attach")]
+        object iface_ip_attach(string apiKey, int ifaceId, int ipAddressId);
+
+        [XmlRpcMethod("iface.ip_detach")]
+        object iface_ip_detach(string apiKey, int ifaceId, int ipAddressId);
         #endregion
 
         [XmlRpcMethod("image.list")]
