@@ -80,9 +80,13 @@
     <Compile Include="Hosting\Mapping\IpAddressCreation.cs" />
     <Compile Include="Hosting\Mapping\IpAddressUpdate.cs" />
     <Compile Include="Hosting\Mapping\VirtualMachine.cs" />
+    <Compile Include="Hosting\Mapping\VirtualMachineCreation.cs" />
+    <Compile Include="Hosting\Mapping\VirtualMachineUpdate.cs" />
     <Compile Include="Hosting\VirtualMachine.cs" />
+    <Compile Include="Hosting\VirtualMachineCreation.cs" />
     <Compile Include="Hosting\VirtualMachineService.cs" />
     <Compile Include="Hosting\Mapping\DataCenter.cs" />
+    <Compile Include="Hosting\VirtualMachineUpdate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
