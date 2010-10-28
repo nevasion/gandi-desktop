@@ -1,7 +1,8 @@
 
-/src/GandiDesktop/bin
-/src/GandiDesktop/obj
+/src/GandiDesktop/Presentation/bin
+/src/GandiDesktop/Presentation/obj
+/src/CookComputing/XmlRpc-2.5.0/bin
 /src/CookComputing/XmlRpc-2.5.0/obj
 /bin
-/src/GandiDesktop.Gandi.Services/bin
-/src/GandiDesktop.Gandi.Services/obj
+/src/GandiDesktop/Gandi/Services/bin
+/src/GandiDesktop/Gandi/Services/obj
