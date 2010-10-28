@@ -2,6 +2,8 @@
 using GandiDesktop.Gandi.Services;
 using GandiDesktop.Gandi.Services.Hosting;
 using GandiDesktop.Model;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace GandiDesktop.ViewModel
 {
@@ -34,22 +36,27 @@ namespace GandiDesktop.ViewModel
                 this.ResourceViewModeCollection.Add(resourceViewModel);
             }
 
-            for (int i = 0; i < disks.Length; i++)
+            IEnumerable<Disk> detachedDisks = disks.Where(d => d.VirtualMachineIds.Length == 0);
+            for (int i = 0; i < detachedDisks.Count(); i++)
             {
-                Disk disk = disks[i];
+                Disk disk = detachedDisks.ElementAt(i);
 
-                ResourceViewModel resourceViewModel = new ResourceViewModel(new DiskResource(disk))
+                if (disk.VirtualMachineIds.Length == 0)
                 {
-                    Left = (i * 58) + 8,
-                    Top = 80
-                };
+                    ResourceViewModel resourceViewModel = new ResourceViewModel(new DiskResource(disk))
+                    {
+                        Left = (i * 58) + 8,
+                        Top = 80
+                    };
 
-                this.ResourceViewModeCollection.Add(resourceViewModel);
+                    this.ResourceViewModeCollection.Add(resourceViewModel);
+                }
             }
 
-            for (int i = 0; i < interfaces.Length; i++)
+            IEnumerable<Interface> detachedInterfaces = interfaces.Where(i => i.VirtualMachineId == null);
+            for (int i = 0; i < detachedInterfaces.Count(); i++)
             {
-                Interface iface = interfaces[i];
+                Interface iface = detachedInterfaces.ElementAt(i);
 
                 ResourceViewModel resourceViewModel = new ResourceViewModel(new InterfaceResource(iface))
                 {

@@ -9,9 +9,8 @@ namespace GandiDesktop.View
     public partial class DesktopView : UserControl
     {
         private bool isDraggingResource = false;
-        private bool resourceHasBeenDragged = false;
         private Point resourceClickMousePosition = new Point();
-        private ResourceView resourceClicked;
+        private ResourceView resourceDragged;
 
         public DesktopView()
         {
@@ -43,25 +42,25 @@ namespace GandiDesktop.View
 
             this.isDraggingResource = true;
             this.resourceClickMousePosition = e.GetPosition(view);
-            this.resourceClicked = view;
+            this.resourceDragged = view;
         }
 
         private void OnResourceViewMouseMove(object sender, MouseEventArgs e)
         {
-            if (e.LeftButton == MouseButtonState.Pressed && isDraggingResource)
+            if (e.LeftButton == MouseButtonState.Pressed && this.isDraggingResource)
             {
-                Point resourceMousePosition = e.GetPosition(resourceClicked);
+                Point resourceMousePosition = e.GetPosition(this.resourceDragged);
 
-                ResourceViewModel viewModel = (ResourceViewModel)resourceClicked.DataContext;
+                ResourceViewModel viewModel = (ResourceViewModel)this.resourceDragged.DataContext;
                 Point viewPosition = new Point(viewModel.Left, viewModel.Top);
 
-                double left = (viewPosition.X + resourceMousePosition.X - resourceClickMousePosition.X);
-                double top = (viewPosition.Y + resourceMousePosition.Y - resourceClickMousePosition.Y);
+                double left = (viewPosition.X + resourceMousePosition.X - this.resourceClickMousePosition.X);
+                double top = (viewPosition.Y + resourceMousePosition.Y - this.resourceClickMousePosition.Y);
 
                 viewModel.Left = left;
                 viewModel.Top = top;
 
-                this.resourceHasBeenDragged = true;
+                this.resourceDragged.IsDragging = true;
             }
         }
 
@@ -69,17 +68,14 @@ namespace GandiDesktop.View
         {
             ResourceView view = (ResourceView)sender;
 
-            if (!this.resourceHasBeenDragged && view == resourceClicked)
+            if (!this.resourceDragged.IsDragging && view == resourceDragged)
             {
                 view.IsExpanded = !view.IsExpanded;
             }
-            else
-            {
-                this.resourceHasBeenDragged = false;
-            }
 
+            this.resourceDragged.IsDragging = false;
             this.isDraggingResource = false;
-            this.resourceClicked = null;
+            this.resourceDragged = null;
         }
 
         private int GetMaxResourceZIndex()

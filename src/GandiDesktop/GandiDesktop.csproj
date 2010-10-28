@@ -72,10 +72,16 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\DataCenterResourceDetail.cs" />
     <Compile Include="Model\DiskResource.cs" />
+    <Compile Include="Model\DiskResourceDetail.cs" />
     <Compile Include="Model\InterfaceResource.cs" />
+    <Compile Include="Model\InterfaceResourceDetail.cs" />
     <Compile Include="Model\IResource.cs" />
+    <Compile Include="Model\IResourceDetail.cs" />
+    <Compile Include="Model\ResourceDetailType.cs" />
     <Compile Include="Model\ResourceType.cs" />
+    <Compile Include="Model\TextResourceDetail.cs" />
     <Compile Include="Model\VirtualMachineResource.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -92,6 +98,9 @@
     <Compile Include="View\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ResourceDetailView.xaml.cs">
+      <DependentUpon>ResourceDetailView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ResourceView.xaml.cs">
       <DependentUpon>ResourceView.xaml</DependentUpon>
     </Compile>
@@ -107,6 +116,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\ResourceDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\ResourceView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -117,6 +130,19 @@
       <Project>{651729A1-9BE4-4A9E-A98E-8DB807BF308C}</Project>
       <Name>GandiDesktop.Gandi.Services</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ResourceDetailText.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ResourceDetailDataCenter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ResourceDetailDisk.png" />
+    <Resource Include="Resources\ResourceDetailInterface.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ResourceDetailSystemDisk.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -12,7 +12,7 @@
                 </ControlTemplate>
             </ItemsControl.Template>
             <ItemsControl.ItemTemplate>
-                <DataTemplate DataType="{x:Type vm:ResourceViewModel}">
+                <DataTemplate>
                     <v:ResourceView
                         MouseEnter="OnResourceViewMouseEnter"
                         MouseLeave="OnResourceViewMouseLeave"

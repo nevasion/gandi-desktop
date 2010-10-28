@@ -97,6 +97,8 @@ namespace GandiDesktop.ViewModel
             this.Type = resource.Type;
 
             this.ResourceDetailViewModelCollection = new ObservableCollection<ResourceDetailViewModel>();
+            foreach (IResourceDetail detail in resource.Details)
+                this.ResourceDetailViewModelCollection.Add(new ResourceDetailViewModel(detail));
         }
 
         public ResourceViewModel(string name, ResourceType type, double left, double top)

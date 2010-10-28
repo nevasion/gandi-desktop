@@ -1,0 +1,95 @@
+﻿<UserControl x:Class="GandiDesktop.View.ResourceDetailView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <UserControl.Resources>
+        
+        <Style x:Key="MainBorder" TargetType="Border">
+            <Setter Property="CornerRadius" Value="2" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Type}" Value="Text">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <SolidColorBrush Color="LightGray" Opacity="0.50" />
+                        </Setter.Value>
+                    </Setter>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Type}" Value="DataCenter">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <SolidColorBrush Color="RosyBrown" Opacity="0.5" />
+                        </Setter.Value>
+                    </Setter>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Type}" Value="Disk">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <SolidColorBrush Color="Green" Opacity="0.25" />
+                        </Setter.Value>
+                    </Setter>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Type}" Value="SystemDisk">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <SolidColorBrush Color="Green" Opacity="0.25" />
+                        </Setter.Value>
+                    </Setter>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Type}" Value="Interface">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <SolidColorBrush Color="Orange" Opacity="0.25" />
+                        </Setter.Value>
+                    </Setter>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        
+        <Style x:Key="MainImage" TargetType="Image">
+            <Setter Property="Width" Value="12" />
+            <Setter Property="Height" Value="12" />
+            <Setter Property="Margin" Value="1,1,2,1" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Type}" Value="Text">
+                    <Setter Property="Source" Value="/GandiDesktop;component/Resources/ResourceDetailText.png" />
+                    <Setter Property="ToolTip" Value="{Binding Name}" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Type}" Value="DataCenter">
+                    <Setter Property="Source" Value="/GandiDesktop;component/Resources/ResourceDetailDataCenter.png" />
+                    <Setter Property="ToolTip" Value="Data Center" />
+                    <Setter Property="Margin" Value="1,1,1,1" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Type}" Value="Disk">
+                    <Setter Property="Source" Value="/GandiDesktop;component/Resources/ResourceDetailDisk.png" />
+                    <Setter Property="ToolTip" Value="Disk" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Type}" Value="SystemDisk">
+                    <Setter Property="Source" Value="/GandiDesktop;component/Resources/ResourceDetailSystemDisk.png" />
+                    <Setter Property="ToolTip" Value="System Disk" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Type}" Value="Interface">
+                    <Setter Property="Source" Value="/GandiDesktop;component/Resources/ResourceDetailInterface.png" />
+                    <Setter Property="ToolTip" Value="Interface" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        
+    </UserControl.Resources>
+    
+    <Grid TextBlock.FontSize="10">
+        <Border x:Name="border" Style="{StaticResource MainBorder}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                
+                <Image x:Name="image" Grid.Column="0" Style="{StaticResource MainImage}" />
+                <TextBlock Grid.Column="1" Text="{Binding Name}" FontWeight="Bold" VerticalAlignment="Center" />
+                <TextBlock Grid.Column="2" Text="{Binding Value}" ToolTip="{Binding Value}" TextTrimming="CharacterEllipsis" Margin="2,0,0,0" VerticalAlignment="Center" />
+            </Grid>
+        </Border>
+    </Grid>
+    
+</UserControl>

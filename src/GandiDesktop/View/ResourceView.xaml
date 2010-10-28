@@ -59,7 +59,16 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
-        
+
+        <Style x:Key="ResourceNameUnder" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="10" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Type}" Value="Interface">
+                    <Setter Property="FontSize" Value="9" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
         <Storyboard x:Key="Collapse" AccelerationRatio="0.875" DecelerationRatio="0.125">
             <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="borderResource" Storyboard.TargetProperty="(FrameworkElement.Width)">
                 <SplineDoubleKeyFrame KeyTime="00:00:00.1" Value="50" />
@@ -137,15 +146,27 @@
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
 
+        <Storyboard x:Key="FadeOut" AccelerationRatio="0.875" DecelerationRatio="0.125">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="gridRoot" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.25" Value="0.75" />
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="FadeIn" AccelerationRatio="0.875" DecelerationRatio="0.125">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="gridRoot" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.25" Value="1" />
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
     </UserControl.Resources>
 
-    <Grid>
+    <Grid x:Name="gridRoot">
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <TextBlock x:Name="labelResourceName" Grid.Row="1" Text="{Binding Name}" FontSize="10" VerticalAlignment="Center" HorizontalAlignment="Center" />
+        <TextBlock x:Name="labelResourceName" Grid.Row="1" Text="{Binding Name}" Style="{StaticResource ResourceNameUnder}" VerticalAlignment="Center" HorizontalAlignment="Center" />
 
         <Grid Grid.Row="0">
             <Border x:Name="borderResource" CornerRadius="5" Background="#FFF3F3F3" Width="50">
@@ -176,12 +197,17 @@
                         <Grid Grid.Row="1" Background="Gray" />
 
                         <Grid x:Name="gridResourceDetails" Grid.Row="2" Visibility="Collapsed">
-                            <ItemsControl ItemsSource="{Binding ResourceDetailViewModelCollection}">
+                            <ItemsControl ItemsSource="{Binding ResourceDetailViewModelCollection}" Margin="0,1,0,0">
                                 <ItemsControl.Template>
                                     <ControlTemplate TargetType="ItemsControl">
                                         <StackPanel IsItemsHost="True" Orientation="Vertical" />
                                     </ControlTemplate>
                                 </ItemsControl.Template>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <v:ResourceDetailView Margin="0,2,0,0" />
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
                             </ItemsControl>
                         </Grid>
                     </Grid>
