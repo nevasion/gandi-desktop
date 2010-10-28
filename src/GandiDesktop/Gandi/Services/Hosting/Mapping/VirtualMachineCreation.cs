@@ -1,4 +1,5 @@
-﻿using CookComputing.XmlRpc;
+﻿using System;
+using CookComputing.XmlRpc;
 using Model = GandiDesktop.Gandi.Services.Hosting;
 
 namespace GandiDesktop.Gandi.Services.Hosting.Mapping
@@ -34,7 +35,7 @@ namespace GandiDesktop.Gandi.Services.Hosting.Mapping
         public int SystemDiskId { get; set; }
 
         [XmlRpcMember(XmlRpcMappingNames.IpVersion)]
-        public string IpVersion { get; set; }
+        public int IpVersion { get; set; }
 
         [XmlRpcMember(XmlRpcMappingNames.IsGandiAI)]
         public int IsGandiAI { get; set; }
@@ -52,7 +53,7 @@ namespace GandiDesktop.Gandi.Services.Hosting.Mapping
             this.Shares = virtualMachineCreation.Shares;
             this.DataCenterId = virtualMachineCreation.DataCenter.Id;
             this.SystemDiskId = virtualMachineCreation.SystemDisk.Id;
-            this.IpVersion = virtualMachineCreation.IpVersion.ToString().Substring(1);
+            this.IpVersion = Convert.ToInt32(virtualMachineCreation.IpVersion.ToString().Substring(1));
             this.IsGandiAI = (virtualMachineCreation.IsGandiAI ? 1 : 0);
             this.UnixLogin = virtualMachineCreation.UnixLogin;
             this.UnixPassword = virtualMachineCreation.UnixPassword;

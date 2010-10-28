@@ -1,4 +1,5 @@
-﻿using CookComputing.XmlRpc;
+﻿using System;
+using CookComputing.XmlRpc;
 using Model = GandiDesktop.Gandi.Services.Hosting;
 
 namespace GandiDesktop.Gandi.Services.Hosting.Mapping
@@ -16,7 +17,7 @@ namespace GandiDesktop.Gandi.Services.Hosting.Mapping
         public int DataCenterId { get; private set; }
 
         [XmlRpcMember(XmlRpcMappingNames.IpVersion)]
-        public string IpVersion { get; private set; }
+        public int IpVersion { get; private set; }
 
         [XmlRpcMember(XmlRpcMappingNames.Bandwidth)]
         public double? Bandwidth { get; private set; }
@@ -24,7 +25,7 @@ namespace GandiDesktop.Gandi.Services.Hosting.Mapping
         public InterfaceCreation(Model.InterfaceCreation ifaceCreation)
         {
             this.DataCenterId = ifaceCreation.DataCenter.Id;
-            this.IpVersion = ifaceCreation.IpVersion.ToString().Substring(1);
+            this.IpVersion = Convert.ToInt32(ifaceCreation.IpVersion.ToString().Substring(1));
             this.Bandwidth = ifaceCreation.Bandwidth;
         }
     }
