@@ -22,7 +22,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\bin\Debug\</OutputPath>
+    <OutputPath>..\..\..\bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -30,7 +30,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\bin\Release\</OutputPath>
+    <OutputPath>..\..\..\bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -126,7 +126,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GandiDesktop.Gandi.Services\GandiDesktop.Gandi.Services.csproj">
+    <ProjectReference Include="..\Gandi\Services\GandiDesktop.Gandi.Services.csproj">
       <Project>{651729A1-9BE4-4A9E-A98E-8DB807BF308C}</Project>
       <Name>GandiDesktop.Gandi.Services</Name>
     </ProjectReference>

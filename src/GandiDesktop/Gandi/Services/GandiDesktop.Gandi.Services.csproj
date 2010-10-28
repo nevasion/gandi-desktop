@@ -19,7 +19,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\bin\Debug\</OutputPath>
+    <OutputPath>..\..\..\..\bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -27,7 +27,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\bin\Release\</OutputPath>
+    <OutputPath>..\..\..\..\bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -93,7 +93,7 @@
     <None Include="GandiDesktop.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CookComputing\XmlRpc-2.5.0\xmlrpc.csproj">
+    <ProjectReference Include="..\..\..\CookComputing\XmlRpc-2.5.0\CookComputing.XmlRpc-2.5.0.csproj">
       <Project>{1B4B0A58-0AFB-4090-91DD-18912CC7DE65}</Project>
       <Name>xmlrpc</Name>
     </ProjectReference>
