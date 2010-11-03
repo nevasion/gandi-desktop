@@ -8,7 +8,10 @@
         <ItemsControl ItemsSource="{Binding ResourceViewModeCollection}">
             <ItemsControl.Template>
                 <ControlTemplate TargetType="ItemsControl">
-                    <Canvas IsItemsHost="True" />
+                    <Canvas 
+                        IsItemsHost="True" 
+                        Background="White"
+                        MouseMove="OnCanvasMouseMove" />
                 </ControlTemplate>
             </ItemsControl.Template>
             <ItemsControl.ItemTemplate>
@@ -17,7 +20,6 @@
                         MouseEnter="OnResourceViewMouseEnter"
                         MouseLeave="OnResourceViewMouseLeave"
                         MouseLeftButtonDown="OnResourceViewMouseLeftButtonDown" 
-                        MouseMove="OnResourceViewMouseMove" 
                         MouseLeftButtonUp="OnResourceViewMouseLeftButtonUp" />
                 </DataTemplate>
             </ItemsControl.ItemTemplate>

@@ -45,7 +45,7 @@ namespace GandiDesktop.View
             this.resourceDragged = view;
         }
 
-        private void OnResourceViewMouseMove(object sender, MouseEventArgs e)
+        private void OnCanvasMouseMove(object sender, MouseEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed && this.isDraggingResource)
             {
