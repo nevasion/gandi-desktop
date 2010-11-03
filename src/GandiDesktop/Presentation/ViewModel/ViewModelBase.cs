@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Windows.Threading;
 
-namespace GandiDesktop.ViewModel
+namespace GandiDesktop.Presentation.ViewModel
 {
     public class ViewModelBase : INotifyPropertyChanged
     {

@@ -1,11 +1,11 @@
 ﻿using System.Collections.ObjectModel;
 using GandiDesktop.Gandi.Services;
 using GandiDesktop.Gandi.Services.Hosting;
-using GandiDesktop.Model;
+using GandiDesktop.Presentation.Model;
 using System.Linq;
 using System.Collections.Generic;
 
-namespace GandiDesktop.ViewModel
+namespace GandiDesktop.Presentation.ViewModel
 {
     public class DesktopViewModel : ViewModelBase
     {

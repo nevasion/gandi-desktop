@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
 
-namespace GandiDesktop.View
+namespace GandiDesktop.Presentation.View
 {
     public partial class ResourceView : UserControl
     {

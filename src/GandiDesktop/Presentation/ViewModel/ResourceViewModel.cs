@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
-using GandiDesktop.Model;
+using GandiDesktop.Presentation.Model;
 
-namespace GandiDesktop.ViewModel
+namespace GandiDesktop.Presentation.ViewModel
 {
     public class ResourceViewModel : ViewModelBase
     {

@@ -1,4 +1,4 @@
-﻿namespace GandiDesktop.Model
+﻿namespace GandiDesktop.Presentation.Model
 {
     public class TextResourceDetail : IResourceDetail
     {

@@ -12,7 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GandiDesktop.View
+namespace GandiDesktop.Presentation.View
 {
     /// <summary>
     /// Interaction logic for ResourceDetailView.xaml

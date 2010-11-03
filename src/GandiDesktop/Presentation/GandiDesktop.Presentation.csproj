@@ -8,7 +8,7 @@
     <ProjectGuid>{159EA6B2-9811-4ED0-8BE0-3D6509937455}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GandiDesktop</RootNamespace>
+    <RootNamespace>GandiDesktop.Presentation</RootNamespace>
     <AssemblyName>GandiDesktop</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

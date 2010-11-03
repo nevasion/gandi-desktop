@@ -1,7 +1,7 @@
 ﻿using GandiDesktop.Gandi.Services.Hosting;
 using System;
 
-namespace GandiDesktop.Model
+namespace GandiDesktop.Presentation.Model
 {
     public class DiskResourceDetail : IResourceDetail
     {

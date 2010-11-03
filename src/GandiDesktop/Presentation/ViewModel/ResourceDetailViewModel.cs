@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using GandiDesktop.Model;
+using GandiDesktop.Presentation.Model;
 
-namespace GandiDesktop.ViewModel
+namespace GandiDesktop.Presentation.ViewModel
 {
     public class ResourceDetailViewModel : ViewModelBase
     {

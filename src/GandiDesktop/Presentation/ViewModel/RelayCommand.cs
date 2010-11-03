@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace GandiDesktop.ViewModel
+namespace GandiDesktop.Presentation.ViewModel
 {
     public class RelayCommand : ICommand
     {

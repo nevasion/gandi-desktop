@@ -1,7 +1,7 @@
-﻿<UserControl x:Class="GandiDesktop.View.ResourceView"
+﻿<UserControl x:Class="GandiDesktop.Presentation.View.ResourceView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:v="clr-namespace:GandiDesktop.View"
+    xmlns:v="clr-namespace:GandiDesktop.Presentation.View"
     SnapsToDevicePixels="True" Height="Auto" Width="Auto">
 
     <UserControl.Resources>

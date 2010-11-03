@@ -4,9 +4,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
-using GandiDesktop.ViewModel;
+using GandiDesktop.Presentation.ViewModel;
 
-namespace GandiDesktop.View
+namespace GandiDesktop.Presentation.View
 {
     public partial class DesktopView : UserControl
     {

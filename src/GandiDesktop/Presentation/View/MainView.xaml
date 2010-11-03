@@ -1,8 +1,8 @@
-﻿<Window x:Class="GandiDesktop.View.MainView"
+﻿<Window x:Class="GandiDesktop.Presentation.View.MainView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:v="clr-namespace:GandiDesktop.View"
-    xmlns:vm="clr-namespace:GandiDesktop.ViewModel"
+    xmlns:v="clr-namespace:GandiDesktop.Presentation.View"
+    xmlns:vm="clr-namespace:GandiDesktop.Presentation.ViewModel"
     SnapsToDevicePixels="True" Height="480" Width="640"
     Title="Gandi Desktop">
     

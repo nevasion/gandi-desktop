@@ -1,4 +1,4 @@
-﻿namespace GandiDesktop.ViewModel
+﻿namespace GandiDesktop.Presentation.ViewModel
 {
     public class MainViewModel : ViewModelBase
     {

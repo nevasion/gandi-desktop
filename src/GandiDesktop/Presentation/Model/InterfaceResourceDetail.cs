@@ -1,7 +1,7 @@
 ﻿using System;
 using GandiDesktop.Gandi.Services.Hosting;
 
-namespace GandiDesktop.Model
+namespace GandiDesktop.Presentation.Model
 {
     public class InterfaceResourceDetail : IResourceDetail
     {

@@ -1,6 +1,6 @@
 ﻿using System.Windows;
-using GandiDesktop.View;
-using GandiDesktop.ViewModel;
+using GandiDesktop.Presentation.View;
+using GandiDesktop.Presentation.ViewModel;
 
 namespace GandiDesktop
 {

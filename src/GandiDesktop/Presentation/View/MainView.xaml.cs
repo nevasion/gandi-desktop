@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace GandiDesktop.View
+namespace GandiDesktop.Presentation.View
 {
     public partial class MainView : Window
     {
