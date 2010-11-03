@@ -5,13 +5,13 @@
     xmlns:vm="clr-namespace:GandiDesktop.ViewModel">
     
     <Grid>
-        <ItemsControl ItemsSource="{Binding ResourceViewModeCollection}">
+        <ItemsControl x:Name="desktopView" ItemsSource="{Binding ResourceViewModeCollection}">
             <ItemsControl.Template>
                 <ControlTemplate TargetType="ItemsControl">
                     <Canvas 
                         IsItemsHost="True" 
                         Background="White"
-                        MouseMove="OnCanvasMouseMove" />
+                        MouseMove="OnCanvasMouseMove"  />
                 </ControlTemplate>
             </ItemsControl.Template>
             <ItemsControl.ItemTemplate>

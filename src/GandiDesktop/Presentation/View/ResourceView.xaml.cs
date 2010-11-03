@@ -8,6 +8,8 @@ namespace GandiDesktop.View
     {
         private const string IsExpandedPropertyName = "IsExpanded";
         private const string IsDraggingPropertyName = "IsDragging";
+        private const string DummyLeftPropertyName = "DummyLeft";
+        private const string DummyTopPropertyName = "DummyTop";
         private const string StoryboardCollapseKey = "Collapse";
         private const string StoryboardExpandKey = "Expand";
         private const string StoryboardFadeOutKey = "FadeOut";
@@ -58,6 +60,24 @@ namespace GandiDesktop.View
                 typeof(bool), 
                 typeof(ResourceView),
                 new UIPropertyMetadata(false, new PropertyChangedCallback(ResourceView.OnIsDraggingPropertyChanged)));
+
+        public double DummyLeft
+        {
+            get { return (double)GetValue(DummyLeftProperty); }
+            set { SetValue(DummyLeftProperty, value); }
+        }
+
+        public static readonly DependencyProperty DummyLeftProperty =
+            DependencyProperty.Register(ResourceView.DummyLeftPropertyName, typeof(double), typeof(ResourceView), new UIPropertyMetadata(0.0));
+
+        public double DummyTop
+        {
+            get { return (double)GetValue(DummyTopProperty); }
+            set { SetValue(DummyTopProperty, value); }
+        }
+
+        public static readonly DependencyProperty DummyTopProperty =
+            DependencyProperty.Register(ResourceView.DummyTopPropertyName, typeof(double), typeof(ResourceView), new UIPropertyMetadata(0.0));
 
         public ResourceView()
         {
