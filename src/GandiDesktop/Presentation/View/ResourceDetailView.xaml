@@ -17,7 +17,7 @@
                 <DataTrigger Binding="{Binding Type}" Value="DataCenter">
                     <Setter Property="Background">
                         <Setter.Value>
-                            <SolidColorBrush Color="RosyBrown" Opacity="0.5" />
+                            <SolidColorBrush Color="Brown" Opacity="0.175" />
                         </Setter.Value>
                     </Setter>
                 </DataTrigger>
@@ -39,6 +39,13 @@
                     <Setter Property="Background">
                         <Setter.Value>
                             <SolidColorBrush Color="Orange" Opacity="0.25" />
+                        </Setter.Value>
+                    </Setter>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Type}" Value="IpAddress">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <SolidColorBrush Color="Orange" Opacity="0.125" />
                         </Setter.Value>
                     </Setter>
                 </DataTrigger>
@@ -70,6 +77,10 @@
                 <DataTrigger Binding="{Binding Type}" Value="Interface">
                     <Setter Property="Source" Value="/GandiDesktop;component/Resources/ResourceDetailInterface.png" />
                     <Setter Property="ToolTip" Value="Interface" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Type}" Value="IpAddress">
+                    <Setter Property="Source" Value="/GandiDesktop;component/Resources/ResourceDetailIpAddress.png" />
+                    <Setter Property="ToolTip" Value="IP" />
                 </DataTrigger>
             </Style.Triggers>
         </Style>

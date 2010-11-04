@@ -26,7 +26,7 @@ namespace GandiDesktop.Presentation.Model
             List<IResourceDetail> details = new List<IResourceDetail>();
 
             foreach (IpAddress ipAddress in iface.IpAddresses)
-                details.Add(new TextResourceDetail(InterfaceResource.IpAddressName, ipAddress.Ip.ToString()));
+                details.Add(new IpAddressResourceDetail(ipAddress));
 
             this.Details = details.ToArray();
         }

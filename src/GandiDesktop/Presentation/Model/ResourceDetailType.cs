@@ -6,6 +6,7 @@
         DataCenter,
         Disk,
         SystemDisk,
-        Interface
+        Interface,
+        IpAddress
     }
 }
