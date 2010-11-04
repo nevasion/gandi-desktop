@@ -131,12 +131,12 @@ namespace GandiDesktop.Presentation.View
 
                 DoubleAnimationUsingKeyFrames animation = new DoubleAnimationUsingKeyFrames()
                 {
-                    Duration = new TimeSpan(0, 0, 0, 0, 125)
+                    Duration = TimeSpan.FromMilliseconds(125)
                 };
 
-                animation.KeyFrames.Add(new SplineDoubleKeyFrame(from, KeyTime.FromTimeSpan(new TimeSpan(0, 0, 0, 0, 0))));
-                animation.KeyFrames.Add(new SplineDoubleKeyFrame(to + ((leftOutBound ? offset : offset * -1) * 2), KeyTime.FromTimeSpan(new TimeSpan(0, 0, 0, 0, 80))));
-                animation.KeyFrames.Add(new SplineDoubleKeyFrame(to, KeyTime.FromTimeSpan(new TimeSpan(0, 0, 0, 0, 125))));
+                animation.KeyFrames.Add(new SplineDoubleKeyFrame(from, KeyTime.FromTimeSpan(TimeSpan.Zero)));
+                animation.KeyFrames.Add(new SplineDoubleKeyFrame(to + ((leftOutBound ? offset : offset * -1) * 2), KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(80))));
+                animation.KeyFrames.Add(new SplineDoubleKeyFrame(to, KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(125))));
 
                 AnimationClock clock = animation.CreateClock();
                 clock.CurrentTimeInvalidated += (sender, e) =>
@@ -155,19 +155,14 @@ namespace GandiDesktop.Presentation.View
                 double from = top;
                 double to = (topOutBound ? offset : (this.ActualHeight - view.ActualHeight - offset));
 
-                //DoubleAnimation animation = new DoubleAnimation(from, to, new Duration(new TimeSpan(0, 0, 0, 0, 100)))
-                //{
-                //    BeginTime = new TimeSpan(0, 0, 0, 0, 50)
-                //};
-
                 DoubleAnimationUsingKeyFrames animation = new DoubleAnimationUsingKeyFrames()
                 {
-                    Duration = new TimeSpan(0, 0, 0, 0, 125)
+                    Duration = TimeSpan.FromMilliseconds(125)
                 };
 
-                animation.KeyFrames.Add(new SplineDoubleKeyFrame(from, KeyTime.FromTimeSpan(new TimeSpan(0, 0, 0, 0, 0))));
-                animation.KeyFrames.Add(new SplineDoubleKeyFrame(to + ((topOutBound ? offset : offset * -1) * 2), KeyTime.FromTimeSpan(new TimeSpan(0, 0, 0, 0, 80))));
-                animation.KeyFrames.Add(new SplineDoubleKeyFrame(to, KeyTime.FromTimeSpan(new TimeSpan(0, 0, 0, 0, 125))));
+                animation.KeyFrames.Add(new SplineDoubleKeyFrame(from, KeyTime.FromTimeSpan(TimeSpan.Zero)));
+                animation.KeyFrames.Add(new SplineDoubleKeyFrame(to + ((topOutBound ? offset : offset * -1) * 2), KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(80))));
+                animation.KeyFrames.Add(new SplineDoubleKeyFrame(to, KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(125))));
 
                 AnimationClock clock = animation.CreateClock();
                 clock.CurrentTimeInvalidated += (sender, e) =>
