@@ -2,22 +2,22 @@
 
 namespace GandiDesktop.Presentation.Model
 {
-    public delegate void ResourceDetailQuickActionHandler(object sender, ResourceDetailQuickActionEventArgs e);
+    public delegate void ResourceDetailActionHandler(object sender, ResourceDetailActionEventArgs e);
 
-    public class ResourceDetailQuickActionEventArgs : EventArgs
+    public class ResourceDetailActionEventArgs : EventArgs
     {
         public string Text { get; private set; }
-        public ResourceDetailQuickAction Type { get; private set; }
+        public ResourceDetailActionType Type { get; private set; }
         public bool Error { get; set; }
         public string ErrorMessage { get; set; }
 
-        public ResourceDetailQuickActionEventArgs(ResourceDetailQuickAction type, string text)
+        public ResourceDetailActionEventArgs(ResourceDetailActionType type, string text)
         {
             this.Type = type;
             this.Text = text;
         }
 
-        public ResourceDetailQuickActionEventArgs(ResourceDetailQuickAction type)
+        public ResourceDetailActionEventArgs(ResourceDetailActionType type)
             : this(type, null)
         {
             
@@ -30,6 +30,6 @@ namespace GandiDesktop.Presentation.Model
         string Value { get; }
         ResourceDetailType Type { get; }
         ResourceDetailAction[] Actions { get; }
-        event ResourceDetailQuickActionHandler DetailQuickAction;
+        event ResourceDetailActionHandler DetailAction;
     }
 }

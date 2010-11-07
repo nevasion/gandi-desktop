@@ -1,6 +1,6 @@
 ﻿namespace GandiDesktop.Presentation.Model
 {
-    public enum ResourceDetailQuickAction
+    public enum ResourceDetailActionType
     {
         Detach,
         Edit,

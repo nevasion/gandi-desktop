@@ -21,7 +21,7 @@ namespace GandiDesktop.Presentation.Model
 
         public ResourceDetailAction[] Actions { get; private set; }
 
-        public event ResourceDetailQuickActionHandler DetailQuickAction;
+        public event ResourceDetailActionHandler DetailAction;
 
         public IpAddressResourceDetail(IpAddress ipAddress)
         {
@@ -48,8 +48,8 @@ namespace GandiDesktop.Presentation.Model
 
         public void Copy(object parameter)
         {
-            if (this.DetailQuickAction != null)
-                this.DetailQuickAction(this, new ResourceDetailQuickActionEventArgs(ResourceDetailQuickAction.Copy, this.ipAddress.Ip.ToString()));
+            if (this.DetailAction != null)
+                this.DetailAction(this, new ResourceDetailActionEventArgs(ResourceDetailActionType.Copy, this.ipAddress.Ip.ToString()));
         }
 
         public void Detach(object parameter)

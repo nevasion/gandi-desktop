@@ -10,8 +10,8 @@ namespace GandiDesktop.Presentation.View
     {
         private const string IsExpandedPropertyName = "IsExpanded";
 
-        private Grid gridQuickActions;
-        private AnimationClock quickActionsClock;
+        private Grid gridActions;
+        private AnimationClock toggleActionsClock;
         private bool animating;
 
         public bool IsExpanded
@@ -31,8 +31,8 @@ namespace GandiDesktop.Presentation.View
             {
                 if (this.animating)
                 {
-                    this.quickActionsClock.Controller.Begin();
-                    this.quickActionsClock.Controller.Pause();
+                    this.toggleActionsClock.Controller.Begin();
+                    this.toggleActionsClock.Controller.Pause();
                 }
             };
 
@@ -42,48 +42,48 @@ namespace GandiDesktop.Presentation.View
                 if (viewModel != null)
                 {
                     if (this.IsExpanded)
-                        this.ToggleQuickActionsDisplay(true);
+                        this.ToggleActionsDisplay(true);
 
-                    if (viewModel.HasQuickActions)
-                        foreach (ResourceDetailActionViewModel quickAction in viewModel.Actions)
-                            quickAction.AskConfirmation = false;
+                    if (viewModel.HasActions)
+                        foreach (ResourceDetailActionViewModel action in viewModel.Actions)
+                            action.AskConfirmation = false;
                 }
             };
         }
 
-        private void OnGridQuickActionsLoaded(object sender, RoutedEventArgs e)
+        private void OnGridActionsLoaded(object sender, RoutedEventArgs e)
         {
-            this.gridQuickActions = (Grid)sender;
+            this.gridActions = (Grid)sender;
         }
 
-        private void OnButtonQuickActionsClick(object sender, RoutedEventArgs e)
+        private void OnButtonToggleActionsClick(object sender, RoutedEventArgs e)
         {
-            this.ToggleQuickActionsDisplay(false);
+            this.ToggleActionsDisplay(false);
         }
 
-        private void ToggleQuickActionsDisplay(bool delayed)
+        private void ToggleActionsDisplay(bool delayed)
         {
-            if (this.gridQuickActions != null)
+            if (this.gridActions != null)
             {
                 double from = this.ActualHeight;
                 double to = 14;
 
                 if (!this.IsExpanded)
-                    to += this.gridQuickActions.ActualHeight;
+                    to += this.gridActions.ActualHeight;
 
-                DoubleAnimation quickActionsAnimation = new DoubleAnimation(from, to, new Duration(TimeSpan.FromMilliseconds(100)));
-                quickActionsAnimation.Completed += delegate
+                DoubleAnimation actionsAnimation = new DoubleAnimation(from, to, new Duration(TimeSpan.FromMilliseconds(100)));
+                actionsAnimation.Completed += delegate
                 {
                     this.animating = false;
                     this.IsExpanded = !this.IsExpanded;
                 };
 
                 if (delayed)
-                    quickActionsAnimation.BeginTime = TimeSpan.FromMilliseconds(1500);
+                    actionsAnimation.BeginTime = TimeSpan.FromMilliseconds(1500);
 
                 this.animating = true; 
-                this.quickActionsClock = quickActionsAnimation.CreateClock();
-                this.ApplyAnimationClock(ResourceDetailView.HeightProperty, this.quickActionsClock);
+                this.toggleActionsClock = actionsAnimation.CreateClock();
+                this.ApplyAnimationClock(ResourceDetailView.HeightProperty, this.toggleActionsClock);
             }
         }
     }

@@ -24,7 +24,7 @@ namespace GandiDesktop.Presentation.Model
 
         public ResourceDetailAction[] Actions { get; private set; }
 
-        public event ResourceDetailQuickActionHandler DetailQuickAction;
+        public event ResourceDetailActionHandler DetailAction;
 
         public InterfaceResourceDetail(Interface iface, VirtualMachine virtualMachine)
         {
@@ -52,8 +52,8 @@ namespace GandiDesktop.Presentation.Model
 
         public void Detach(object parameter)
         {
-            if (this.DetailQuickAction != null)
-                this.DetailQuickAction(this, new ResourceDetailQuickActionEventArgs(ResourceDetailQuickAction.Detach));
+            if (this.DetailAction != null)
+                this.DetailAction(this, new ResourceDetailActionEventArgs(ResourceDetailActionType.Detach));
 
             Service.Hosting.VirtualMachine.DetachInterface(virtualMachine, iface);
         }

@@ -21,7 +21,7 @@ namespace GandiDesktop.Presentation.Model
 
         public IResourceDetail[] Details { get; private set; }
 
-        public event ResourceDetailQuickActionHandler DetailQuickAction;
+        public event ResourceDetailActionHandler DetailAction;
 
         public VirtualMachineResource(VirtualMachine virtualMachine)
         {
@@ -34,10 +34,10 @@ namespace GandiDesktop.Presentation.Model
             foreach (Disk disk in virtualMachine.AttachedDisks)
             {
                 DiskResourceDetail diskResourceDetail = new DiskResourceDetail(disk, virtualMachine);
-                diskResourceDetail.DetailQuickAction += (sender, e) => 
+                diskResourceDetail.DetailAction += (sender, e) => 
                 {
-                    if (this.DetailQuickAction != null)
-                        this.DetailQuickAction(this, e);
+                    if (this.DetailAction != null)
+                        this.DetailAction(this, e);
                 };
 
                 details.Add(diskResourceDetail);
@@ -46,10 +46,10 @@ namespace GandiDesktop.Presentation.Model
             foreach (Interface iface in virtualMachine.AttachedInterfaces)
             {
                 InterfaceResourceDetail ifaceResourceDetail = new InterfaceResourceDetail(iface, virtualMachine);
-                ifaceResourceDetail.DetailQuickAction += (sender, e) =>
+                ifaceResourceDetail.DetailAction += (sender, e) =>
                 {
-                    if (this.DetailQuickAction != null)
-                        this.DetailQuickAction(this, e);
+                    if (this.DetailAction != null)
+                        this.DetailAction(this, e);
                 };
 
                 details.Add(ifaceResourceDetail);

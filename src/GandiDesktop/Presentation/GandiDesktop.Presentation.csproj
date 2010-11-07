@@ -75,7 +75,7 @@
     <Compile Include="Model\DataCenterResourceDetail.cs" />
     <Compile Include="Model\DiskResource.cs" />
     <Compile Include="Model\DiskResourceDetail.cs" />
-    <Compile Include="Model\ResourceDetailQuickAction.cs" />
+    <Compile Include="Model\ResourceDetailActionType.cs" />
     <Compile Include="Model\Service.cs" />
     <Compile Include="Model\InterfaceResource.cs" />
     <Compile Include="Model\InterfaceResourceDetail.cs" />
@@ -153,11 +153,11 @@
     <Resource Include="Resources\ResourceDetailIpAddress.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\ResourceDetailQuickActionsHide.png" />
-    <Resource Include="Resources\ResourceDetailQuickActionsShow.png" />
+    <Resource Include="Resources\ResourceDetailActionsHide.png" />
+    <Resource Include="Resources\ResourceDetailActionsShow.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\ResourceDetailQuickActions.png" />
+    <Resource Include="Resources\ResourceDetailAction.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

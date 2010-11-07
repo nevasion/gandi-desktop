@@ -13,7 +13,7 @@
 
         public ResourceDetailAction[] Actions { get; private set; }
 
-        public event ResourceDetailQuickActionHandler DetailQuickAction;
+        public event ResourceDetailActionHandler DetailAction;
 
         public TextResourceDetail(string name, string value)
         {

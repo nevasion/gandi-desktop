@@ -51,40 +51,40 @@ namespace GandiDesktop.Presentation.ViewModel
             }
         }
 
-        private bool hasQuickActions;
-        public bool HasQuickActions
+        private bool hasActions;
+        public bool HasActions
         {
-            get { return this.hasQuickActions; }
+            get { return this.hasActions; }
             set
             {
-                if (this.hasQuickActions != value)
+                if (this.hasActions != value)
                 {
-                    this.hasQuickActions = value;
-                    base.OnPropertyChanged(() => HasQuickActions);
+                    this.hasActions = value;
+                    base.OnPropertyChanged(() => HasActions);
                 }
             }
         }
 
         public ObservableCollection<ResourceDetailActionViewModel> Actions { get; private set; }
 
-        public event ResourceDetailQuickActionHandler DetailQuickAction;
+        public event ResourceDetailActionHandler DetailAction;
 
         public ResourceDetailViewModel(IResourceDetail resourceDetail)
         {
             this.Name = resourceDetail.Name;
             this.Value = resourceDetail.Value;
             this.Type = resourceDetail.Type;
-            this.HasQuickActions = (resourceDetail.Actions != null && resourceDetail.Actions.Length > 0);
+            this.HasActions = (resourceDetail.Actions != null && resourceDetail.Actions.Length > 0);
 
             this.Actions = new ObservableCollection<ResourceDetailActionViewModel>();
-            if (this.HasQuickActions)
+            if (this.HasActions)
                 foreach (ResourceDetailAction action in resourceDetail.Actions)
                     this.Actions.Add(new ResourceDetailActionViewModel(action));
 
-            resourceDetail.DetailQuickAction += (sender, e) => 
+            resourceDetail.DetailAction += (sender, e) => 
             {
-                if (this.DetailQuickAction != null)
-                    this.DetailQuickAction(this, e);
+                if (this.DetailAction != null)
+                    this.DetailAction(this, e);
             };
         }
     }

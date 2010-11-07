@@ -18,7 +18,7 @@ namespace GandiDesktop.Presentation.Model
 
         public ResourceDetailAction[] Actions { get; private set; }
 
-        public event ResourceDetailQuickActionHandler DetailQuickAction;
+        public event ResourceDetailActionHandler DetailAction;
 
         public DataCenterResourceDetail(DataCenter dataCenter)
         {

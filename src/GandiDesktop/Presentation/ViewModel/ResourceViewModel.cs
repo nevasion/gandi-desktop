@@ -88,19 +88,19 @@ namespace GandiDesktop.Presentation.ViewModel
             {
                 ResourceDetailViewModel resourceDetailViewModel = new ResourceDetailViewModel(detail);
 
-                resourceDetailViewModel.DetailQuickAction += (sender, e) =>
+                resourceDetailViewModel.DetailAction += (sender, e) =>
                 {
                     if (!e.Error)
                     {
-                        if (e.Type == ResourceDetailQuickAction.Detach)
+                        if (e.Type == ResourceDetailActionType.Detach)
                         {
                             this.ResourceDetailViewModelCollection.Remove(resourceDetailViewModel);
                         }
-                        else if (e.Type == ResourceDetailQuickAction.Copy)
+                        else if (e.Type == ResourceDetailActionType.Copy)
                         {
                             Clipboard.SetText(e.Text);
                         }
-                        else if (e.Type == ResourceDetailQuickAction.Edit)
+                        else if (e.Type == ResourceDetailActionType.Edit)
                         {
                         }
                     }
