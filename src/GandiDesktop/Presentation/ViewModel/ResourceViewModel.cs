@@ -78,20 +78,6 @@ namespace GandiDesktop.Presentation.ViewModel
             }
         }
 
-        private bool isMouseOver;
-        public bool IsMouseOver
-        {
-            get { return this.isMouseOver; }
-            set
-            {
-                if (this.isMouseOver != value)
-                {
-                    this.isMouseOver = value;
-                    base.OnPropertyChanged(() => IsMouseOver);
-                }
-            }
-        }
-
         public ResourceViewModel(IResource resource)
         {
             this.Name = resource.Name;

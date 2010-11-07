@@ -27,23 +27,6 @@ namespace GandiDesktop.Presentation.View
             };
         }
 
-        private void OnResourceViewMouseEnter(object sender, MouseEventArgs e)
-        {
-            ResourceView view = (ResourceView)sender;
-            ResourceViewModel viewModel = (ResourceViewModel)view.DataContext;
-
-            viewModel.IsMouseOver = true;
-        }
-
-        private void OnResourceViewMouseLeave(object sender, MouseEventArgs e)
-        {
-            ResourceView view = (ResourceView)sender;
-            ResourceViewModel viewModel = (ResourceViewModel)view.DataContext;
-
-            view.IsDragging = false;
-            viewModel.IsMouseOver = false;
-        }
-
         private void OnResourceViewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             ResourceView view = (ResourceView)sender;
@@ -80,14 +63,7 @@ namespace GandiDesktop.Presentation.View
             ResourceView view = (ResourceView)sender;
 
             if (this.resourceDragged != null)
-            {
-                if (!this.resourceDragged.IsDragging && view == resourceDragged)
-                {
-                    view.IsExpanded = !view.IsExpanded;
-                }
-
                 this.resourceDragged.IsDragging = false;
-            }
 
             this.isDraggingResource = false;
             this.resourceDragged = null;

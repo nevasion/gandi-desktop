@@ -17,8 +17,6 @@
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <v:ResourceView
-                        MouseEnter="OnResourceViewMouseEnter"
-                        MouseLeave="OnResourceViewMouseLeave"
                         MouseLeftButtonDown="OnResourceViewMouseLeftButtonDown" 
                         MouseLeftButtonUp="OnResourceViewMouseLeftButtonUp" />
                 </DataTemplate>

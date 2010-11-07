@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media.Animation;
 
 namespace GandiDesktop.Presentation.View
@@ -82,6 +83,12 @@ namespace GandiDesktop.Presentation.View
         public ResourceView()
         {
             InitializeComponent();
+        }
+
+        private void OnResourceTypeMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (!this.IsDragging)
+                this.IsExpanded = !this.IsExpanded;
         }
 
         private static void OnIsExpandedPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
