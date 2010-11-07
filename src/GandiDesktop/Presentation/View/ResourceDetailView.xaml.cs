@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
+using GandiDesktop.Presentation.ViewModel;
 
 namespace GandiDesktop.Presentation.View
 {
@@ -10,6 +11,8 @@ namespace GandiDesktop.Presentation.View
         private const string IsExpandedPropertyName = "IsExpanded";
 
         private Grid gridQuickActions;
+        private AnimationClock quickActionsClock;
+        private bool animating;
 
         public bool IsExpanded
         {
@@ -23,35 +26,65 @@ namespace GandiDesktop.Presentation.View
         public ResourceDetailView()
         {
             InitializeComponent();
-        }
 
-        private void OnButtonQuickActionsClick(object sender, RoutedEventArgs e)
-        {
-            if (gridQuickActions != null)
+            this.MouseEnter += delegate
             {
-                double from = this.ActualHeight;
-                double to;
-
-                if (this.IsExpanded)
+                if (this.animating)
                 {
-                    to = 14;
+                    this.quickActionsClock.Controller.Begin();
+                    this.quickActionsClock.Controller.Pause();
                 }
-                else
+            };
+
+            this.MouseLeave += delegate
+            {
+                ResourceDetailViewModel viewModel = this.DataContext as ResourceDetailViewModel;
+                if (viewModel != null)
                 {
-                    to = 14 + gridQuickActions.ActualHeight;
+                    if (this.IsExpanded)
+                        this.ToggleQuickActionsDisplay(true);
+
+                    if (viewModel.HasQuickActions)
+                        foreach (ResourceDetailActionViewModel quickAction in viewModel.Actions)
+                            quickAction.AskConfirmation = false;
                 }
-
-                this.IsExpanded = !this.IsExpanded;
-
-                DoubleAnimation animation = new DoubleAnimation(from, to, new Duration(TimeSpan.FromMilliseconds(100)));
-
-                this.BeginAnimation(ResourceDetailView.HeightProperty, animation);
-            }
+            };
         }
 
         private void OnGridQuickActionsLoaded(object sender, RoutedEventArgs e)
         {
-            gridQuickActions = (Grid)sender;
+            this.gridQuickActions = (Grid)sender;
+        }
+
+        private void OnButtonQuickActionsClick(object sender, RoutedEventArgs e)
+        {
+            this.ToggleQuickActionsDisplay(false);
+        }
+
+        private void ToggleQuickActionsDisplay(bool delayed)
+        {
+            if (this.gridQuickActions != null)
+            {
+                double from = this.ActualHeight;
+                double to = 14;
+
+                if (!this.IsExpanded)
+                    to += this.gridQuickActions.ActualHeight;
+
+                DoubleAnimation quickActionsAnimation = new DoubleAnimation(from, to, new Duration(TimeSpan.FromMilliseconds(100)));
+                quickActionsAnimation.Completed += delegate
+                {
+                    this.animating = false;
+                    this.IsExpanded = !this.IsExpanded;
+                };
+
+                if (delayed)
+                    quickActionsAnimation.BeginTime = TimeSpan.FromMilliseconds(1500);
+
+                this.animating = true; 
+                this.quickActionsClock = quickActionsAnimation.CreateClock();
+                this.ApplyAnimationClock(ResourceDetailView.HeightProperty, this.quickActionsClock);
+            }
         }
     }
 }

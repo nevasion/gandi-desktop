@@ -76,6 +76,24 @@
             </Style.Triggers>
         </Style>
 
+        <Style x:Key="ButtonQuickActionConfirmation" TargetType="Button">
+            <Setter Property="Foreground" Value="Navy" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <TextBlock Text="{TemplateBinding Content}" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="FontWeight" Value="Bold" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        
         <Style x:Key="MainContent" TargetType="ContentControl">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Type}" Value="Text">
@@ -170,7 +188,17 @@
                                                                                 </Grid.ColumnDefinitions>
 
                                                                                 <Image Grid.Column="0" Opacity="0.5" Source="/GandiDesktop;component/Resources/ResourceDetailQuickActions.png" Margin="1,1,2,1" Width="4" Height="4" VerticalAlignment="Center" />
-                                                                                <TextBlock Grid.Column="1" Text="{Binding Name}" VerticalAlignment="Center" />
+                                                                                <TextBlock x:Name="text" Grid.Column="1" Text="{Binding Name}" VerticalAlignment="Center" />
+                                                                                
+                                                                                <Grid x:Name="gridConfirm" Grid.Column="1" Margin="2,0,2,0" Visibility="Collapsed">
+                                                                                    <Grid.ColumnDefinitions>
+                                                                                        <ColumnDefinition Width="1*" />
+                                                                                        <ColumnDefinition Width="1*" />
+                                                                                    </Grid.ColumnDefinitions>
+                                                                                    
+                                                                                    <Button Grid.Column="0" Content="Confirm" Command="{Binding ConfirmCommand}" Style="{StaticResource ButtonQuickActionConfirmation}" Foreground="Navy" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                                                    <Button Grid.Column="1" Content="Cancel" Command="{Binding CancelCommand}" Style="{StaticResource ButtonQuickActionConfirmation}" Foreground="DarkRed" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                                                </Grid>
                                                                             </Grid>
                                                                         </Border>
                                                                         
@@ -182,10 +210,24 @@
                                                                                     </Setter.Value>
                                                                                 </Setter>
                                                                             </Trigger>
+                                                                            <DataTrigger Binding="{Binding AskConfirmation}" Value="True">
+                                                                                <Setter TargetName="border" Property="Border.Background">
+                                                                                    <Setter.Value>
+                                                                                        <SolidColorBrush Color="Black" Opacity="0.070" />
+                                                                                    </Setter.Value>
+                                                                                </Setter>
+                                                                                <Setter TargetName="text" Property="Visibility" Value="Collapsed" />
+                                                                                <Setter TargetName="gridConfirm" Property="Visibility" Value="Visible" />
+                                                                            </DataTrigger>
                                                                         </ControlTemplate.Triggers>
                                                                     </ControlTemplate>
                                                                 </Setter.Value>
                                                             </Setter>
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding ConfirmationRequired}" Value="True">
+                                                                    <Setter Property="Command" Value="{Binding AskCommand}" />
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
                                                         </Style>
                                                     </Button.Style>
                                                 </Button>

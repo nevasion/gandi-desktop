@@ -32,10 +32,10 @@ namespace GandiDesktop.Presentation.Model
             if (disk.IsBootDisk) this.Type = ResourceDetailType.SystemDisk;
             else this.Type = ResourceDetailType.Disk;
 
-            ResourceDetailAction detachAction = new ResourceDetailAction() { Name = DiskResourceDetail.DetachCommandName };
+            ResourceDetailAction detachAction = new ResourceDetailAction(DiskResourceDetail.DetachCommandName, true);
             detachAction.Command = new RelayCommand((parameter) => this.Detach(parameter));
 
-            ResourceDetailAction editAction = new ResourceDetailAction() { Name = DiskResourceDetail.EditCommandName };
+            ResourceDetailAction editAction = new ResourceDetailAction(DiskResourceDetail.EditCommandName);
             editAction.Command = new RelayCommand((parameter) => this.Edit(parameter));
 
             this.Actions = new ResourceDetailAction[] 

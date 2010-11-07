@@ -37,10 +37,10 @@ namespace GandiDesktop.Presentation.Model
                 iface.IpAddressIds.Length, 
                 (iface.IpAddressIds.Length <= 1 ? null : InterfaceResourceDetail.PluralSuffix));
 
-            ResourceDetailAction detachAction = new ResourceDetailAction() { Name = InterfaceResourceDetail.DetachCommandName };
+            ResourceDetailAction detachAction = new ResourceDetailAction(InterfaceResourceDetail.DetachCommandName, true);
             detachAction.Command = new RelayCommand((parameter) => this.Detach(parameter));
 
-            ResourceDetailAction editAction = new ResourceDetailAction() { Name = InterfaceResourceDetail.EditCommandName };
+            ResourceDetailAction editAction = new ResourceDetailAction(InterfaceResourceDetail.EditCommandName);
             editAction.Command = new RelayCommand((parameter) => this.Edit(parameter));
 
             this.Actions = new ResourceDetailAction[] 

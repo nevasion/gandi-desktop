@@ -29,13 +29,13 @@ namespace GandiDesktop.Presentation.Model
 
             this.Value = ipAddress.Ip.ToString();
 
-            ResourceDetailAction copyAction = new ResourceDetailAction() { Name = IpAddressResourceDetail.CopyCommandName };
+            ResourceDetailAction copyAction = new ResourceDetailAction(IpAddressResourceDetail.CopyCommandName);
             copyAction.Command = new RelayCommand((parameter) => this.Copy(parameter));
 
-            ResourceDetailAction detachAction = new ResourceDetailAction() { Name = IpAddressResourceDetail.DetachCommandName };
+            ResourceDetailAction detachAction = new ResourceDetailAction(IpAddressResourceDetail.DetachCommandName, true);
             detachAction.Command = new RelayCommand((parameter) => this.Detach(parameter));
 
-            ResourceDetailAction editAction = new ResourceDetailAction() { Name = IpAddressResourceDetail.EditCommandName };
+            ResourceDetailAction editAction = new ResourceDetailAction(IpAddressResourceDetail.EditCommandName);
             editAction.Command = new RelayCommand((parameter) => this.Edit(parameter));
 
             this.Actions = new ResourceDetailAction[] 
