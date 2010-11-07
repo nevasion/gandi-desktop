@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using GandiDesktop.Presentation.Model;
+using System.Collections.ObjectModel;
 
 namespace GandiDesktop.Presentation.ViewModel
 {
@@ -50,11 +51,41 @@ namespace GandiDesktop.Presentation.ViewModel
             }
         }
 
+        private bool hasQuickActions;
+        public bool HasQuickActions
+        {
+            get { return this.hasQuickActions; }
+            set
+            {
+                if (this.hasQuickActions != value)
+                {
+                    this.hasQuickActions = value;
+                    base.OnPropertyChanged(() => HasQuickActions);
+                }
+            }
+        }
+
+        public ObservableCollection<ResourceDetailActionViewModel> Actions { get; private set; }
+
+        public event ResourceDetailQuickActionHandler DetailQuickAction;
+
         public ResourceDetailViewModel(IResourceDetail resourceDetail)
         {
             this.Name = resourceDetail.Name;
             this.Value = resourceDetail.Value;
             this.Type = resourceDetail.Type;
+            this.HasQuickActions = (resourceDetail.Actions != null && resourceDetail.Actions.Length > 0);
+
+            this.Actions = new ObservableCollection<ResourceDetailActionViewModel>();
+            if (this.HasQuickActions)
+                foreach (ResourceDetailAction action in resourceDetail.Actions)
+                    this.Actions.Add(new ResourceDetailActionViewModel(action));
+
+            resourceDetail.DetailQuickAction += (sender, e) => 
+            {
+                if (this.DetailQuickAction != null)
+                    this.DetailQuickAction(this, e);
+            };
         }
     }
 }

@@ -16,6 +16,10 @@ namespace GandiDesktop.Presentation.Model
             get { return ResourceDetailType.DataCenter; }
         }
 
+        public ResourceDetailAction[] Actions { get; private set; }
+
+        public event ResourceDetailQuickActionHandler DetailQuickAction;
+
         public DataCenterResourceDetail(DataCenter dataCenter)
         {
             this.Value = String.Format(DataCenterResourceDetail.ValueTemplate, dataCenter.Name, dataCenter.Country);

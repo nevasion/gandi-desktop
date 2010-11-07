@@ -75,11 +75,14 @@
     <Compile Include="Model\DataCenterResourceDetail.cs" />
     <Compile Include="Model\DiskResource.cs" />
     <Compile Include="Model\DiskResourceDetail.cs" />
+    <Compile Include="Model\ResourceDetailQuickAction.cs" />
+    <Compile Include="Model\Service.cs" />
     <Compile Include="Model\InterfaceResource.cs" />
     <Compile Include="Model\InterfaceResourceDetail.cs" />
     <Compile Include="Model\IpAddressResourceDetail.cs" />
     <Compile Include="Model\IResource.cs" />
     <Compile Include="Model\IResourceDetail.cs" />
+    <Compile Include="Model\ResourceDetailAction.cs" />
     <Compile Include="Model\ResourceDetailType.cs" />
     <Compile Include="Model\ResourceType.cs" />
     <Compile Include="Model\TextResourceDetail.cs" />
@@ -89,7 +92,8 @@
     </Compile>
     <Compile Include="ViewModel\DesktopViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="ViewModel\RelayCommand.cs" />
+    <Compile Include="RelayCommand.cs" />
+    <Compile Include="ViewModel\ResourceDetailActionViewModel.cs" />
     <Compile Include="ViewModel\ResourceDetailViewModel.cs" />
     <Compile Include="ViewModel\ResourceViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
@@ -147,6 +151,13 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\ResourceDetailIpAddress.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ResourceDetailQuickActionsHide.png" />
+    <Resource Include="Resources\ResourceDetailQuickActionsShow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ResourceDetailQuickActions.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

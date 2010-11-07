@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Windows;
 using GandiDesktop.Presentation.Model;
 
 namespace GandiDesktop.Presentation.ViewModel
@@ -98,7 +99,33 @@ namespace GandiDesktop.Presentation.ViewModel
 
             this.ResourceDetailViewModelCollection = new ObservableCollection<ResourceDetailViewModel>();
             foreach (IResourceDetail detail in resource.Details)
-                this.ResourceDetailViewModelCollection.Add(new ResourceDetailViewModel(detail));
+            {
+                ResourceDetailViewModel resourceDetailViewModel = new ResourceDetailViewModel(detail);
+
+                resourceDetailViewModel.DetailQuickAction += (sender, e) =>
+                {
+                    if (!e.Error)
+                    {
+                        if (e.Type == ResourceDetailQuickAction.Detach)
+                        {
+                            this.ResourceDetailViewModelCollection.Remove(resourceDetailViewModel);
+                        }
+                        else if (e.Type == ResourceDetailQuickAction.Copy)
+                        {
+                            Clipboard.SetText(e.Text);
+                        }
+                        else if (e.Type == ResourceDetailQuickAction.Edit)
+                        {
+                        }
+                    }
+                    else
+                    {
+
+                    }
+                };
+
+                this.ResourceDetailViewModelCollection.Add(resourceDetailViewModel);
+            }
         }
 
         public ResourceViewModel(string name, ResourceType type, double left, double top)

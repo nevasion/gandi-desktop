@@ -1,9 +1,9 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using GandiDesktop.Gandi.Services;
 using GandiDesktop.Gandi.Services.Hosting;
 using GandiDesktop.Presentation.Model;
-using System.Linq;
-using System.Collections.Generic;
 
 namespace GandiDesktop.Presentation.ViewModel
 {
@@ -15,13 +15,11 @@ namespace GandiDesktop.Presentation.ViewModel
         {
             this.ResourceViewModeCollection = new ObservableCollection<ResourceViewModel>();
 
-            GandiService gandiService = new GandiService(System.IO.File.ReadAllText("apikey.txt"));
-
-            DataCenter[] dataCenters = gandiService.Hosting.DataCenter.List();
-            Disk[] disks = gandiService.Hosting.Disk.List(dataCenters);
-            IpAddress[] ipAddresses = gandiService.Hosting.IpAddress.List(dataCenters);
-            Interface[] interfaces = gandiService.Hosting.Interface.List(dataCenters, ipAddresses);
-            VirtualMachine[] virtualMachines = gandiService.Hosting.VirtualMachine.List(dataCenters, interfaces, disks);
+            DataCenter[] dataCenters = Service.Hosting.DataCenter.List();
+            Disk[] disks = Service.Hosting.Disk.List(dataCenters);
+            IpAddress[] ipAddresses = Service.Hosting.IpAddress.List(dataCenters);
+            Interface[] interfaces = Service.Hosting.Interface.List(dataCenters, ipAddresses);
+            VirtualMachine[] virtualMachines = Service.Hosting.VirtualMachine.List(dataCenters, interfaces, disks);
 
             for (int i = 0; i < virtualMachines.Length; i++)
             {

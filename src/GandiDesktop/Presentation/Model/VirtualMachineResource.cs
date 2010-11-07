@@ -21,6 +21,8 @@ namespace GandiDesktop.Presentation.Model
 
         public IResourceDetail[] Details { get; private set; }
 
+        public event ResourceDetailQuickActionHandler DetailQuickAction;
+
         public VirtualMachineResource(VirtualMachine virtualMachine)
         {
             this.Name = virtualMachine.Hostname;
@@ -28,10 +30,31 @@ namespace GandiDesktop.Presentation.Model
             List<IResourceDetail> details = new List<IResourceDetail>();
 
             details.Add(new DataCenterResourceDetail(virtualMachine.DataCenter));
+
             foreach (Disk disk in virtualMachine.AttachedDisks)
-                details.Add(new DiskResourceDetail(disk));
+            {
+                DiskResourceDetail diskResourceDetail = new DiskResourceDetail(disk, virtualMachine);
+                diskResourceDetail.DetailQuickAction += (sender, e) => 
+                {
+                    if (this.DetailQuickAction != null)
+                        this.DetailQuickAction(this, e);
+                };
+
+                details.Add(diskResourceDetail);
+            }
+
             foreach (Interface iface in virtualMachine.AttachedInterfaces)
-                details.Add(new InterfaceResourceDetail(iface));
+            {
+                InterfaceResourceDetail ifaceResourceDetail = new InterfaceResourceDetail(iface, virtualMachine);
+                ifaceResourceDetail.DetailQuickAction += (sender, e) =>
+                {
+                    if (this.DetailQuickAction != null)
+                        this.DetailQuickAction(this, e);
+                };
+
+                details.Add(ifaceResourceDetail);
+            }
+
             details.Add(new TextResourceDetail(VirtualMachineResource.CPUName, String.Format(VirtualMachineResource.CPUValueTemplate, virtualMachine.Cores, (virtualMachine.Cores == 1 ? null : VirtualMachineResource.PluralSuffix))));
             details.Add(new TextResourceDetail(VirtualMachineResource.MemoryName, String.Format(VirtualMachineResource.MemoryValueTemplate, virtualMachine.Memory)));
             

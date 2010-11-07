@@ -1,11 +1,16 @@
-﻿using GandiDesktop.Gandi.Services.Hosting;
-using System;
+﻿using System;
+using GandiDesktop.Gandi.Services.Hosting;
 
 namespace GandiDesktop.Presentation.Model
 {
     public class DiskResourceDetail : IResourceDetail
     {
         private const string ValueTemplate = "{0} ({1} Go)";
+        private const string DetachCommandName = "Detach";
+        private const string EditCommandName = "Edit";
+
+        private Disk disk;
+        private VirtualMachine virtualMachine;
 
         public string Name { get; private set; }
 
@@ -13,12 +18,44 @@ namespace GandiDesktop.Presentation.Model
 
         public ResourceDetailType Type { get; private set; }
 
-        public DiskResourceDetail(Disk disk)
+        public ResourceDetailAction[] Actions { get; private set; }
+
+        public event ResourceDetailQuickActionHandler DetailQuickAction;
+
+        public DiskResourceDetail(Disk disk, VirtualMachine virtualMachine)
         {
+            this.disk = disk;
+            this.virtualMachine = virtualMachine;
+
             this.Value = String.Format(DiskResourceDetail.ValueTemplate, disk.Name, (disk.Size / 1000));
 
             if (disk.IsBootDisk) this.Type = ResourceDetailType.SystemDisk;
             else this.Type = ResourceDetailType.Disk;
+
+            ResourceDetailAction detachAction = new ResourceDetailAction() { Name = DiskResourceDetail.DetachCommandName };
+            detachAction.Command = new RelayCommand((parameter) => this.Detach(parameter));
+
+            ResourceDetailAction editAction = new ResourceDetailAction() { Name = DiskResourceDetail.EditCommandName };
+            editAction.Command = new RelayCommand((parameter) => this.Edit(parameter));
+
+            this.Actions = new ResourceDetailAction[] 
+            {
+                detachAction,
+                editAction
+            };
+        }
+
+        public void Detach(object parameter)
+        {
+            if (this.DetailQuickAction != null)
+                this.DetailQuickAction(this, new ResourceDetailQuickActionEventArgs(ResourceDetailQuickAction.Detach));
+
+            Service.Hosting.VirtualMachine.DetachDisk(this.virtualMachine, this.disk);
+        }
+
+        public void Edit(object parameter)
+        {
+
         }
     }
 }

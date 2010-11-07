@@ -11,6 +11,10 @@
             get { return ResourceDetailType.Text; }
         }
 
+        public ResourceDetailAction[] Actions { get; private set; }
+
+        public event ResourceDetailQuickActionHandler DetailQuickAction;
+
         public TextResourceDetail(string name, string value)
         {
             this.Name = name;
