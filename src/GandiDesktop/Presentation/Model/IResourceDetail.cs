@@ -8,6 +8,7 @@ namespace GandiDesktop.Presentation.Model
     {
         public string Text { get; private set; }
         public ResourceDetailActionType Type { get; private set; }
+        public object Resource { get; set; }
         public bool Error { get; set; }
         public string ErrorMessage { get; set; }
 

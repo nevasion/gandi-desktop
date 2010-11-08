@@ -4,6 +4,7 @@
     {
         Detach,
         Edit,
-        Copy
+        Copy,
+        SeeIpAddresses
     }
 }

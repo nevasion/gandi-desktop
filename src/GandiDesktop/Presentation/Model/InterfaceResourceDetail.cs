@@ -8,6 +8,7 @@ namespace GandiDesktop.Presentation.Model
         private const string PluralSuffix = "s";
         private const string ValueTemplate = "{0} Kbps ({1} IP{2})";
         private const string DetachCommandName = "Detach";
+        private const string SeeIpAddressesCommandName = "See IP{0}";
         private const string EditCommandName = "Edit";
 
         private Interface iface;
@@ -40,14 +41,24 @@ namespace GandiDesktop.Presentation.Model
             ResourceDetailAction detachAction = new ResourceDetailAction(InterfaceResourceDetail.DetachCommandName, true);
             detachAction.Command = new RelayCommand((parameter) => this.Detach(parameter));
 
+            ResourceDetailAction seeIpAddressesAction = new ResourceDetailAction(String.Format(InterfaceResourceDetail.SeeIpAddressesCommandName, (iface.IpAddressIds.Length <= 1 ? null : InterfaceResourceDetail.PluralSuffix)));
+            seeIpAddressesAction.Command = new RelayCommand((parameter) => this.SeeIpAddresses(parameter));
+
             ResourceDetailAction editAction = new ResourceDetailAction(InterfaceResourceDetail.EditCommandName);
             editAction.Command = new RelayCommand((parameter) => this.Edit(parameter));
 
             this.Actions = new ResourceDetailAction[] 
             {
                 detachAction,
+                seeIpAddressesAction,
                 editAction
             };
+        }
+
+        public void SeeIpAddresses(object parameter)
+        {
+            if (this.DetailAction != null)
+                this.DetailAction(this, new ResourceDetailActionEventArgs(ResourceDetailActionType.SeeIpAddresses) { Resource = this.iface });
         }
 
         public void Detach(object parameter)

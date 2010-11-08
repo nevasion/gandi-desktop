@@ -1,5 +1,7 @@
 ﻿using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
+using GandiDesktop.Gandi.Services.Hosting;
 using GandiDesktop.Presentation.Model;
 
 namespace GandiDesktop.Presentation.ViewModel
@@ -92,13 +94,28 @@ namespace GandiDesktop.Presentation.ViewModel
                 {
                     if (!e.Error)
                     {
-                        if (e.Type == ResourceDetailActionType.Detach)
-                        {
-                            this.ResourceDetailViewModelCollection.Remove(resourceDetailViewModel);
-                        }
-                        else if (e.Type == ResourceDetailActionType.Copy)
+                        if (e.Type == ResourceDetailActionType.Copy)
                         {
                             Clipboard.SetText(e.Text);
+                        }
+                        else if (e.Type == ResourceDetailActionType.SeeIpAddresses)
+                        {
+                            int i = this.ResourceDetailViewModelCollection.IndexOf(resourceDetailViewModel);
+                            Interface iface = (Interface)e.Resource;
+
+                            ResourceDetailViewModel[] ipAddresseDetails = this.ResourceDetailViewModelCollection.Where(r => r.Type == ResourceDetailType.IpAddress).ToArray();
+                            for (int j = 0; j < ipAddresseDetails.Length; j++)
+                            {
+                                ResourceDetailViewModel ipAddressDetail = ipAddresseDetails[j];
+                                this.ResourceDetailViewModelCollection.Remove(ipAddressDetail);
+                            }
+
+                            foreach (IpAddress ipAddress in iface.IpAddresses)
+                                this.ResourceDetailViewModelCollection.Insert(++i, new ResourceDetailViewModel(new IpAddressResourceDetail(ipAddress)));
+                        }
+                        else if (e.Type == ResourceDetailActionType.Detach)
+                        {
+                            this.ResourceDetailViewModelCollection.Remove(resourceDetailViewModel);
                         }
                         else if (e.Type == ResourceDetailActionType.Edit)
                         {
