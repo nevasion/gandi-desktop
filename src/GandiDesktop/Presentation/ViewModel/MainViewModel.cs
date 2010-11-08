@@ -8,5 +8,10 @@
         {
             this.DesktopViewModel = new DesktopViewModel();
         }
+
+        public void SaveResourceLocations()
+        {
+            this.DesktopViewModel.SaveResourceLocations();
+        }
     }
 }

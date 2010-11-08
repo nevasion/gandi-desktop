@@ -85,6 +85,7 @@
     <Compile Include="Model\ResourceDetailAction.cs" />
     <Compile Include="Model\ResourceDetailType.cs" />
     <Compile Include="Model\ResourceType.cs" />
+    <Compile Include="ResourceSettingInfo.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="SettingsKeyAttribute.cs" />
     <Compile Include="Model\TextResourceDetail.cs" />

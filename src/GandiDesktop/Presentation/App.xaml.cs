@@ -6,8 +6,18 @@ namespace GandiDesktop
 {
     public partial class App : Application
     {
+        private MainViewModel mainViewModel = new MainViewModel();
+
         public App()
         {
+            this.mainViewModel = new MainViewModel();
+        }
+
+        protected override void OnExit(ExitEventArgs e)
+        {
+            base.OnExit(e);
+
+            this.mainViewModel.SaveResourceLocations();
         }
 
         protected override void OnStartup(StartupEventArgs e)
@@ -16,7 +26,7 @@ namespace GandiDesktop
 
             MainView mainView = new MainView()
             {
-                DataContext = new MainViewModel()
+                DataContext = this.mainViewModel
             };
 
             mainView.Show();

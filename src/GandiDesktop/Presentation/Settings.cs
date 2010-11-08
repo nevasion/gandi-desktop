@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Windows;
 
 namespace GandiDesktop.Presentation
@@ -13,6 +15,7 @@ namespace GandiDesktop.Presentation
         {
             public const string WindowLocation = "window_location";
             public const string WindowSize = "window_size";
+            public const string ResourceInfos = "resource_infos";
         }
 
         static class Values
@@ -22,6 +25,9 @@ namespace GandiDesktop.Presentation
 
             [SettingsKey(Keys.WindowSize)]
             public static string WindowSize { get; set; }
+
+            [SettingsKey(Keys.ResourceInfos)]
+            public static string ResourceInfos { get; set; }
         }
 
         private const string KeyValueSeparator = "=";
@@ -65,6 +71,49 @@ namespace GandiDesktop.Presentation
             set
             {
                 Settings.Values.WindowSize = (value.HasValue ? value.Value.ToString(CultureInfo.InvariantCulture) : null);
+            }
+        }
+
+        public static ResourceSettingInfo[] ResourceInfos
+        {
+            get
+            {
+                List<ResourceSettingInfo> infoList = new List<ResourceSettingInfo>();
+
+                if (!String.IsNullOrEmpty(Settings.Values.ResourceInfos))
+                {
+                    string[] resources = Settings.Values.ResourceInfos.Split(
+                        new char[] { ResourceSettingInfo.ResourceSeparator },
+                        StringSplitOptions.RemoveEmptyEntries);
+
+                    foreach (string resource in resources)
+                    {
+                        ResourceSettingInfo resourceInfo = ResourceSettingInfo.Parse(resource);
+                        if (resourceInfo != null)
+                            infoList.Add(resourceInfo);
+                    }
+                }
+
+                return infoList.ToArray();
+            }
+            set
+            {
+                if (value != null && value.Length > 0)
+                {
+                    StringBuilder resourceInfos = new StringBuilder();
+
+                    foreach (ResourceSettingInfo resourceInfo in value)
+                    {
+                        resourceInfos.Append(resourceInfo);
+                        resourceInfos.Append(ResourceSettingInfo.ResourceSeparator);
+                    }
+
+                    Settings.Values.ResourceInfos = resourceInfos.ToString();
+                }
+                else
+                {
+                    Settings.Values.ResourceInfos = null;
+                }
             }
         }
 

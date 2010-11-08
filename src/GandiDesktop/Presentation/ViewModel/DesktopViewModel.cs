@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using GandiDesktop.Gandi.Services;
+using System.Windows;
 using GandiDesktop.Gandi.Services.Hosting;
 using GandiDesktop.Presentation.Model;
 
@@ -9,11 +9,14 @@ namespace GandiDesktop.Presentation.ViewModel
 {
     public class DesktopViewModel : ViewModelBase
     {
+        private ResourceSettingInfo[] resourceInfos;
+
         public ObservableCollection<ResourceViewModel> ResourceViewModeCollection { get; private set; }
 
         public DesktopViewModel()
         {
             this.ResourceViewModeCollection = new ObservableCollection<ResourceViewModel>();
+            this.resourceInfos = Settings.ResourceInfos;
 
             DataCenter[] dataCenters = Service.Hosting.DataCenter.List();
             Disk[] disks = Service.Hosting.Disk.List(dataCenters);
@@ -31,6 +34,7 @@ namespace GandiDesktop.Presentation.ViewModel
                     Top = 10
                 };
 
+                this.ApplySettings(resourceViewModel);
                 this.ResourceViewModeCollection.Add(resourceViewModel);
             }
 
@@ -47,6 +51,7 @@ namespace GandiDesktop.Presentation.ViewModel
                         Top = 80
                     };
 
+                    this.ApplySettings(resourceViewModel); 
                     this.ResourceViewModeCollection.Add(resourceViewModel);
                 }
             }
@@ -62,8 +67,36 @@ namespace GandiDesktop.Presentation.ViewModel
                     Top = 150
                 };
 
+                this.ApplySettings(resourceViewModel); 
                 this.ResourceViewModeCollection.Add(resourceViewModel);
             }
+        }
+
+        private void ApplySettings(ResourceViewModel resourceViewModel)
+        {
+            ResourceSettingInfo resourceInfo = this.resourceInfos.SingleOrDefault(r => r.Name == resourceViewModel.Name);
+            if (resourceInfo != null)
+            {
+                resourceViewModel.Left = resourceInfo.Location.X;
+                resourceViewModel.Top = resourceInfo.Location.Y;
+                resourceViewModel.ZIndex = resourceInfo.ZIndex;
+            }
+        }
+
+        public void SaveResourceLocations()
+        {
+            int zIndex = 0;
+            List<ResourceSettingInfo> resourceInfoList = new List<ResourceSettingInfo>();
+            foreach (ResourceViewModel resourceViewModel in this.ResourceViewModeCollection.OrderBy(r => r.ZIndex))
+                resourceInfoList.Add(new ResourceSettingInfo()
+                {
+                    Name = resourceViewModel.Name,
+                    Location = new Point(resourceViewModel.Left, resourceViewModel.Top),
+                    ZIndex = zIndex++
+                });
+
+            Settings.ResourceInfos = resourceInfoList.ToArray();
+            Settings.Save();
         }
     }
 }
