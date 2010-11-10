@@ -43,6 +43,6 @@ namespace GandiDesktop.Gandi.Services.Hosting.Mapping
         public string State { get; set; }
 
         [XmlRpcMember(XmlRpcMappingNames.Version)]
-        public string Version { get; set; }
+        public int Version { get; set; }
     }
 }
