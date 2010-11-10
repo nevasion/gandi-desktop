@@ -100,15 +100,15 @@ namespace GandiDesktop.Presentation.ViewModel
                         }
                         else if (e.Type == ResourceDetailActionType.SeeIpAddresses)
                         {
-                            int i = this.ResourceDetailViewModelCollection.IndexOf(resourceDetailViewModel);
-                            Interface iface = (Interface)e.Resource;
-
                             ResourceDetailViewModel[] ipAddresseDetails = this.ResourceDetailViewModelCollection.Where(r => r.Type == ResourceDetailType.IpAddress).ToArray();
                             for (int j = 0; j < ipAddresseDetails.Length; j++)
                             {
                                 ResourceDetailViewModel ipAddressDetail = ipAddresseDetails[j];
                                 this.ResourceDetailViewModelCollection.Remove(ipAddressDetail);
                             }
+
+                            int i = this.ResourceDetailViewModelCollection.IndexOf(resourceDetailViewModel);
+                            Interface iface = (Interface)e.Resource;
 
                             foreach (IpAddress ipAddress in iface.IpAddresses)
                                 this.ResourceDetailViewModelCollection.Insert(++i, new ResourceDetailViewModel(new IpAddressResourceDetail(ipAddress)));
