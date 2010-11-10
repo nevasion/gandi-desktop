@@ -23,7 +23,10 @@ namespace GandiDesktop.Presentation.View
             this.MouseLeave += delegate 
             { 
                 this.MoveResourcesInBounds();
+
                 this.isDraggingResource = false;
+                if (this.resourceDragged != null)
+                    this.resourceDragged.IsDragging = false;
             };
         }
 
