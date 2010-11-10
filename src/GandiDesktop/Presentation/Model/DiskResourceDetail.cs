@@ -47,10 +47,18 @@ namespace GandiDesktop.Presentation.Model
 
         public void Detach(object parameter)
         {
-            if (this.DetailAction != null)
-                this.DetailAction(this, new ResourceDetailActionEventArgs(ResourceDetailActionType.Detach));
+            ResourceDetailActionEventArgs actionEventArgs = new ResourceDetailActionEventArgs(ResourceDetailActionType.Detach);
 
-            Service.Hosting.VirtualMachine.DetachDisk(this.virtualMachine, this.disk);
+            try { Service.Hosting.VirtualMachine.DetachDisk(this.virtualMachine, this.disk); }
+            catch (Exception x)
+            {
+                actionEventArgs.Resource = this;
+                actionEventArgs.Error = true;
+                actionEventArgs.ErrorMessage = x.Message;
+            }
+
+            if (this.DetailAction != null)
+                this.DetailAction(this, actionEventArgs);
         }
 
         public void Edit(object parameter)

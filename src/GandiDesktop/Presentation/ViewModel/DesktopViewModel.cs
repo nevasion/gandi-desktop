@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
+using System.Windows.Input;
 using GandiDesktop.Gandi.Services.Hosting;
 using GandiDesktop.Presentation.Model;
 
@@ -10,6 +11,46 @@ namespace GandiDesktop.Presentation.ViewModel
     public class DesktopViewModel : ViewModelBase
     {
         private ResourceSettingInfo[] resourceInfos;
+
+        private bool displayError;
+        public bool DisplayError
+        {
+            get { return this.displayError; }
+            set
+            {
+                if (this.displayError != value)
+                {
+                    this.displayError = value;
+                    base.OnPropertyChanged(() => DisplayError);
+                }
+            }
+        }
+
+        private string errorMessage;
+        public string ErrorMessage
+        {
+            get { return this.errorMessage; }
+            set
+            {
+                if (this.errorMessage != value)
+                {
+                    this.errorMessage = value;
+                    base.OnPropertyChanged(() => ErrorMessage);
+                }
+            }
+        }
+
+        private ICommand closeErrorCommand;
+        public ICommand CloseErrorCommand
+        {
+            get
+            {
+                if (this.closeErrorCommand == null)
+                    this.closeErrorCommand = new RelayCommand((parameter) => CloseError(parameter));
+
+                return this.closeErrorCommand;
+            }
+        }
 
         public ObservableCollection<ResourceViewModel> ResourceViewModeCollection { get; private set; }
 
@@ -34,6 +75,8 @@ namespace GandiDesktop.Presentation.ViewModel
                     Top = 10
                 };
 
+                resourceViewModel.DetailAction += OnDetailAction;
+
                 this.ApplySettings(resourceViewModel);
                 this.ResourceViewModeCollection.Add(resourceViewModel);
             }
@@ -51,6 +94,8 @@ namespace GandiDesktop.Presentation.ViewModel
                         Top = 80
                     };
 
+                    resourceViewModel.DetailAction += OnDetailAction;
+
                     this.ApplySettings(resourceViewModel); 
                     this.ResourceViewModeCollection.Add(resourceViewModel);
                 }
@@ -67,8 +112,24 @@ namespace GandiDesktop.Presentation.ViewModel
                     Top = 150
                 };
 
+                resourceViewModel.DetailAction += OnDetailAction;
+
                 this.ApplySettings(resourceViewModel); 
                 this.ResourceViewModeCollection.Add(resourceViewModel);
+            }
+        }
+
+        public void CloseError(object parameter)
+        {
+            this.DisplayError = false;
+        }
+
+        private void OnDetailAction(object sender, ResourceDetailActionEventArgs e)
+        {
+            if (e.Error)
+            {
+                this.ErrorMessage = e.ErrorMessage; 
+                this.DisplayError = true; 
             }
         }
 

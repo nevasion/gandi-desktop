@@ -80,6 +80,8 @@ namespace GandiDesktop.Presentation.ViewModel
             }
         }
 
+        public event ResourceDetailActionHandler DetailAction;
+
         public ResourceViewModel(IResource resource)
         {
             this.Name = resource.Name;
@@ -123,7 +125,8 @@ namespace GandiDesktop.Presentation.ViewModel
                     }
                     else
                     {
-
+                        if (this.DetailAction != null)
+                            this.DetailAction(this, e);
                     }
                 };
 
