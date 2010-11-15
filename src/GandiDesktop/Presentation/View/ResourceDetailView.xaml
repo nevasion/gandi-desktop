@@ -42,6 +42,7 @@
         <Style x:Key="ButtonToggleActions" TargetType="Button">
             <Setter Property="ToolTip" Value="Quick Actions" />
             <Setter Property="FontSize" Value="9" />
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
             <Setter Property="VerticalAlignment" Value="Stretch" />
             <Setter Property="HorizontalAlignment" Value="Right" />
             <Setter Property="Visibility" Value="Hidden" />
@@ -99,7 +100,7 @@
                 <DataTrigger Binding="{Binding Type}" Value="Text">
                     <Setter Property="Background">
                         <Setter.Value>
-                            <SolidColorBrush Color="LightGray" Opacity="0.50" />
+                            <SolidColorBrush Color="LightGray" Opacity="0.75" />
                         </Setter.Value>
                     </Setter>
                 </DataTrigger>
@@ -134,7 +135,7 @@
                 <DataTrigger Binding="{Binding Type}" Value="IpAddress">
                     <Setter Property="Background">
                         <Setter.Value>
-                            <SolidColorBrush Color="Orange" Opacity="0.125" />
+                            <SolidColorBrush Color="Orange" Opacity="0.1375" />
                         </Setter.Value>
                     </Setter>
                 </DataTrigger>
@@ -255,7 +256,7 @@
     </UserControl.Resources>
 
     <Grid x:Name="rootGrid" TextBlock.FontSize="10">
-        <ContentControl Style="{StaticResource MainContent}" />
+        <ContentControl FocusVisualStyle="{x:Null}" Style="{StaticResource MainContent}" />
     </Grid>
 
 </UserControl>
