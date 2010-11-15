@@ -3,6 +3,7 @@
     public enum ResourceDetailType
     {
         Text,
+        Status,
         DataCenter,
         Disk,
         SystemDisk,

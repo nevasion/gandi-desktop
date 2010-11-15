@@ -85,6 +85,7 @@
     <Compile Include="Model\ResourceDetailAction.cs" />
     <Compile Include="Model\ResourceDetailType.cs" />
     <Compile Include="Model\ResourceType.cs" />
+    <Compile Include="Model\StatusResourceDetail.cs" />
     <Compile Include="ResourceSettingInfo.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="SettingsKeyAttribute.cs" />
@@ -167,6 +168,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Close.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ResourceDetailStatus.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
