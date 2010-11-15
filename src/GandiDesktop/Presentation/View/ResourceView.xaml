@@ -60,6 +60,28 @@
             </Style.Triggers>
         </Style>
 
+        <Style x:Key="StateSphere" TargetType="Ellipse">
+            <Setter Property="ToolTip" Value="{Binding Status}" />
+            <Setter Property="Visibility" Value="Collapsed" />
+            <Setter Property="Opacity" Value="0.5" />
+            <Setter Property="Fill" Value="Red" />
+            <Setter Property="Stroke" Value="LightGray" />
+            <Setter Property="StrokeThickness" Value="0.5" />
+            <Setter Property="Width" Value="5" />
+            <Setter Property="Height" Value="5" />
+            <Setter Property="Margin" Value="4" />
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Type}" Value="VirtualMachine">
+                    <Setter Property="Visibility" Value="Visible" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding IsRunning}" Value="True">
+                    <Setter Property="Fill" Value="Green" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        
         <Style x:Key="ResourceNameUnder" TargetType="TextBlock">
             <Setter Property="TextTrimming" Value="CharacterEllipsis" />
             <Setter Property="MaxWidth" Value="46" />
@@ -97,6 +119,10 @@
                     </DiscreteObjectKeyFrame.Value>
                 </DiscreteObjectKeyFrame>
             </ObjectAnimationUsingKeyFrames>
+
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00.3" Storyboard.TargetName="stateSphere" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.05" Value="0.5" />
+            </DoubleAnimationUsingKeyFrames>
 
             <ObjectAnimationUsingKeyFrames BeginTime="00:00:00.0" Storyboard.TargetName="gridResourceDetails" Storyboard.TargetProperty="(UIElement.Visibility)">
                 <DiscreteObjectKeyFrame KeyTime="00:00:00.05" Value="{x:Static Visibility.Collapsed}"/>
@@ -136,6 +162,10 @@
                     </DiscreteObjectKeyFrame.Value>
                 </DiscreteObjectKeyFrame>
             </ObjectAnimationUsingKeyFrames>
+
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="stateSphere" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.05" Value="0" />
+            </DoubleAnimationUsingKeyFrames>
 
             <ObjectAnimationUsingKeyFrames BeginTime="00:00:00.0" Storyboard.TargetName="gridResourceDetails" Storyboard.TargetProperty="(UIElement.Visibility)">
                 <DiscreteObjectKeyFrame KeyTime="00:00:00.10" Value="{x:Static Visibility.Visible}"/>
@@ -186,6 +216,7 @@
                     <Border x:Name="borderResourceType" Grid.Column="0" Style="{StaticResource ResourceTypeBorder}" MouseLeftButtonUp="OnResourceTypeMouseLeftButtonUp" CornerRadius="5" Width="50" Height="50" VerticalAlignment="Top" HorizontalAlignment="Left">
                         <Grid>
                             <TextBlock Style="{StaticResource ResourceTypeTextBlock}" FontFamily="Courrier" Opacity="0.5" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                            <Ellipse x:Name="stateSphere" Style="{StaticResource StateSphere}" />
                         </Grid>
                     </Border>
 

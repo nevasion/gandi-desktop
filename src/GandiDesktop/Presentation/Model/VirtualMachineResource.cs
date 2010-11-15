@@ -14,6 +14,8 @@ namespace GandiDesktop.Presentation.Model
 
         public string Name { get; private set; }
 
+        public string Status { get; private set; }
+
         public ResourceType Type
         {
             get { return ResourceType.VirtualMachine; }
@@ -26,6 +28,7 @@ namespace GandiDesktop.Presentation.Model
         public VirtualMachineResource(VirtualMachine virtualMachine)
         {
             this.Name = virtualMachine.Hostname;
+            this.Status = virtualMachine.State;
 
             List<IResourceDetail> details = new List<IResourceDetail>();
 

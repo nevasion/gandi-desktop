@@ -24,6 +24,34 @@ namespace GandiDesktop.Presentation.ViewModel
             }
         }
 
+        private string status;
+        public string Status
+        {
+            get { return this.status; }
+            set
+            {
+                if (this.status != value)
+                {
+                    this.status = value;
+                    base.OnPropertyChanged(() => Status);
+                }
+            }
+        }
+
+        private bool isRunning;
+        public bool IsRunning
+        {
+            get { return this.isRunning; }
+            set
+            {
+                if (this.isRunning != value)
+                {
+                    this.isRunning = value;
+                    base.OnPropertyChanged(() => IsRunning);
+                }
+            }
+        }
+
         private ResourceType type;
         public ResourceType Type
         {
@@ -85,6 +113,8 @@ namespace GandiDesktop.Presentation.ViewModel
         public ResourceViewModel(IResource resource)
         {
             this.Name = resource.Name;
+            this.Status = resource.Status;
+            this.IsRunning = (resource.Status == "running");
             this.Type = resource.Type;
 
             this.ResourceDetailViewModelCollection = new ObservableCollection<ResourceDetailViewModel>();

@@ -37,6 +37,20 @@ namespace GandiDesktop.Presentation.ViewModel
             }
         }
 
+        private bool isRunning;
+        public bool IsRunning
+        {
+            get { return this.isRunning; }
+            set
+            {
+                if (this.isRunning != value)
+                {
+                    this.isRunning = value;
+                    base.OnPropertyChanged(() => IsRunning);
+                }
+            }
+        }
+
         private ResourceDetailType type;
         public ResourceDetailType Type
         {
@@ -73,6 +87,10 @@ namespace GandiDesktop.Presentation.ViewModel
         {
             this.Name = resourceDetail.Name;
             this.Value = resourceDetail.Value;
+
+            if (resourceDetail.Type == ResourceDetailType.Status)
+                this.IsRunning = (resourceDetail.Value == "running");
+
             this.Type = resourceDetail.Type;
             this.HasActions = (resourceDetail.Actions != null && resourceDetail.Actions.Length > 0);
 

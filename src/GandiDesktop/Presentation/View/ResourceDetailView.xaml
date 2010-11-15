@@ -16,7 +16,7 @@
                     <Setter Property="ToolTip" Value="{Binding Name}" />
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Type}" Value="Status">
-                    <Setter Property="Source" Value="/GandiDesktop;component/Resources/ResourceDetailStatus.png" />
+                    <Setter Property="Source" Value="/GandiDesktop;component/Resources/ResourceDetailRedStatus.png" />
                     <Setter Property="ToolTip" Value="Status" />
                     <Setter Property="Margin" Value="1,1,0,0" />
                 </DataTrigger>
@@ -40,6 +40,9 @@
                 <DataTrigger Binding="{Binding Type}" Value="IpAddress">
                     <Setter Property="Source" Value="/GandiDesktop;component/Resources/ResourceDetailIpAddress.png" />
                     <Setter Property="ToolTip" Value="IP" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding IsRunning}" Value="True">
+                    <Setter Property="Source" Value="/GandiDesktop;component/Resources/ResourceDetailGreenStatus.png" />
                 </DataTrigger>
             </Style.Triggers>
         </Style>

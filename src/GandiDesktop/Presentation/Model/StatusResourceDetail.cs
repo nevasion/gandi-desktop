@@ -6,6 +6,8 @@
 
         public string Value { get; private set; }
 
+        public string Status { get; private set; }
+
         public ResourceDetailType Type
         {
             get { return ResourceDetailType.Status; }
