@@ -18,7 +18,9 @@
                 <DataTrigger Binding="{Binding Type}" Value="Status">
                     <Setter Property="Source" Value="/GandiDesktop;component/Resources/ResourceDetailRedStatus.png" />
                     <Setter Property="ToolTip" Value="Status" />
-                    <Setter Property="Margin" Value="1,1,0,0" />
+                    <Setter Property="Width" Value="6" />
+                    <Setter Property="Height" Value="6" />
+                    <Setter Property="Margin" Value="3,1,2,1" />
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Type}" Value="DataCenter">
                     <Setter Property="Source" Value="/GandiDesktop;component/Resources/ResourceDetailDataCenter.png" />
@@ -113,11 +115,9 @@
                     </Setter>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Type}" Value="Status">
-                    <Setter Property="Background">
-                        <Setter.Value>
-                            <SolidColorBrush Color="Gray" Opacity="0.25" />
-                        </Setter.Value>
-                    </Setter>
+                    <Setter Property="BorderThickness" Value="1" />
+                    <Setter Property="BorderBrush" Value="LightGray" />
+                    <Setter Property="Margin" Value="2,-0.5,0,0" />
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Type}" Value="DataCenter">
                     <Setter Property="Background">
@@ -159,7 +159,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ContentControl">
-                        <Border Background="{TemplateBinding Background}" CornerRadius="2">
+                        <Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="2">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
@@ -174,7 +174,7 @@
 
                                 <Image x:Name="image" Grid.Column="0" Grid.Row="0" Style="{StaticResource MainImage}" />
                                 <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Name}" FontWeight="Bold" VerticalAlignment="Center" />
-                                <TextBlock Grid.Column="2" Grid.Row="0" Text="{Binding Value}" ToolTip="{Binding Value}" TextTrimming="CharacterEllipsis" Margin="2,0,0,0" VerticalAlignment="Center" />
+                                <TextBlock Grid.Column="2" Grid.Row="0" Text="{Binding Value}" ToolTip="{Binding Value}" TextTrimming="CharacterEllipsis" Margin="{TemplateBinding Margin}" VerticalAlignment="Center" />
 
                                 <Button x:Name="buttonToggleActions" Grid.Column="3" Grid.Row="0" Style="{StaticResource ButtonToggleActions}" Click="OnButtonToggleActionsClick" />
 
@@ -266,6 +266,7 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+            <Setter Property="Margin" Value="2,0,0,0" />            
         </Style>
 
     </UserControl.Resources>

@@ -170,9 +170,6 @@
     <Resource Include="Resources\Close.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\ResourceDetailStatus.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\ResourceDetailGreenStatus.png" />
     <Resource Include="Resources\ResourceDetailRedStatus.png" />
   </ItemGroup>

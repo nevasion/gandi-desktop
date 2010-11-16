@@ -89,7 +89,7 @@ namespace GandiDesktop.Presentation.ViewModel
             this.Value = resourceDetail.Value;
 
             if (resourceDetail.Type == ResourceDetailType.Status)
-                this.IsRunning = (resourceDetail.Value == "running");
+                this.IsRunning = (resourceDetail.Value == "Running");
 
             this.Type = resourceDetail.Type;
             this.HasActions = (resourceDetail.Actions != null && resourceDetail.Actions.Length > 0);

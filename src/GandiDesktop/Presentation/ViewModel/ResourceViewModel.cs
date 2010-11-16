@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using GandiDesktop.Gandi.Services.Hosting;
@@ -114,7 +115,12 @@ namespace GandiDesktop.Presentation.ViewModel
         {
             this.Name = resource.Name;
             this.Status = resource.Status;
-            this.IsRunning = (resource.Status == "running");
+            if (!String.IsNullOrEmpty(this.Status))
+            {
+                this.Status = this.Status.Replace('_', ' ');
+                this.Status = this.Status.Substring(0, 1).ToUpperInvariant() + this.Status.Substring(1);
+            }
+            this.IsRunning = (this.Status == "Running");
             this.Type = resource.Type;
 
             this.ResourceDetailViewModelCollection = new ObservableCollection<ResourceDetailViewModel>();

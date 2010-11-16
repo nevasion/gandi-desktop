@@ -19,6 +19,9 @@
 
         public StatusResourceDetail(string status)
         {
+            status = status.Replace('_', ' ');
+            status = status.Substring(0, 1).ToUpperInvariant() + status.Substring(1);
+
             this.Value = status;
         }
     }
