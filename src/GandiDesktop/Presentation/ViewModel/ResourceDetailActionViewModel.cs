@@ -29,7 +29,9 @@ namespace GandiDesktop.Presentation.ViewModel
             get
             {
                 if (this.askCommand == null)
-                    this.askCommand = new RelayCommand((parameter) => this.Ask(parameter));
+                    this.askCommand = new RelayCommand(
+                        (parameter) => this.Ask(parameter),
+                        (parameter) => this.CanAsk(parameter));
 
                 return this.askCommand;
             }
@@ -64,6 +66,11 @@ namespace GandiDesktop.Presentation.ViewModel
             this.Name = resourceDetailAction.Name;
             this.Command = resourceDetailAction.Command;
             this.ConfirmationRequired = resourceDetailAction.ConfirmationRequired;
+        }
+
+        public bool CanAsk(object parameter)
+        {
+            return this.Command.CanExecute(parameter);
         }
 
         public void Ask(object parameter)

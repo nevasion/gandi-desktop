@@ -231,7 +231,7 @@
                         <Grid Grid.Row="1" Background="Gray" />
 
                         <Grid x:Name="gridResourceDetails" Grid.Row="2" Visibility="Collapsed">
-                            <ItemsControl ItemsSource="{Binding ResourceDetailViewModelCollection}" Margin="0,1,0,0">
+                            <ItemsControl ItemsSource="{Binding ResourceDetailViewModelCollection}" Margin="0,2,0,0">
                                 <ItemsControl.Template>
                                     <ControlTemplate TargetType="ItemsControl">
                                         <StackPanel IsItemsHost="True" Orientation="Vertical" />

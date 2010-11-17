@@ -192,9 +192,10 @@
                                     <ItemsControl Grid.Row="1" ItemsSource="{Binding Actions}" Margin="0,0,0,2">
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
-                                                <Button Command="{Binding Command}">
+                                                <Button>
                                                     <Button.Style>
                                                         <Style TargetType="Button">
+                                                            <Setter Property="Command" Value="{Binding Command}" />
                                                             <Setter Property="Template">
                                                                 <Setter.Value>
                                                                     <ControlTemplate TargetType="Button">
@@ -242,12 +243,12 @@
                                                                 </Setter.Value>
                                                             </Setter>
                                                             <Style.Triggers>
-                                                                <DataTrigger Binding="{Binding ConfirmationRequired}" Value="True">
-                                                                    <Setter Property="Command" Value="{Binding AskCommand}" />
-                                                                </DataTrigger>
                                                                 <Trigger Property="IsEnabled" Value="False">
                                                                     <Setter Property="Visibility" Value="Collapsed" />
                                                                 </Trigger>
+                                                                <DataTrigger Binding="{Binding ConfirmationRequired}" Value="True">
+                                                                    <Setter Property="Command" Value="{Binding AskCommand}" />
+                                                                </DataTrigger>
                                                             </Style.Triggers>
                                                         </Style>
                                                     </Button.Style>
