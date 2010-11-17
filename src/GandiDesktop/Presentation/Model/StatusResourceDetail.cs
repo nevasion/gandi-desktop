@@ -1,7 +1,15 @@
-﻿namespace GandiDesktop.Presentation.Model
+﻿using GandiDesktop.Gandi.Services.Hosting;
+
+namespace GandiDesktop.Presentation.Model
 {
     public class StatusResourceDetail : IResourceDetail
     {
+        private const string StartCommandName = "Start";
+        private const string StopCommandName = "Stop";
+        private const string RebootCommandName = "Reboot";
+
+        private VirtualMachine virtualMachine;
+
         public string Name { get; private set; }
 
         public string Value { get; private set; }
@@ -17,12 +25,62 @@
 
         public event ResourceDetailActionHandler DetailAction;
 
-        public StatusResourceDetail(string status)
+        public StatusResourceDetail(VirtualMachine virtualMachine)
         {
+            this.virtualMachine = virtualMachine;
+
+            string status = virtualMachine.State;
+
             status = status.Replace('_', ' ');
             status = status.Substring(0, 1).ToUpperInvariant() + status.Substring(1);
 
             this.Value = status;
+
+            ResourceDetailAction startAction = new ResourceDetailAction(StatusResourceDetail.StartCommandName, true);
+            startAction.Command = new RelayCommand((parameter) => this.Start(parameter), (parameter) => this.CanStart(parameter));
+
+            ResourceDetailAction stopAction = new ResourceDetailAction(StatusResourceDetail.StopCommandName, true);
+            stopAction.Command = new RelayCommand((parameter) => this.Stop(parameter), (parameter) => this.CanStop(parameter));
+
+            ResourceDetailAction rebootAction = new ResourceDetailAction(StatusResourceDetail.RebootCommandName, true);
+            rebootAction.Command = new RelayCommand((parameter) => this.Reboot(parameter), (parameter) => this.CanReboot(parameter));
+
+            this.Actions = new ResourceDetailAction[] 
+            {
+                startAction,
+                stopAction,
+                rebootAction
+            };
+        }
+
+        public bool CanStart(object parameter)
+        {
+            return (this.virtualMachine.State != "running");
+        }
+
+        public void Start(object parameter)
+        {
+            Service.Hosting.VirtualMachine.Start(this.virtualMachine);
+        }
+
+        public bool CanStop(object parameter)
+        {
+            return (this.virtualMachine.State == "running");
+        }
+
+        public void Stop(object parameter)
+        {
+            Service.Hosting.VirtualMachine.Stop(this.virtualMachine);
+        }
+
+        public bool CanReboot(object parameter)
+        {
+            return (this.virtualMachine.State == "running");
+        }
+
+        public void Reboot(object parameter)
+        {
+            Service.Hosting.VirtualMachine.Reboot(this.virtualMachine);
         }
     }
 }

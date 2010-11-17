@@ -55,7 +55,6 @@
             <Setter Property="FocusVisualStyle" Value="{x:Null}" />
             <Setter Property="VerticalAlignment" Value="Stretch" />
             <Setter Property="HorizontalAlignment" Value="Right" />
-            <Setter Property="Visibility" Value="Hidden" />
             <Setter Property="Padding" Value="4,0,4,0" />
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="Template">
@@ -116,7 +115,11 @@
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Type}" Value="Status">
                     <Setter Property="BorderThickness" Value="1" />
-                    <Setter Property="BorderBrush" Value="LightGray" />
+                    <Setter Property="BorderBrush">
+                        <Setter.Value>
+                            <SolidColorBrush Color="Black" Opacity="0.070" />
+                        </Setter.Value>
+                    </Setter>
                     <Setter Property="Margin" Value="2,-0.5,0,0" />
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Type}" Value="DataCenter">
@@ -189,10 +192,9 @@
                                     <ItemsControl Grid.Row="1" ItemsSource="{Binding Actions}" Margin="0,0,0,2">
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
-                                                <Button>
+                                                <Button Command="{Binding Command}">
                                                     <Button.Style>
                                                         <Style TargetType="Button">
-                                                            <Setter Property="Command" Value="{Binding Command}" />
                                                             <Setter Property="Template">
                                                                 <Setter.Value>
                                                                     <ControlTemplate TargetType="Button">
@@ -243,6 +245,9 @@
                                                                 <DataTrigger Binding="{Binding ConfirmationRequired}" Value="True">
                                                                     <Setter Property="Command" Value="{Binding AskCommand}" />
                                                                 </DataTrigger>
+                                                                <Trigger Property="IsEnabled" Value="False">
+                                                                    <Setter Property="Visibility" Value="Collapsed" />
+                                                                </Trigger>
                                                             </Style.Triggers>
                                                         </Style>
                                                     </Button.Style>

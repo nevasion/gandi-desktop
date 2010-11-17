@@ -32,7 +32,7 @@ namespace GandiDesktop.Presentation.Model
 
             List<IResourceDetail> details = new List<IResourceDetail>();
 
-            details.Add(new StatusResourceDetail(virtualMachine.State));
+            details.Add(new StatusResourceDetail(virtualMachine));
             details.Add(new DataCenterResourceDetail(virtualMachine.DataCenter));
 
             foreach (Disk disk in virtualMachine.AttachedDisks)
