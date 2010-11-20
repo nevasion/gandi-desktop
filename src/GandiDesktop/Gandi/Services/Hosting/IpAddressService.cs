@@ -13,27 +13,27 @@ namespace GandiDesktop.Gandi.Services.Hosting
             this.apiKey = apiKey;
         }
 
-        public void Create(IpAddressCreation ipAddressCreation)
+        public IpAddressOperation Create(IpAddressCreation ipAddressCreation)
         {
             throw new System.NotImplementedException();
 
-            //Mapping.IpAddressCreation mappingIpAddressCreation = new Mapping.IpAddressCreation(ipAddressCreation);
+            Mapping.IpAddressCreation mappingIpAddressCreation = new Mapping.IpAddressCreation(ipAddressCreation);
 
-            //object mappingOperation = this.service.ip_create(this.apiKey, mappingIpAddressCreation);
+            return new IpAddressOperation(this.service.ip_create(this.apiKey, mappingIpAddressCreation), null);
         }
 
-        public void Update(IpAddress ipAddress, IpAddressUpdate ipAddressUpdate)
+        public IpAddressOperation Update(IpAddress ipAddress, IpAddressUpdate ipAddressUpdate)
         {
             Mapping.IpAddressUpdate mappingIpAddressUpdate = new Mapping.IpAddressUpdate(ipAddressUpdate);
 
-            object mappingOperation = this.service.ip_update(this.apiKey, ipAddress.Id, mappingIpAddressUpdate);
+            return new IpAddressOperation(this.service.ip_update(this.apiKey, ipAddress.Id, mappingIpAddressUpdate), ipAddress);
         }
 
-        public void Delete(IpAddress ipAddress)
+        public IpAddressOperation Delete(IpAddress ipAddress)
         {
             throw new System.NotImplementedException();
 
-            //object mappingOperation = this.service.ip_delete(this.apiKey, ipAddress.Id);
+            return new IpAddressOperation(this.service.ip_delete(this.apiKey, ipAddress.Id), ipAddress);
         }
 
         public IpAddress[] List()

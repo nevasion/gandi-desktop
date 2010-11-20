@@ -13,66 +13,66 @@ namespace GandiDesktop.Gandi.Services.Hosting
             this.apiKey = apiKey;
         }
 
-        public void Create(VirtualMachineCreation virtualMachineCreation)
+        public VirtualMachineOperation Create(VirtualMachineCreation virtualMachineCreation)
         {
             Mapping.VirtualMachineCreation mappingVirtualMachineCreation = new Mapping.VirtualMachineCreation(virtualMachineCreation);
 
-            object mappingOperation = this.service.vm_create(this.apiKey, mappingVirtualMachineCreation);
+            return new VirtualMachineOperation(this.service.vm_create(this.apiKey, mappingVirtualMachineCreation), null);
         }
 
-        public void CreateFrom(VirtualMachineCreation virtualMachineCreation, DiskCreation diskCreation, Disk sourceDisk)
+        public VirtualMachineOperation CreateFrom(VirtualMachineCreation virtualMachineCreation, DiskCreation diskCreation, Disk sourceDisk)
         {
             Mapping.VirtualMachineCreation mappingVirtualMachineCreation = new Mapping.VirtualMachineCreation(virtualMachineCreation);
             Mapping.DiskCreation mappingDiskCreation = new Mapping.DiskCreation(diskCreation);
 
-            object mappingOperation = this.service.vm_create_from(this.apiKey, mappingVirtualMachineCreation, mappingDiskCreation, sourceDisk.Id);
+            return new VirtualMachineOperation(this.service.vm_create_from(this.apiKey, mappingVirtualMachineCreation, mappingDiskCreation, sourceDisk.Id), null);
         }
 
-        public void Update(VirtualMachine virtualMachine, VirtualMachineUpdate virtualMachineUpdate)
+        public VirtualMachineOperation Update(VirtualMachine virtualMachine, VirtualMachineUpdate virtualMachineUpdate)
         {
             Mapping.VirtualMachineUpdate mappingVirtualMachineUpdate = new Mapping.VirtualMachineUpdate(virtualMachineUpdate);
 
-            object mappingOperation = this.service.vm_update(this.apiKey, virtualMachine.Id, mappingVirtualMachineUpdate);
+            return new VirtualMachineOperation(this.service.vm_update(this.apiKey, virtualMachine.Id, mappingVirtualMachineUpdate), virtualMachine);
         }
 
-        public void Delete(VirtualMachine virtualMachine)
+        public VirtualMachineOperation Delete(VirtualMachine virtualMachine)
         {
-            object mappingOperation = this.service.vm_delete(this.apiKey, virtualMachine.Id);
+            return new VirtualMachineOperation(this.service.vm_delete(this.apiKey, virtualMachine.Id), virtualMachine);
         }
 
-        public void Start(VirtualMachine virtualMachine)
+        public VirtualMachineOperation Start(VirtualMachine virtualMachine)
         {
-            object mappingOperation = this.service.vm_start(this.apiKey, virtualMachine.Id);
+            return new VirtualMachineOperation(this.service.vm_start(this.apiKey, virtualMachine.Id), virtualMachine);
         }
 
-        public void Stop(VirtualMachine virtualMachine)
+        public VirtualMachineOperation Stop(VirtualMachine virtualMachine)
         {
-            object mappingOperation = this.service.vm_stop(this.apiKey, virtualMachine.Id);
+            return new VirtualMachineOperation(this.service.vm_stop(this.apiKey, virtualMachine.Id), virtualMachine);
         }
 
-        public void Reboot(VirtualMachine virtualMachine)
+        public VirtualMachineOperation Reboot(VirtualMachine virtualMachine)
         {
-            object mappingOperation = this.service.vm_reboot(this.apiKey, virtualMachine.Id);
+            return new VirtualMachineOperation(this.service.vm_reboot(this.apiKey, virtualMachine.Id), virtualMachine);
         }
 
-        public void AttachDisk(VirtualMachine virtualMachine, Disk disk)
+        public VirtualMachineOperation AttachDisk(VirtualMachine virtualMachine, Disk disk)
         {
-            object mappingOperation = this.service.vm_disk_attach(this.apiKey, virtualMachine.Id, disk.Id);
+            return new VirtualMachineOperation(this.service.vm_disk_attach(this.apiKey, virtualMachine.Id, disk.Id), virtualMachine, disk);
         }
 
-        public void DetachDisk(VirtualMachine virtualMachine, Disk disk)
+        public VirtualMachineOperation DetachDisk(VirtualMachine virtualMachine, Disk disk)
         {
-            object mappingOperation = this.service.vm_disk_detach(this.apiKey, virtualMachine.Id, disk.Id);
+            return new VirtualMachineOperation(this.service.vm_disk_detach(this.apiKey, virtualMachine.Id, disk.Id), virtualMachine, disk);
         }
 
-        public void AttachInterface(VirtualMachine virtualMachine, Interface iface)
+        public VirtualMachineOperation AttachInterface(VirtualMachine virtualMachine, Interface iface)
         {
-            object mappingOperation = this.service.vm_iface_attach(this.apiKey, virtualMachine.Id, iface.Id);
+            return new VirtualMachineOperation(this.service.vm_iface_attach(this.apiKey, virtualMachine.Id, iface.Id), virtualMachine, iface);
         }
 
-        public void DetachInterface(VirtualMachine virtualMachine, Interface iface)
+        public VirtualMachineOperation DetachInterface(VirtualMachine virtualMachine, Interface iface)
         {
-            object mappingOperation = this.service.vm_iface_detach(this.apiKey, virtualMachine.Id, iface.Id);
+            return new VirtualMachineOperation(this.service.vm_iface_detach(this.apiKey, virtualMachine.Id, iface.Id), virtualMachine, iface);
         }
 
         public VirtualMachine[] List()

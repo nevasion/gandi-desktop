@@ -14,30 +14,30 @@ namespace GandiDesktop.Gandi.Services.Hosting
             this.apiKey = apiKey;
         }
 
-        public void Create(DiskCreation diskCreation)
+        public DiskOperation Create(DiskCreation diskCreation)
         {
             Mapping.DiskCreation mappingDiskCreation = new Mapping.DiskCreation(diskCreation);
 
-            object mappingOperation = this.service.disk_create(this.apiKey, mappingDiskCreation);
+            return new DiskOperation(this.service.disk_create(this.apiKey, mappingDiskCreation), null);
         }
 
-        public void CreateFrom(Disk sourceDisk, DiskCopy diskCopy)
+        public DiskOperation CreateFrom(Disk sourceDisk, DiskCopy diskCopy)
         {
             Mapping.DiskCopy mappingDiskCopy = new Mapping.DiskCopy(diskCopy);
 
-            object mappingOperation = this.service.disk_create_from(this.apiKey, mappingDiskCopy, sourceDisk.Id);
+            return new DiskOperation(this.service.disk_create_from(this.apiKey, mappingDiskCopy, sourceDisk.Id), null);
         }
 
-        public void Update(Disk disk, DiskUpdate diskUpdate)
+        public DiskOperation Update(Disk disk, DiskUpdate diskUpdate)
         {
             Mapping.DiskUpdate mappingDiskUpdate = new Mapping.DiskUpdate(diskUpdate);
 
-            object mappingOperation = this.service.disk_update(this.apiKey, disk.Id, mappingDiskUpdate);
+            return new DiskOperation(this.service.disk_update(this.apiKey, disk.Id, mappingDiskUpdate), disk);
         }
 
-        public void Delete(Disk disk)
+        public DiskOperation Delete(Disk disk)
         {
-            object mappingOperation = this.service.disk_delete(this.apiKey, disk.Id);
+            return new DiskOperation(this.service.disk_delete(this.apiKey, disk.Id), disk);
         }
 
         public Disk[] List()

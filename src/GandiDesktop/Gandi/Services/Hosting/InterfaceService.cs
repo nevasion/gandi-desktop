@@ -13,37 +13,37 @@ namespace GandiDesktop.Gandi.Services.Hosting
             this.apiKey = apiKey;
         }
 
-        public void Create(InterfaceCreation ifaceCreation)
+        public InterfaceOperation Create(InterfaceCreation ifaceCreation)
         {
             Mapping.InterfaceCreation mappingIfaceCreation = new Mapping.InterfaceCreation(ifaceCreation);
 
-            object mappingOperation = this.service.iface_create(this.apiKey, mappingIfaceCreation);
+            return new InterfaceOperation(this.service.iface_create(this.apiKey, mappingIfaceCreation), null);
         }
 
-        public void Update(Interface iface, InterfaceUpdate ifaceUpdate)
+        public InterfaceOperation Update(Interface iface, InterfaceUpdate ifaceUpdate)
         {
             Mapping.InterfaceUpdate mappingIfaceUpdate = new Mapping.InterfaceUpdate(ifaceUpdate);
 
-            object mappingOperation = this.service.iface_update(this.apiKey, iface.Id, mappingIfaceUpdate);
+            return new InterfaceOperation(this.service.iface_update(this.apiKey, iface.Id, mappingIfaceUpdate), iface);
         }
 
-        public void Delete(Interface iface)
+        public InterfaceOperation Delete(Interface iface)
         {
-            object mappingOperation = this.service.iface_delete(this.apiKey, iface.Id);
+            return new InterfaceOperation(this.service.iface_delete(this.apiKey, iface.Id), iface);
         }
 
-        public void AttachIpAddress(Interface iface, IpAddress ipAddress)
-        {
-            throw new System.NotImplementedException();
-
-            //object mappingOperation = this.service.iface_ip_attach(this.apiKey, iface.Id, ipAddress.Id);
-        }
-
-        public void DetachIpAddress(Interface iface, IpAddress ipAddress)
+        public InterfaceOperation AttachIpAddress(Interface iface, IpAddress ipAddress)
         {
             throw new System.NotImplementedException();
 
-            //object mappingOperation = this.service.iface_ip_detach(this.apiKey, iface.Id, ipAddress.Id);
+            return new InterfaceOperation(this.service.iface_ip_attach(this.apiKey, iface.Id, ipAddress.Id), iface, ipAddress);
+        }
+
+        public InterfaceOperation DetachIpAddress(Interface iface, IpAddress ipAddress)
+        {
+            throw new System.NotImplementedException();
+
+            return new InterfaceOperation(this.service.iface_ip_detach(this.apiKey, iface.Id, ipAddress.Id), iface, ipAddress);
         }
 
         public Interface[] List()

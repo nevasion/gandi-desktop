@@ -38,6 +38,7 @@ namespace GandiDesktop.Gandi.Services.Hosting
         public const string VirtualMachineDetachDisk = "vm.disk_detach";
         public const string VirtualMachineAttachInterface = "vm.iface_attach";
         public const string VirtualMachineDetachInterface = "vm.iface_detach";
+        public const string OperationInfo = "operation.info";
     }
 
     [XmlRpcUrl(XmlRpcUrl.Url)]
@@ -53,16 +54,16 @@ namespace GandiDesktop.Gandi.Services.Hosting
         Mapping.Disk[] disk_list(string apiKey);
 
         [XmlRpcMethod(XmlRpcMethodNames.DiskCreate)]
-        object disk_create(string apiKey, Mapping.DiskCreation diskCreation);
+        Mapping.DiskOperation disk_create(string apiKey, Mapping.DiskCreation diskCreation);
 
         [XmlRpcMethod(XmlRpcMethodNames.DiskCreateFrom)]
-        object disk_create_from(string apiKey, Mapping.DiskCopy diskCopy, int sourceDiskId);
+        Mapping.DiskOperation disk_create_from(string apiKey, Mapping.DiskCopy diskCopy, int sourceDiskId);
 
         [XmlRpcMethod(XmlRpcMethodNames.DiskUpdate)]
-        object disk_update(string apiKey, int diskId, Mapping.DiskUpdate diskUpdate);
+        Mapping.DiskOperation disk_update(string apiKey, int diskId, Mapping.DiskUpdate diskUpdate);
 
         [XmlRpcMethod(XmlRpcMethodNames.DiskDelete)]
-        object disk_delete(string apiKey, int diskId);
+        Mapping.DiskOperation disk_delete(string apiKey, int diskId);
         #endregion
 
         #region Interface
@@ -70,19 +71,19 @@ namespace GandiDesktop.Gandi.Services.Hosting
         Mapping.Interface[] iface_list(string apiKey);
 
         [XmlRpcMethod(XmlRpcMethodNames.InterfaceCreate)]
-        object iface_create(string apiKey, Mapping.InterfaceCreation ifaceCreation);
+        Mapping.InterfaceOperation iface_create(string apiKey, Mapping.InterfaceCreation ifaceCreation);
 
         [XmlRpcMethod(XmlRpcMethodNames.InterfaceUpdate)]
-        object iface_update(string apiKey, int ifaceId, Mapping.InterfaceUpdate ifaceUpdate);
+        Mapping.InterfaceOperation iface_update(string apiKey, int ifaceId, Mapping.InterfaceUpdate ifaceUpdate);
 
         [XmlRpcMethod(XmlRpcMethodNames.InterfaceDelete)]
-        object iface_delete(string apiKey, int ifaceId);
+        Mapping.InterfaceOperation iface_delete(string apiKey, int ifaceId);
 
         [XmlRpcMethod(XmlRpcMethodNames.InterfaceAttachIp)]
-        object iface_ip_attach(string apiKey, int ifaceId, int ipAddressId);
+        Mapping.InterfaceOperation iface_ip_attach(string apiKey, int ifaceId, int ipAddressId);
 
         [XmlRpcMethod(XmlRpcMethodNames.InterfaceDetachIp)]
-        object iface_ip_detach(string apiKey, int ifaceId, int ipAddressId);
+        Mapping.InterfaceOperation iface_ip_detach(string apiKey, int ifaceId, int ipAddressId);
         #endregion
 
         #region Image
@@ -95,13 +96,13 @@ namespace GandiDesktop.Gandi.Services.Hosting
         Mapping.IpAddress[] ip_list(string apiKey);
 
         [XmlRpcMethod(XmlRpcMethodNames.IpAddressCreate)]
-        object ip_create(string apiKey, Mapping.IpAddressCreation ipAddressCreation);
+        Mapping.IpAddressOperation ip_create(string apiKey, Mapping.IpAddressCreation ipAddressCreation);
 
         [XmlRpcMethod(XmlRpcMethodNames.IpAddressUpdate)]
-        object ip_update(string apiKey, int ipAddressId, Mapping.IpAddressUpdate ipAddressUpdate);
+        Mapping.IpAddressOperation ip_update(string apiKey, int ipAddressId, Mapping.IpAddressUpdate ipAddressUpdate);
 
         [XmlRpcMethod(XmlRpcMethodNames.IpAddressDelete)]
-        object ip_delete(string apiKey, int ipAddressId);
+        Mapping.IpAddressOperation ip_delete(string apiKey, int ipAddressId);
         #endregion
 
         #region VirtualMachine
@@ -109,37 +110,42 @@ namespace GandiDesktop.Gandi.Services.Hosting
         Mapping.VirtualMachine[] vm_list(string apiKey);
 
         [XmlRpcMethod(XmlRpcMethodNames.VirtualMachineCreate)]
-        object vm_create(string apiKey, Mapping.VirtualMachineCreation virtualMachineCreation);
+        Mapping.VirtualMachineOperation vm_create(string apiKey, Mapping.VirtualMachineCreation virtualMachineCreation);
 
         [XmlRpcMethod(XmlRpcMethodNames.VirtualMachineCreateFrom)]
-        object vm_create_from(string apiKey, Mapping.VirtualMachineCreation virtualMachineCreation, Mapping.DiskCreation diskCreation, int sourceDiskId);
+        Mapping.VirtualMachineOperation vm_create_from(string apiKey, Mapping.VirtualMachineCreation virtualMachineCreation, Mapping.DiskCreation diskCreation, int sourceDiskId);
 
         [XmlRpcMethod(XmlRpcMethodNames.VirtualMachineUpdate)]
-        object vm_update(string apiKey, int virtualMachineId, Mapping.VirtualMachineUpdate virtualMachineUpdate);
+        Mapping.VirtualMachineOperation vm_update(string apiKey, int virtualMachineId, Mapping.VirtualMachineUpdate virtualMachineUpdate);
 
         [XmlRpcMethod(XmlRpcMethodNames.VirtualMachineDelete)]
-        object vm_delete(string apiKey, int virtualMachineId);
+        Mapping.VirtualMachineOperation vm_delete(string apiKey, int virtualMachineId);
 
         [XmlRpcMethod(XmlRpcMethodNames.VirtualMachineStart)]
-        object vm_start(string apiKey, int virtualMachineId);
+        Mapping.VirtualMachineOperation vm_start(string apiKey, int virtualMachineId);
 
         [XmlRpcMethod(XmlRpcMethodNames.VirtualMachineStop)]
-        object vm_stop(string apiKey, int virtualMachineId);
+        Mapping.VirtualMachineOperation vm_stop(string apiKey, int virtualMachineId);
 
         [XmlRpcMethod(XmlRpcMethodNames.VirtualMachineReboot)]
-        object vm_reboot(string apiKey, int virtualMachineId);
+        Mapping.VirtualMachineOperation vm_reboot(string apiKey, int virtualMachineId);
 
         [XmlRpcMethod(XmlRpcMethodNames.VirtualMachineAttachDisk)]
-        object vm_disk_attach(string apiKey, int virtualMachineId, int diskId);
+        Mapping.VirtualMachineOperation vm_disk_attach(string apiKey, int virtualMachineId, int diskId);
 
         [XmlRpcMethod(XmlRpcMethodNames.VirtualMachineDetachDisk)]
-        object vm_disk_detach(string apiKey, int virtualMachineId, int diskId);
+        Mapping.VirtualMachineOperation vm_disk_detach(string apiKey, int virtualMachineId, int diskId);
 
         [XmlRpcMethod(XmlRpcMethodNames.VirtualMachineAttachInterface)]
-        object vm_iface_attach(string apiKey, int virtualMachineId, int ifaceId);
+        Mapping.VirtualMachineOperation vm_iface_attach(string apiKey, int virtualMachineId, int ifaceId);
 
         [XmlRpcMethod(XmlRpcMethodNames.VirtualMachineDetachInterface)]
-        object vm_iface_detach(string apiKey, int virtualMachineId, int ifaceId);
+        Mapping.VirtualMachineOperation vm_iface_detach(string apiKey, int virtualMachineId, int ifaceId);
+        #endregion
+
+        #region Operation
+        [XmlRpcMethod(XmlRpcMethodNames.OperationInfo)]
+        Mapping.Operation operation_info(string apiKey, int operationId);
         #endregion
     }
 }
