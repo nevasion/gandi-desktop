@@ -17,33 +17,33 @@ namespace GandiDesktop.Gandi.Services.Hosting
         {
             Mapping.InterfaceCreation mappingIfaceCreation = new Mapping.InterfaceCreation(ifaceCreation);
 
-            return new InterfaceOperation(this.service.iface_create(this.apiKey, mappingIfaceCreation), null);
+            return new InterfaceOperation(this.service.InterfaceCreate(this.apiKey, mappingIfaceCreation), null);
         }
 
         public InterfaceOperation Update(Interface iface, InterfaceUpdate ifaceUpdate)
         {
             Mapping.InterfaceUpdate mappingIfaceUpdate = new Mapping.InterfaceUpdate(ifaceUpdate);
 
-            return new InterfaceOperation(this.service.iface_update(this.apiKey, iface.Id, mappingIfaceUpdate), iface);
+            return new InterfaceOperation(this.service.InterfaceUpdate(this.apiKey, iface.Id, mappingIfaceUpdate), iface);
         }
 
         public InterfaceOperation Delete(Interface iface)
         {
-            return new InterfaceOperation(this.service.iface_delete(this.apiKey, iface.Id), iface);
+            return new InterfaceOperation(this.service.InterfaceDelete(this.apiKey, iface.Id), iface);
         }
 
         public InterfaceOperation AttachIpAddress(Interface iface, IpAddress ipAddress)
         {
             throw new System.NotImplementedException();
 
-            return new InterfaceOperation(this.service.iface_ip_attach(this.apiKey, iface.Id, ipAddress.Id), iface, ipAddress);
+            return new InterfaceOperation(this.service.InterfaceAttachIp(this.apiKey, iface.Id, ipAddress.Id), iface, ipAddress);
         }
 
         public InterfaceOperation DetachIpAddress(Interface iface, IpAddress ipAddress)
         {
             throw new System.NotImplementedException();
 
-            return new InterfaceOperation(this.service.iface_ip_detach(this.apiKey, iface.Id, ipAddress.Id), iface, ipAddress);
+            return new InterfaceOperation(this.service.InterfaceDetachIp(this.apiKey, iface.Id, ipAddress.Id), iface, ipAddress);
         }
 
         public Interface[] List()
@@ -63,7 +63,7 @@ namespace GandiDesktop.Gandi.Services.Hosting
 
         public Interface[] List(DataCenter[] dataCenters, IpAddress[] ipAddresses)
         {
-            Mapping.Interface[] mappingInterfaces = this.service.iface_list(this.apiKey);
+            Mapping.Interface[] mappingInterfaces = this.service.InterfaceList(this.apiKey);
 
             List<Interface> interfaceList = new List<Interface>();
             foreach (Mapping.Interface mappingInterface in mappingInterfaces)

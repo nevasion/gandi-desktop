@@ -30,7 +30,7 @@ namespace GandiDesktop.Gandi.Services.Hosting
 
         public Image[] List(DataCenter[] dataCenters, Disk[] disks)
         {
-            Mapping.Image[] mappingImages = this.service.image_list(this.apiKey);
+            Mapping.Image[] mappingImages = this.service.ImageList(this.apiKey);
 
             List<Image> imageList = new List<Image>();
             foreach (Mapping.Image mappingImage in mappingImages)

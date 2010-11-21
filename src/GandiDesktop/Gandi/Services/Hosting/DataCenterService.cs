@@ -15,7 +15,7 @@ namespace GandiDesktop.Gandi.Services.Hosting
 
         public DataCenter[] List()
         {
-            Mapping.DataCenter[] mappingDataCenters = this.service.datacenter_list(this.apiKey);
+            Mapping.DataCenter[] mappingDataCenters = this.service.DataCenterList(this.apiKey);
 
             List<DataCenter> dataCenterList = new List<DataCenter>();
             foreach (Mapping.DataCenter mappingDataCenter in mappingDataCenters)

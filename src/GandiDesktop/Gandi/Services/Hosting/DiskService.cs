@@ -18,26 +18,26 @@ namespace GandiDesktop.Gandi.Services.Hosting
         {
             Mapping.DiskCreation mappingDiskCreation = new Mapping.DiskCreation(diskCreation);
 
-            return new DiskOperation(this.service.disk_create(this.apiKey, mappingDiskCreation), null);
+            return new DiskOperation(this.service.DiskCreate(this.apiKey, mappingDiskCreation), null);
         }
 
         public DiskOperation CreateFrom(Disk sourceDisk, DiskCopy diskCopy)
         {
             Mapping.DiskCopy mappingDiskCopy = new Mapping.DiskCopy(diskCopy);
 
-            return new DiskOperation(this.service.disk_create_from(this.apiKey, mappingDiskCopy, sourceDisk.Id), null);
+            return new DiskOperation(this.service.DiskCreateFrom(this.apiKey, mappingDiskCopy, sourceDisk.Id), null);
         }
 
         public DiskOperation Update(Disk disk, DiskUpdate diskUpdate)
         {
             Mapping.DiskUpdate mappingDiskUpdate = new Mapping.DiskUpdate(diskUpdate);
 
-            return new DiskOperation(this.service.disk_update(this.apiKey, disk.Id, mappingDiskUpdate), disk);
+            return new DiskOperation(this.service.DiskUpdate(this.apiKey, disk.Id, mappingDiskUpdate), disk);
         }
 
         public DiskOperation Delete(Disk disk)
         {
-            return new DiskOperation(this.service.disk_delete(this.apiKey, disk.Id), disk);
+            return new DiskOperation(this.service.DiskDelete(this.apiKey, disk.Id), disk);
         }
 
         public Disk[] List()
@@ -47,7 +47,7 @@ namespace GandiDesktop.Gandi.Services.Hosting
 
         public Disk[] List(DataCenter[] dataCenters)
         {
-            Mapping.Disk[] mappingDisks = this.service.disk_list(this.apiKey);
+            Mapping.Disk[] mappingDisks = this.service.DiskList(this.apiKey);
 
             List<Disk> diskList = new List<Disk>();
             foreach (Mapping.Disk mappingDisk in mappingDisks)

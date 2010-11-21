@@ -19,21 +19,21 @@ namespace GandiDesktop.Gandi.Services.Hosting
 
             Mapping.IpAddressCreation mappingIpAddressCreation = new Mapping.IpAddressCreation(ipAddressCreation);
 
-            return new IpAddressOperation(this.service.ip_create(this.apiKey, mappingIpAddressCreation), null);
+            return new IpAddressOperation(this.service.IpAddressCreate(this.apiKey, mappingIpAddressCreation), null);
         }
 
         public IpAddressOperation Update(IpAddress ipAddress, IpAddressUpdate ipAddressUpdate)
         {
             Mapping.IpAddressUpdate mappingIpAddressUpdate = new Mapping.IpAddressUpdate(ipAddressUpdate);
 
-            return new IpAddressOperation(this.service.ip_update(this.apiKey, ipAddress.Id, mappingIpAddressUpdate), ipAddress);
+            return new IpAddressOperation(this.service.IpAddressUpdate(this.apiKey, ipAddress.Id, mappingIpAddressUpdate), ipAddress);
         }
 
         public IpAddressOperation Delete(IpAddress ipAddress)
         {
             throw new System.NotImplementedException();
 
-            return new IpAddressOperation(this.service.ip_delete(this.apiKey, ipAddress.Id), ipAddress);
+            return new IpAddressOperation(this.service.IpAddressDelete(this.apiKey, ipAddress.Id), ipAddress);
         }
 
         public IpAddress[] List()
@@ -43,7 +43,7 @@ namespace GandiDesktop.Gandi.Services.Hosting
 
         public IpAddress[] List(DataCenter[] dataCenters)
         {
-            Mapping.IpAddress[] mappingIpAddresses = this.service.ip_list(this.apiKey);
+            Mapping.IpAddress[] mappingIpAddresses = this.service.IpAddressList(this.apiKey);
 
             List<IpAddress> ipAddressList = new List<IpAddress>();
             foreach (Mapping.IpAddress mappingIpAddress in mappingIpAddresses)

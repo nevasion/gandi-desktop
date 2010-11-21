@@ -53,7 +53,7 @@
 
         private Operation Info(int operationId)
         {
-            return new Operation(this.service.operation_info(this.apiKey, operationId));
+            return new Operation(this.service.OperationInfo(this.apiKey, operationId));
         }
     }
 }
