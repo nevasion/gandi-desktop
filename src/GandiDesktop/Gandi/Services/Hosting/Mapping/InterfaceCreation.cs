@@ -25,7 +25,7 @@ namespace GandiDesktop.Gandi.Services.Hosting.Mapping
         public InterfaceCreation(Model.InterfaceCreation ifaceCreation)
         {
             this.DataCenterId = ifaceCreation.DataCenter.Id;
-            this.IpVersion = Convert.ToInt32(ifaceCreation.IpVersion.ToString().Substring(1));
+            this.IpVersion = Converter.ToIpVersion(ifaceCreation.IpVersion);
             this.Bandwidth = ifaceCreation.Bandwidth;
         }
     }

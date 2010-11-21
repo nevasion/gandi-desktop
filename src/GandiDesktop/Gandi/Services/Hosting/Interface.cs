@@ -12,9 +12,9 @@ namespace GandiDesktop.Gandi.Services.Hosting
         public DateTime Created { get; private set; }
         public DateTime LastUpdated { get; private set; }
         public int? Index { get; private set; }
-        public string State { get; private set; }
+        public InterfaceStatus Status { get; private set; }
         public double Bandwidth { get; private set; }
-        public string Type { get; private set; }
+        public InterfaceType Type { get; private set; }
         public int? VirtualMachineId { get; private set; }
         public VirtualMachine VirtualMachine { get; internal set; }
         public int[] IpAddressIds { get; private set; }
@@ -30,9 +30,9 @@ namespace GandiDesktop.Gandi.Services.Hosting
             this.LastUpdated = iface.LastUpdated;
             if (iface.Num != null)
                 this.Index = Convert.ToInt32(iface.Num);
-            this.State = iface.State;
+            this.Status = Converter.ToInterfaceStatus(iface.State);
             this.Bandwidth = iface.Bandwidth;
-            this.Type = iface.Type;
+            this.Type = Converter.ToInterfaceType(iface.Type);
             if (iface.VirtualMachineId != null)
                 this.VirtualMachineId = Convert.ToInt32(iface.VirtualMachineId);
             this.VirtualMachine = null;

@@ -53,7 +53,7 @@ namespace GandiDesktop.Gandi.Services.Hosting.Mapping
             this.Shares = virtualMachineCreation.Shares;
             this.DataCenterId = virtualMachineCreation.DataCenter.Id;
             this.SystemDiskId = virtualMachineCreation.SystemDisk.Id;
-            this.IpVersion = Convert.ToInt32(virtualMachineCreation.IpVersion.ToString().Substring(1));
+            this.IpVersion = Converter.ToIpVersion(virtualMachineCreation.IpVersion);
             this.IsGandiAI = (virtualMachineCreation.IsGandiAI ? 1 : 0);
             this.UnixLogin = virtualMachineCreation.UnixLogin;
             this.UnixPassword = virtualMachineCreation.UnixPassword;

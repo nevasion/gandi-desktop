@@ -25,7 +25,7 @@ namespace GandiDesktop.Gandi.Services.Hosting.Mapping
         public IpAddressCreation(Model.IpAddressCreation ipAddressCreation)
         {
             this.DataCenterId = ipAddressCreation.DataCenter.Id;
-            this.IpVersion = Convert.ToInt32(ipAddressCreation.IpVersion.ToString().Substring(1));
+            this.IpVersion = Converter.ToIpVersion(ipAddressCreation.IpVersion);
             this.Reverse = ipAddressCreation.Reverse;
         }
     }

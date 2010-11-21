@@ -10,8 +10,8 @@ namespace GandiDesktop.Gandi.Services.Hosting
         public DataCenter DataCenter { get; private set; }
         public int DiskId { get; private set; }
         public Disk Disk { get; private set; }
-        public string Visibility { get; private set; }
-        public string OsArchitecture { get; private set; }
+        public ImageVisibility Visibility { get; private set; }
+        public ImageArchitecture Architecture { get; private set; }
         public int AuthorId { get; private set; }
 
         public Image(Mapping.Image image, DataCenter[] dataCenters, Disk[] disks)
@@ -24,8 +24,8 @@ namespace GandiDesktop.Gandi.Services.Hosting
             this.DiskId = image.DiskId;
             if (disks != null)
                 this.Disk = disks.SingleOrDefault(d => d.Id == image.DiskId);
-            this.Visibility = image.Visibility;
-            this.OsArchitecture = image.OsArchitecture;
+            this.Visibility = Converter.ToImageVisibility(image.Visibility);
+            this.Architecture = Converter.ToImageArchitecture(image.OsArchitecture);
             this.AuthorId = image.AuthorId;
         }
     }

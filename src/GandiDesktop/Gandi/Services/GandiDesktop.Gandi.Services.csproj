@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GandiService.cs" />
+    <Compile Include="Hosting\Converter.cs" />
     <Compile Include="Hosting\DataCenter.cs" />
     <Compile Include="Hosting\DataCenterService.cs" />
     <Compile Include="Hosting\Disk.cs" />
@@ -70,7 +71,6 @@
     <Compile Include="Hosting\IpAddressOperation.cs" />
     <Compile Include="Hosting\IpAddressService.cs" />
     <Compile Include="Hosting\IpAddressUpdate.cs" />
-    <Compile Include="Hosting\IpVersion.cs" />
     <Compile Include="Hosting\Mapping\Disk.cs" />
     <Compile Include="Hosting\Mapping\DiskCopy.cs" />
     <Compile Include="Hosting\Mapping\DiskCreation.cs" />

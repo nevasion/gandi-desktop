@@ -35,7 +35,7 @@ namespace GandiDesktop.Gandi.Services.Hosting.Mapping
             this.DataCenterId = diskCreation.DataCenter.Id;
             this.Name = diskCreation.Name;
             this.Size = diskCreation.Size;
-            this.Type = diskCreation.Type.ToString().ToLowerInvariant();
+            this.Type = Converter.ToDiskType(diskCreation.Type);
 
             List<int> repulsedDiskIdList = new List<int>();
             if (diskCreation.RepulsedDisks != null)

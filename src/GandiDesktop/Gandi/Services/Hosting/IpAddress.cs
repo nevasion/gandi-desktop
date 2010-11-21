@@ -15,8 +15,8 @@ namespace GandiDesktop.Gandi.Services.Hosting
         public DateTime LastUpdated { get; private set; }
         public IPAddress Ip { get; private set; }
         public string Reverse { get; private set; }
-        public string State { get; private set; }
-        public int Version { get; private set; }
+        public IpAddressStatus Status { get; private set; }
+        public IpVersion Version { get; private set; }
 
         public IpAddress(Mapping.IpAddress ipAddress, DataCenter[] dataCenters)
         {
@@ -31,8 +31,8 @@ namespace GandiDesktop.Gandi.Services.Hosting
             this.LastUpdated = ipAddress.LastUpdated;
             this.Ip = IPAddress.Parse(ipAddress.Ip);
             this.Reverse = ipAddress.Reverse;
-            this.State = ipAddress.State;
-            this.Version = ipAddress.Version;
+            this.Status = Converter.ToIpAddressStatus(ipAddress.State);
+            this.Version = Converter.ToIpVersion(ipAddress.Version);
         }
     }
 }

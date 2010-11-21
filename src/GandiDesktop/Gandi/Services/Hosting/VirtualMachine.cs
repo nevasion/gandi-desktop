@@ -11,7 +11,7 @@ namespace GandiDesktop.Gandi.Services.Hosting
         public DataCenter DataCenter { get; set; }
         public string Hostname { get; set; }
         public string Description { get; set; }
-        public string State { get; set; }
+        public VirtualMachineStatus Status { get; set; }
         public int Memory { get; set; }
         public int MaxMemory { get; set; }
         public int Shares { get; set; }
@@ -34,7 +34,7 @@ namespace GandiDesktop.Gandi.Services.Hosting
                 this.DataCenter = dataCenters.SingleOrDefault(d => d.Id == virtualMachine.DataCenterId);
             this.Hostname = virtualMachine.Hostname;
             this.Description = virtualMachine.Description;
-            this.State = virtualMachine.State;
+            this.Status = Converter.ToVirtualMachineStatus(virtualMachine.State);
             this.Memory = virtualMachine.Memory;
             this.Shares = virtualMachine.Shares;
             this.FlexShares = virtualMachine.FlexShares;

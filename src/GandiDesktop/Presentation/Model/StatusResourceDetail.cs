@@ -29,7 +29,7 @@ namespace GandiDesktop.Presentation.Model
         {
             this.virtualMachine = virtualMachine;
 
-            string status = virtualMachine.State;
+            string status = virtualMachine.Status.ToString();
 
             status = status.Replace('_', ' ');
             status = status.Substring(0, 1).ToUpperInvariant() + status.Substring(1);
@@ -55,27 +55,27 @@ namespace GandiDesktop.Presentation.Model
 
         public bool CanStart(object parameter)
         {
-            return (this.virtualMachine.State != "running");
+            return (this.virtualMachine.Status != VirtualMachineStatus.Running);
         }
 
         public void Start(object parameter)
         {
-            Service.Hosting.VirtualMachine.Start(this.virtualMachine);
+            VirtualMachineOperation operation = Service.Hosting.VirtualMachine.Start(this.virtualMachine);
         }
 
         public bool CanStop(object parameter)
         {
-            return (this.virtualMachine.State == "running");
+            return (this.virtualMachine.Status == VirtualMachineStatus.Running);
         }
 
         public void Stop(object parameter)
         {
-            Service.Hosting.VirtualMachine.Stop(this.virtualMachine);
+            VirtualMachineOperation operation = Service.Hosting.VirtualMachine.Stop(this.virtualMachine);
         }
 
         public bool CanReboot(object parameter)
         {
-            return (this.virtualMachine.State == "running");
+            return (this.virtualMachine.Status == VirtualMachineStatus.Running);
         }
 
         public void Reboot(object parameter)

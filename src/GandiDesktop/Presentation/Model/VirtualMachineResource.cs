@@ -28,7 +28,7 @@ namespace GandiDesktop.Presentation.Model
         public VirtualMachineResource(VirtualMachine virtualMachine)
         {
             this.Name = virtualMachine.Hostname;
-            this.Status = virtualMachine.State;
+            this.Status = virtualMachine.Status.ToString();
 
             List<IResourceDetail> details = new List<IResourceDetail>();
 

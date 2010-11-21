@@ -3,12 +3,6 @@ using System.Linq;
 
 namespace GandiDesktop.Gandi.Services.Hosting
 {
-    public enum DiskType
-    {
-        Data,
-        Backup
-    }
-
     public class Disk
     {
         public int Id { get; private set; }
@@ -39,7 +33,7 @@ namespace GandiDesktop.Gandi.Services.Hosting
             if (disk.Source != null)
                 this.Source = Convert.ToInt32(disk.Source);
             this.Visibility = disk.Visibility;
-            this.Type = (DiskType)Enum.Parse(typeof(DiskType), disk.Type, true);
+            this.Type = Converter.ToDiskType(disk.Type);
             this.IsBootDisk = disk.IsBootDisk;
             this.VirtualMachineIds = disk.VirtualMachineIds;
             this.VirtualMachines = null;
