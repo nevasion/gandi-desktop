@@ -192,7 +192,7 @@
                                     <ItemsControl Grid.Row="1" ItemsSource="{Binding Actions}" Margin="0,0,0,2">
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
-                                                <Button>
+                                                <Button Cursor="{Binding Cursor}">
                                                     <Button.Style>
                                                         <Style TargetType="Button">
                                                             <Setter Property="Command" Value="{Binding Command}" />

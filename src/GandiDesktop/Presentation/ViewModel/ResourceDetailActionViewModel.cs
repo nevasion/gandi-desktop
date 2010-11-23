@@ -9,6 +9,20 @@ namespace GandiDesktop.Presentation.ViewModel
         public ICommand Command { get; set; }
         public bool ConfirmationRequired { get; set; }
 
+        private Cursor cursor;
+        public Cursor Cursor
+        {
+            get { return this.cursor; }
+            set
+            {
+                if (this.cursor != value)
+                {
+                    this.cursor = value;
+                    base.OnPropertyChanged(() => Cursor);
+                }
+            }
+        }
+
         private bool askConfirmation;
         public bool AskConfirmation
         {
@@ -80,8 +94,13 @@ namespace GandiDesktop.Presentation.ViewModel
 
         public void Confirm(object parameter)
         {
+            this.Cursor = Cursors.Wait;
+
             if (this.Command != null && this.Command.CanExecute(null))
                 this.Command.Execute(null);
+
+            this.AskConfirmation = false;
+            this.Cursor = Cursors.Arrow;
         }
 
         public void Cancel(object parameter)
