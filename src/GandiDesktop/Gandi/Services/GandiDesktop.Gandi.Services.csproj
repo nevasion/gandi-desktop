@@ -62,6 +62,7 @@
     <Compile Include="Hosting\DiskOperation.cs" />
     <Compile Include="Hosting\DiskService.cs" />
     <Compile Include="Hosting\DiskUpdate.cs" />
+    <Compile Include="Hosting\HostingResourceComparer.cs" />
     <Compile Include="Hosting\HostingService.cs" />
     <Compile Include="Hosting\IHostingService.cs" />
     <Compile Include="Hosting\Image.cs" />

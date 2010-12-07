@@ -9,14 +9,14 @@ namespace GandiDesktop.Presentation.Model
     {
         private GandiDesktop.Gandi.Services.Hosting.HostingService service;
 
-        private List<IHostingResource> resources;
+        private List<IHostingResource> resources = new List<IHostingResource>();
 
-        public IQueryable<DataCenter> DataCenters { get { return resources.Cast<DataCenter>().AsQueryable<DataCenter>(); } }
-        public IQueryable<Disk> Disks { get { return resources.Cast<Disk>().AsQueryable<Disk>(); } }
-        public IQueryable<Interface> Interfaces { get { return resources.Cast<Interface>().AsQueryable<Interface>(); } }
-        public IQueryable<Image> Images { get { return resources.Cast<Image>().AsQueryable<Image>(); } }
-        public IQueryable<IpAddress> IpAddresses { get { return resources.Cast<IpAddress>().AsQueryable<IpAddress>(); } }
-        public IQueryable<VirtualMachine> VirtualMachines { get { return resources.Cast<VirtualMachine>().AsQueryable<VirtualMachine>(); } }
+        public IQueryable<DataCenter> DataCenters { get { return resources.OfType<DataCenter>().AsQueryable(); } }
+        public IQueryable<Disk> Disks { get { return resources.OfType<Disk>().AsQueryable(); } }
+        public IQueryable<Interface> Interfaces { get { return resources.OfType<Interface>().AsQueryable(); } }
+        public IQueryable<Image> Images { get { return resources.OfType<Image>().AsQueryable(); } }
+        public IQueryable<IpAddress> IpAddresses { get { return resources.OfType<IpAddress>().AsQueryable(); } }
+        public IQueryable<VirtualMachine> VirtualMachines { get { return resources.OfType<VirtualMachine>().AsQueryable(); } }
 
         public DataCenterService DataCenter { get { return service.DataCenter; } }
 
@@ -89,7 +89,7 @@ namespace GandiDesktop.Presentation.Model
 
         public void AddOrUpdate(IHostingResource resource)
         {
-            if (this.resources.Contains(resource))
+            if (this.resources.Contains(resource, new HostingResourceComparer()))
             {
                 IHostingResource oldResource = this.resources.Single(r => r.Id == resource.Id);
                 this.resources[this.resources.IndexOf(oldResource)] = resource;

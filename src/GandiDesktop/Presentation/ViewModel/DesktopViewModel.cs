@@ -226,25 +226,24 @@ namespace GandiDesktop.Presentation.ViewModel
             if (resourceViewModel.Type == ResourceType.Disk)
             {
                 Disk disk = Service.Hosting.Fetch<Disk>(resourceViewModel.Id);
-                Service.Hosting.AddOrUpdate(disk);
                 resourceViewModel.Update(new DiskResource(disk));
             }
             else if (resourceViewModel.Type == ResourceType.Interface)
             {
                 Interface iface = Service.Hosting.Fetch<Interface>(resourceViewModel.Id);
-                Service.Hosting.AddOrUpdate(iface);
                 resourceViewModel.Update(new InterfaceResource(iface));
             }
             else if (resourceViewModel.Type == ResourceType.VirtualMachine)
             {
                 VirtualMachine virtualMachine = Service.Hosting.Fetch<VirtualMachine>(resourceViewModel.Id);
-                Service.Hosting.AddOrUpdate(virtualMachine);
                 resourceViewModel.Update(new VirtualMachineResource(virtualMachine));
             }
         }
 
         private void RemoveResource(ResourceViewModel resourceViewModel)
         {
+            Service.Hosting.Remove(resourceViewModel.Resource);
+
             this.ResourceViewModeCollection.Remove(resourceViewModel);
         }
 
