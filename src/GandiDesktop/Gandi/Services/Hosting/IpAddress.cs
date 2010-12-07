@@ -4,7 +4,7 @@ using System.Net;
 
 namespace GandiDesktop.Gandi.Services.Hosting
 {
-    public class IpAddress
+    public class IpAddress : IHostingResource
     {
         public int Id { get; private set; }
         public int DataCenterId { get; private set; }

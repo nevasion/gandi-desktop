@@ -69,7 +69,7 @@ namespace GandiDesktop.Presentation.ViewModel
             }
         }
 
-        public object Resource { get; private set; }
+        public IHostingResource Resource { get; private set; }
 
         private double left;
         public double Left
@@ -132,7 +132,7 @@ namespace GandiDesktop.Presentation.ViewModel
             }
             this.IsRunning = (this.Status == "Running");
             this.Type = resource.Type;
-            this.Resource = resource;
+            this.Resource = resource.Resource;
 
             if (this.ResourceDetailViewModelCollection == null)
                 this.ResourceDetailViewModelCollection = new ObservableCollection<ResourceDetailViewModel>();

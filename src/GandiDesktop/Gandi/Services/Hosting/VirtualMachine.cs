@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace GandiDesktop.Gandi.Services.Hosting
 {
-    public class VirtualMachine
+    public class VirtualMachine : IHostingResource
     {
         public int Id { get; set; }
         public int DataCenterId { get; private set; }

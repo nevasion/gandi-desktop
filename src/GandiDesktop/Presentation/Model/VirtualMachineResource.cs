@@ -25,7 +25,9 @@ namespace GandiDesktop.Presentation.Model
 
         public IResourceDetail[] Details { get; private set; }
 
-        public object Resource { get; private set; }
+        public IHostingResource Resource { get; private set; }
+
+        public bool CanAttach { get; private set; }
 
         public event ResourceDetailActionHandler DetailAction;
 
@@ -35,6 +37,7 @@ namespace GandiDesktop.Presentation.Model
             this.Name = virtualMachine.Hostname;
             this.Status = virtualMachine.Status.ToString();
             this.Resource = virtualMachine;
+            this.CanAttach = false;
 
             List<IResourceDetail> details = new List<IResourceDetail>();
 
@@ -73,6 +76,11 @@ namespace GandiDesktop.Presentation.Model
             details.Add(new TextResourceDetail(VirtualMachineResource.MemoryName, String.Format(VirtualMachineResource.MemoryValueTemplate, virtualMachine.Memory)));
 
             this.Details = details.ToArray();
+        }
+
+        public bool CanReceiveAttachement(IHostingResource resource)
+        {
+            return (resource is Disk || resource is Interface);
         }
     }
 }

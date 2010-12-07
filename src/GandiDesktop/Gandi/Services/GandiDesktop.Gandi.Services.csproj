@@ -76,6 +76,7 @@
     <Compile Include="Hosting\IpAddressOperation.cs" />
     <Compile Include="Hosting\IpAddressService.cs" />
     <Compile Include="Hosting\IpAddressUpdate.cs" />
+    <Compile Include="Hosting\IHostingResource.cs" />
     <Compile Include="Hosting\Mapping\Disk.cs" />
     <Compile Include="Hosting\Mapping\DiskCopy.cs" />
     <Compile Include="Hosting\Mapping\DiskCreation.cs" />

@@ -2,7 +2,7 @@
 
 namespace GandiDesktop.Gandi.Services.Hosting
 {
-    public class Image
+    public class Image : IHostingResource
     {
         public int Id { get; private set; }
         public string Label { get; private set; }

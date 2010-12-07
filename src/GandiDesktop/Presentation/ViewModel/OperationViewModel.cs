@@ -171,7 +171,7 @@ namespace GandiDesktop.Presentation.ViewModel
 
         public OperationStep RefreshStatus()
         {
-            Operation refreshedOperation = Service.Hosting.Operation.Update(this.operation);
+            Operation refreshedOperation = Service.Hosting.UpdateOperation(this.operation);
 
             this.operation.Step = refreshedOperation.Step;
             this.operation.LastUpdated = refreshedOperation.LastUpdated;

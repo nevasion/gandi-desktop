@@ -53,34 +53,20 @@ namespace GandiDesktop.Presentation.ViewModel
         public ObservableCollection<ResourceViewModel> ResourceViewModeCollection { get; private set; }
         public OperationsViewModel OperationsViewModel { get; private set; }
 
-        private List<ResourceSettingInfo> resourceInfoList = null; 
-        private List<DataCenter> dataCenterList = null;
-        private List<Disk> diskList = null;
-        private List<IpAddress> ipAddresseList = null;
-        private List<Interface> interfaceList = null;
-        private List<VirtualMachine> virtualMachineList = null;
+        private List<ResourceSettingInfo> resourceInfoList = null;
 
         public DesktopViewModel()
         {
             this.ResourceViewModeCollection = new ObservableCollection<ResourceViewModel>();
             this.OperationsViewModel = new OperationsViewModel();
-
             this.resourceInfoList = new List<ResourceSettingInfo>(Settings.ResourceInfos);
 
-            DataCenter[] dataCenters = Service.Hosting.DataCenter.List();
-            Disk[] disks = Service.Hosting.Disk.List(dataCenters);
-            IpAddress[] ipAddresses = Service.Hosting.IpAddress.List(dataCenters);
-            Interface[] interfaces = Service.Hosting.Interface.List(dataCenters, ipAddresses);
+            Service.Hosting.FetchAll(false);
 
-            this.dataCenterList = new List<DataCenter>(dataCenters);
-            this.diskList = new List<Disk>(Service.Hosting.Disk.List(dataCenters));
-            this.ipAddresseList = new List<IpAddress>(Service.Hosting.IpAddress.List(dataCenters));
-            this.interfaceList = new List<Interface>(Service.Hosting.Interface.List(dataCenters, ipAddresses));
-            this.virtualMachineList = new List<VirtualMachine>(Service.Hosting.VirtualMachine.List(dataCenters, interfaces, disks));
-
-            for (int i = 0; i < this.virtualMachineList.Count; i++)
+            IEnumerable<VirtualMachine> virtualMachineList = Service.Hosting.VirtualMachines;
+            for (int i = 0; i < virtualMachineList.Count(); i++)
             {
-                VirtualMachine virtualMachine = this.virtualMachineList[i];
+                VirtualMachine virtualMachine = virtualMachineList.ElementAt(i);
 
                 ResourceViewModel resourceViewModel = new ResourceViewModel(new VirtualMachineResource(virtualMachine))
                 {
@@ -94,7 +80,7 @@ namespace GandiDesktop.Presentation.ViewModel
                 this.ResourceViewModeCollection.Add(resourceViewModel);
             }
 
-            IEnumerable<Disk> detachedDisks = this.diskList.Where(d => d.VirtualMachineIds.Length == 0);
+            IEnumerable<Disk> detachedDisks = Service.Hosting.Disks.Where(d => d.VirtualMachineIds.Length == 0);
             for (int i = 0; i < detachedDisks.Count(); i++)
             {
                 Disk disk = detachedDisks.ElementAt(i);
@@ -111,7 +97,7 @@ namespace GandiDesktop.Presentation.ViewModel
                 this.ResourceViewModeCollection.Add(resourceViewModel);
             }
 
-            IEnumerable<Interface> detachedInterfaces = this.interfaceList.Where(i => i.VirtualMachineId == null);
+            IEnumerable<Interface> detachedInterfaces = Service.Hosting.Interfaces.Where(i => i.VirtualMachineId == null);
             for (int i = 0; i < detachedInterfaces.Count(); i++)
             {
                 Interface iface = detachedInterfaces.ElementAt(i);
@@ -182,23 +168,22 @@ namespace GandiDesktop.Presentation.ViewModel
                 {
                     if (operation is DiskOperation)
                     {
-                        Disk disk = Service.Hosting.Disk.Single(operation.DiskId, this.dataCenterList.ToArray());
+                        Disk disk = Service.Hosting.Fetch<Disk>(operation.DiskId);
 
                         this.AddResource(new DiskResource(disk), 20, 20);
                     }
                     else if (operation is InterfaceOperation)
                     {
-                        Interface iface = Service.Hosting.Interface.Single(operation.InterfaceId, this.dataCenterList.ToArray(), this.ipAddresseList.ToArray());
+                        Interface iface = Service.Hosting.Fetch<Interface>(operation.InterfaceId);
 
                         this.AddResource(new InterfaceResource(iface), 20, 20);
                     }
                     else if (operation is IpAddressOperation)
                     {
-                        //IpAddress ipAddress = Service.Hosting.IpAddress.Single(operation.IpAddressId, this.dataCenterList.ToArray());
                     }
                     else if (operation is VirtualMachineOperation)
                     {
-                        VirtualMachine virtualMachine = Service.Hosting.VirtualMachine.Single(operation.VirtualMachineId.Value, this.dataCenterList.ToArray(), this.interfaceList.ToArray(), this.diskList.ToArray());
+                        VirtualMachine virtualMachine = Service.Hosting.Fetch<VirtualMachine>(operation.VirtualMachineId.Value);
 
                         this.AddResource(new VirtualMachineResource(virtualMachine), 20, 20);
                     }
@@ -224,15 +209,6 @@ namespace GandiDesktop.Presentation.ViewModel
 
         private void AddResource(IResource resource, double left, double top)
         {
-            if (resource.Resource is Disk)
-                this.diskList.Add(resource.Resource as Disk);
-            else if (resource.Resource is Interface)
-                this.interfaceList.Add(resource.Resource as Interface);
-            else if (resource.Resource is IpAddress)
-                this.ipAddresseList.Add(resource.Resource as IpAddress);
-            else if (resource.Resource is VirtualMachine)
-                this.virtualMachineList.Add(resource.Resource as VirtualMachine);
-            
             ResourceViewModel resourceViewModel = new ResourceViewModel(resource)
             {
                 Left = left,
@@ -249,44 +225,26 @@ namespace GandiDesktop.Presentation.ViewModel
         {
             if (resourceViewModel.Type == ResourceType.Disk)
             {
-                Disk newdisk = Service.Hosting.Disk.Single(resourceViewModel.Id, this.dataCenterList.ToArray());
-                Disk oldDisk = this.diskList.Single(d => d.Id == newdisk.Id);
-
-                oldDisk = newdisk;
-
-                resourceViewModel.Update(new DiskResource(oldDisk));
+                Disk disk = Service.Hosting.Fetch<Disk>(resourceViewModel.Id);
+                Service.Hosting.AddOrUpdate(disk);
+                resourceViewModel.Update(new DiskResource(disk));
             }
             else if (resourceViewModel.Type == ResourceType.Interface)
             {
-                Interface newInterface = Service.Hosting.Interface.Single(resourceViewModel.Id, this.dataCenterList.ToArray(), this.ipAddresseList.ToArray());
-                Interface oldInterface = this.interfaceList.Single(i => i.Id == newInterface.Id);
-
-                oldInterface = newInterface;
-
-                resourceViewModel.Update(new InterfaceResource(oldInterface));
+                Interface iface = Service.Hosting.Fetch<Interface>(resourceViewModel.Id);
+                Service.Hosting.AddOrUpdate(iface);
+                resourceViewModel.Update(new InterfaceResource(iface));
             }
             else if (resourceViewModel.Type == ResourceType.VirtualMachine)
             {
-                VirtualMachine newVirtualMachine = Service.Hosting.VirtualMachine.Single(resourceViewModel.Id, this.dataCenterList.ToArray(), this.interfaceList.ToArray(), this.diskList.ToArray());
-                VirtualMachine oldVirtualMachine = this.virtualMachineList.Single(v => v.Id == newVirtualMachine.Id);
-
-                oldVirtualMachine = newVirtualMachine;
-
-                resourceViewModel.Update(new VirtualMachineResource(oldVirtualMachine));
+                VirtualMachine virtualMachine = Service.Hosting.Fetch<VirtualMachine>(resourceViewModel.Id);
+                Service.Hosting.AddOrUpdate(virtualMachine);
+                resourceViewModel.Update(new VirtualMachineResource(virtualMachine));
             }
         }
 
         private void RemoveResource(ResourceViewModel resourceViewModel)
         {
-            if (resourceViewModel.Resource is Disk)
-                this.diskList.Remove(resourceViewModel.Resource as Disk);
-            else if (resourceViewModel.Resource is Interface)
-                this.interfaceList.Remove(resourceViewModel.Resource as Interface);
-            else if (resourceViewModel.Resource is IpAddress)
-                this.ipAddresseList.Remove(resourceViewModel.Resource as IpAddress);
-            else if (resourceViewModel.Resource is VirtualMachine)
-                this.virtualMachineList.Remove(resourceViewModel.Resource as VirtualMachine);
-
             this.ResourceViewModeCollection.Remove(resourceViewModel);
         }
 

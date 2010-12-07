@@ -1,4 +1,6 @@
-﻿namespace GandiDesktop.Presentation.Model
+﻿using GandiDesktop.Gandi.Services.Hosting;
+
+namespace GandiDesktop.Presentation.Model
 {
     public interface IResource
     {
@@ -7,6 +9,8 @@
         string Status { get; }
         ResourceType Type { get; }
         IResourceDetail[] Details { get; }
-        object Resource { get; }
+        IHostingResource Resource { get; }
+        bool CanAttach { get; }
+        bool CanReceiveAttachement(IHostingResource resource);
     }
 }

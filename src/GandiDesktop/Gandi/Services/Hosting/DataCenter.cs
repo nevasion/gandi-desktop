@@ -1,6 +1,6 @@
 ﻿namespace GandiDesktop.Gandi.Services.Hosting
 {
-    public class DataCenter
+    public class DataCenter : IHostingResource
     {
         public int Id { get; private set; }
         public string Name { get; private set; }

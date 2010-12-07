@@ -85,6 +85,7 @@
     <Compile Include="Model\DataCenterResourceDetail.cs" />
     <Compile Include="Model\DiskResource.cs" />
     <Compile Include="Model\DiskResourceDetail.cs" />
+    <Compile Include="Model\HostingService.cs" />
     <Compile Include="Model\ResourceDetailActionEventArgs.cs" />
     <Compile Include="Model\ResourceDetailActionType.cs" />
     <Compile Include="Model\Service.cs" />

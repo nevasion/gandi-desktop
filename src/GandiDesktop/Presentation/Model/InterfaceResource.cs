@@ -23,13 +23,16 @@ namespace GandiDesktop.Presentation.Model
 
         public IResourceDetail[] Details { get; private set; }
 
-        public object Resource { get; private set; }
+        public IHostingResource Resource { get; private set; }
+
+        public bool CanAttach { get; private set; }
 
         public InterfaceResource(Interface iface)
         {
             this.Id = iface.Id;
             this.Name = String.Format(InterfaceResource.NameTemplate, iface.Bandwidth);
             this.Resource = iface;
+            this.CanAttach = true;
 
             List<IResourceDetail> details = new List<IResourceDetail>();
 
@@ -37,6 +40,12 @@ namespace GandiDesktop.Presentation.Model
                 details.Add(new IpAddressResourceDetail(ipAddress));
 
             this.Details = details.ToArray();
+        }
+
+        public bool CanReceiveAttachement(IHostingResource resource)
+        {
+            return false;
+            //return resource is IpAddressResource;
         }
     }
 }

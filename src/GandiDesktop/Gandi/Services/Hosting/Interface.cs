@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace GandiDesktop.Gandi.Services.Hosting
 {
-    public class Interface
+    public class Interface : IHostingResource
     {
         public int Id { get; private set; }
         public int DataCenterId { get; private set; }

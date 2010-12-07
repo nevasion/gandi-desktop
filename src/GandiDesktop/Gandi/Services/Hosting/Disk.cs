@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace GandiDesktop.Gandi.Services.Hosting
 {
-    public class Disk
+    public class Disk : IHostingResource
     {
         public int Id { get; private set; }
         public string Name { get; private set; }
