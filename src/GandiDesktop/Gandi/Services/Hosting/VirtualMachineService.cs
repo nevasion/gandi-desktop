@@ -55,7 +55,7 @@ namespace GandiDesktop.Gandi.Services.Hosting
             return new VirtualMachineOperation(this.service.VirtualMachineReboot(this.apiKey, virtualMachine.Id), virtualMachine);
         }
 
-        public VirtualMachine Single(int virtualMachineId, DataCenter[] dataCenters, Interface[] interfaces, Disk[] disks)
+        public VirtualMachine Single(int virtualMachineId, DataCenter[] dataCenters = null, Interface[] interfaces = null, Disk[] disks = null)
         {
             Mapping.VirtualMachine mappingVirtualMachine = this.service.VirtualMachineInfo(this.apiKey, virtualMachineId);
 
@@ -77,12 +77,12 @@ namespace GandiDesktop.Gandi.Services.Hosting
 
         public VirtualMachineOperation AttachInterface(VirtualMachine virtualMachine, Interface iface)
         {
-            return new VirtualMachineOperation(this.service.VirtualMachineAttachInterface(this.apiKey, virtualMachine.Id, iface.Id), virtualMachine, iface);
+            return new VirtualMachineOperation(this.service.VirtualMachineAttachInterface(this.apiKey, virtualMachine.Id, iface.Id), virtualMachine, iface: iface);
         }
 
         public VirtualMachineOperation DetachInterface(VirtualMachine virtualMachine, Interface iface)
         {
-            return new VirtualMachineOperation(this.service.VirtualMachineDetachInterface(this.apiKey, virtualMachine.Id, iface.Id), virtualMachine, iface);
+            return new VirtualMachineOperation(this.service.VirtualMachineDetachInterface(this.apiKey, virtualMachine.Id, iface.Id), virtualMachine, iface: iface);
         }
 
         public VirtualMachine[] List(DataCenter[] dataCenters, Interface[] interfaces, Disk[] disks)

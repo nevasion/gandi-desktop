@@ -5,7 +5,7 @@
         public int DiskId { get; private set; }
         public Disk Disk { get; private set; }
 
-        public DiskOperation(Mapping.DiskOperation operation, Disk disk)
+        public DiskOperation(Mapping.DiskOperation operation, Disk disk = null)
             : base(operation)
         {
             this.DiskId = operation.DiskId;

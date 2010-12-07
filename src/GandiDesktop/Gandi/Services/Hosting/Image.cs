@@ -14,7 +14,7 @@ namespace GandiDesktop.Gandi.Services.Hosting
         public ImageArchitecture Architecture { get; private set; }
         public int AuthorId { get; private set; }
 
-        public Image(Mapping.Image image, DataCenter[] dataCenters, Disk[] disks)
+        public Image(Mapping.Image image, DataCenter[] dataCenters = null, Disk[] disks = null)
         {
             this.Id = image.Id;
             this.Label = image.Label;

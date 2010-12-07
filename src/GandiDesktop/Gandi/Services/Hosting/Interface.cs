@@ -20,7 +20,7 @@ namespace GandiDesktop.Gandi.Services.Hosting
         public int[] IpAddressIds { get; private set; }
         public IpAddress[] IpAddresses { get; private set; }
 
-        public Interface(Mapping.Interface iface, DataCenter[] dataCenters, IpAddress[] ips)
+        public Interface(Mapping.Interface iface, DataCenter[] dataCenters = null, IpAddress[] ips = null)
         {
             this.Id = iface.Id;
             this.DataCenterId = iface.DataCenterId;

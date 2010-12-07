@@ -13,22 +13,7 @@ namespace GandiDesktop.Gandi.Services.Hosting
             this.apiKey = apiKey;
         }
 
-        public Image[] List()
-        {
-            return this.List(null, null);
-        }
-
-        public Image[] List(Disk[] disks)
-        {
-            return this.List(null, disks);
-        }
-
-        public Image[] List(DataCenter[] dataCenters)
-        {
-            return this.List(dataCenters, null);
-        }
-
-        public Image[] List(DataCenter[] dataCenters, Disk[] disks)
+        public Image[] List(DataCenter[] dataCenters = null, Disk[] disks = null)
         {
             Mapping.Image[] mappingImages = this.service.ImageList(this.apiKey);
 

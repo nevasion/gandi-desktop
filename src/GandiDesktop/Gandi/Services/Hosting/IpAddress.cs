@@ -18,7 +18,7 @@ namespace GandiDesktop.Gandi.Services.Hosting
         public IpAddressStatus Status { get; private set; }
         public IpVersion Version { get; private set; }
 
-        public IpAddress(Mapping.IpAddress ipAddress, DataCenter[] dataCenters)
+        public IpAddress(Mapping.IpAddress ipAddress, DataCenter[] dataCenters = null)
         {
             this.Id = ipAddress.Id;
             this.DataCenterId = ipAddress.DataCenterId;

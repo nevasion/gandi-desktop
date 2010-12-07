@@ -36,7 +36,7 @@ namespace GandiDesktop.Gandi.Services.Hosting
             return new IpAddressOperation(this.service.IpAddressDelete(this.apiKey, ipAddress.Id), ipAddress);
         }
 
-        public IpAddress Single(int ipAddressId, DataCenter[] dataCenters)
+        public IpAddress Single(int ipAddressId, DataCenter[] dataCenters = null)
         {
             Mapping.IpAddress mappingIpAddress = this.service.IpAddressInfo(this.apiKey, ipAddressId);
 
@@ -46,7 +46,7 @@ namespace GandiDesktop.Gandi.Services.Hosting
                 return null;
         }
 
-        public IpAddress[] List(DataCenter[] dataCenters)
+        public IpAddress[] List(DataCenter[] dataCenters = null)
         {
             Mapping.IpAddress[] mappingIpAddresses = this.service.IpAddressList(this.apiKey);
 

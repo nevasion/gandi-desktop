@@ -26,7 +26,7 @@ namespace GandiDesktop.Gandi.Services.Hosting
         public int[] AttachedDiskIds { get; private set; }
         public Disk[] AttachedDisks { get; set; }
 
-        public VirtualMachine(Mapping.VirtualMachine virtualMachine, DataCenter[] dataCenters, Interface[] interfaces, Disk[] disks)
+        public VirtualMachine(Mapping.VirtualMachine virtualMachine, DataCenter[] dataCenters = null, Interface[] interfaces = null, Disk[] disks = null)
         {
             this.Id = virtualMachine.Id;
             this.DataCenterId = virtualMachine.DataCenterId;

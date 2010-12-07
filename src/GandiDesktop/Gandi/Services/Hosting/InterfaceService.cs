@@ -46,7 +46,7 @@ namespace GandiDesktop.Gandi.Services.Hosting
             return new InterfaceOperation(this.service.InterfaceDetachIp(this.apiKey, iface.Id, ipAddress.Id), iface, ipAddress);
         }
 
-        public Interface Single(int interfaceId, DataCenter[] dataCenters, IpAddress[] ipAddresses)
+        public Interface Single(int interfaceId, DataCenter[] dataCenters = null, IpAddress[] ipAddresses = null)
         {
             Mapping.Interface mappingInterface = this.service.InterfaceInfo(this.apiKey, interfaceId);
 
@@ -56,7 +56,7 @@ namespace GandiDesktop.Gandi.Services.Hosting
                 return null;
         }
 
-        public Interface[] List(DataCenter[] dataCenters, IpAddress[] ipAddresses)
+        public Interface[] List(DataCenter[] dataCenters = null, IpAddress[] ipAddresses = null)
         {
             Mapping.Interface[] mappingInterfaces = this.service.InterfaceList(this.apiKey);
 

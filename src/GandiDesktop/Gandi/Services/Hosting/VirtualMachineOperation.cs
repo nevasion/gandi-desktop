@@ -2,6 +2,9 @@
 {
     public class VirtualMachineOperation : Operation
     {
+        private Mapping.VirtualMachineOperation virtualMachineOperation;
+        private Hosting.Interface iface;
+
         public int? VirtualMachineId { get; private set; }
         public VirtualMachine VirtualMachine { get; private set; }
 
@@ -11,22 +14,7 @@
         public int? IntefaceId {get; private set; }
         public Interface Interface { get; private set; }
 
-        public VirtualMachineOperation(Mapping.VirtualMachineOperation operation, VirtualMachine virtualMachine)
-            : this(operation, virtualMachine, null, null)
-        {
-        }
-
-        public VirtualMachineOperation(Mapping.VirtualMachineOperation operation, VirtualMachine virtualMachine, Disk disk)
-            : this(operation, virtualMachine, disk, null)
-        {
-        }
-
-        public VirtualMachineOperation(Mapping.VirtualMachineOperation operation, VirtualMachine virtualMachine, Interface iface)
-            : this(operation, virtualMachine, null, iface)
-        {
-        }
-
-        private VirtualMachineOperation(Mapping.VirtualMachineOperation operation, VirtualMachine virtualMachine, Disk disk, Interface iface)
+        public VirtualMachineOperation(Mapping.VirtualMachineOperation operation, VirtualMachine virtualMachine, Disk disk = null, Interface iface = null)
             : base(operation)
         {
             this.VirtualMachineId = operation.VirtualMachineId;

@@ -8,17 +8,7 @@
         public int? IpAddressId { get; private set; }
         public IpAddress IpAddress { get; private set; }
 
-        public InterfaceOperation(Mapping.InterfaceOperation operation, Interface iface)
-            : this(operation, iface, null, null)
-        {
-        }
-
-        public InterfaceOperation(Mapping.InterfaceOperation operation, Interface iface, IpAddress ipAddress)
-            : this(operation, iface, ipAddress, null)
-        {
-        }
-
-        private InterfaceOperation(Mapping.InterfaceOperation operation, Interface iface, IpAddress ipAddress, object dummy)
+        public InterfaceOperation(Mapping.InterfaceOperation operation, Interface iface, IpAddress ipAddress = null)
             : base(operation)
         {
             this.InterfaceId = operation.InterfaceId;

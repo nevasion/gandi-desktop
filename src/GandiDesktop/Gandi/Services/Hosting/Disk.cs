@@ -22,7 +22,7 @@ namespace GandiDesktop.Gandi.Services.Hosting
         public int DataCenterId { get; private set; }
         public DataCenter DataCenter { get; private set; }
 
-        public Disk(Mapping.Disk disk, DataCenter[] dataCenters)
+        public Disk(Mapping.Disk disk, DataCenter[] dataCenters = null)
         {
             this.Id = disk.Id;
             this.Name = disk.Name;

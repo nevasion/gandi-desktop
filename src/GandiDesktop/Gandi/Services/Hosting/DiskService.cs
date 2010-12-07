@@ -17,14 +17,14 @@ namespace GandiDesktop.Gandi.Services.Hosting
         {
             Mapping.DiskCreation mappingDiskCreation = new Mapping.DiskCreation(diskCreation);
 
-            return new DiskOperation(this.service.DiskCreate(this.apiKey, mappingDiskCreation), null);
+            return new DiskOperation(this.service.DiskCreate(this.apiKey, mappingDiskCreation));
         }
 
         public DiskOperation CreateFrom(Disk sourceDisk, DiskCopy diskCopy)
         {
             Mapping.DiskCopy mappingDiskCopy = new Mapping.DiskCopy(diskCopy);
 
-            return new DiskOperation(this.service.DiskCreateFrom(this.apiKey, mappingDiskCopy, sourceDisk.Id), null);
+            return new DiskOperation(this.service.DiskCreateFrom(this.apiKey, mappingDiskCopy, sourceDisk.Id));
         }
 
         public DiskOperation Update(Disk disk, DiskUpdate diskUpdate)
@@ -39,7 +39,7 @@ namespace GandiDesktop.Gandi.Services.Hosting
             return new DiskOperation(this.service.DiskDelete(this.apiKey, disk.Id), disk);
         }
 
-        public Disk Single(int diskId, DataCenter[] dataCenters)
+        public Disk Single(int diskId, DataCenter[] dataCenters = null)
         {
             Mapping.Disk mappingDisk = this.service.DiskInfo(this.apiKey, diskId);
 
@@ -49,7 +49,7 @@ namespace GandiDesktop.Gandi.Services.Hosting
                 return null;
         }
 
-        public Disk[] List(DataCenter[] dataCenters)
+        public Disk[] List(DataCenter[] dataCenters = null)
         {
             Mapping.Disk[] mappingDisks = this.service.DiskList(this.apiKey);
 
