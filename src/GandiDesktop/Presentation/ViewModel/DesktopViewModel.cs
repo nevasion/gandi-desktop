@@ -176,45 +176,42 @@ namespace GandiDesktop.Presentation.ViewModel
             if ((operationViewModel.Type & OperationType.Detach) == OperationType.Detach
                 || (operationViewModel.Type & OperationType.Create) == OperationType.Create)
             {
-                DiskOperation diskOperation = operationViewModel.Operation as DiskOperation;
-                InterfaceOperation interfaceOperation = operationViewModel.Operation as InterfaceOperation;
-                IpAddressOperation ipAddressOperation = operationViewModel.Operation as IpAddressOperation;
-                VirtualMachineOperation virtualMachineOperation = operationViewModel.Operation as VirtualMachineOperation;
+                dynamic operation = operationViewModel.Operation;
 
-                if (diskOperation != null)
+                if ((operationViewModel.Type & OperationType.Create) == OperationType.Create)
                 {
-                    Disk disk = Service.Hosting.Disk.Single(diskOperation.DiskId, this.dataCenterList.ToArray());
-
-                    this.AddResource(new DiskResource(disk), 20, 20);
-                }
-                else if (interfaceOperation != null)
-                {
-                    Interface iface = Service.Hosting.Interface.Single(interfaceOperation.InterfaceId, this.dataCenterList.ToArray(), this.ipAddresseList.ToArray());
-
-                    this.AddResource(new InterfaceResource(iface), 20, 20);
-                }
-                else if (ipAddressOperation != null)
-                {
-                    //IpAddress ipAddress = Service.Hosting.IpAddress.Single(ipAddressOperation.IpAddressId, this.dataCenterList.ToArray());
-                }
-                else if (virtualMachineOperation != null)
-                {
-                    if ((operationViewModel.Type & OperationType.Detach) == OperationType.Detach)
+                    if (operation is DiskOperation)
                     {
-                        if (virtualMachineOperation.Disk != null)
-                        {
-                            this.AddResource(new DiskResource(virtualMachineOperation.Disk), 20, 20);
-                        }
-                        else if (virtualMachineOperation.Interface != null)
-                        {
-                            this.AddResource(new InterfaceResource(virtualMachineOperation.Interface), 20, 20);
-                        }
+                        Disk disk = Service.Hosting.Disk.Single(operation.DiskId, this.dataCenterList.ToArray());
+
+                        this.AddResource(new DiskResource(disk), 20, 20);
                     }
-                    else if ((operationViewModel.Type & OperationType.Create) == OperationType.Create)
+                    else if (operation is InterfaceOperation)
                     {
-                        VirtualMachine virtualMachine = Service.Hosting.VirtualMachine.Single(virtualMachineOperation.VirtualMachineId.Value, this.dataCenterList.ToArray(), this.interfaceList.ToArray(), this.diskList.ToArray());
+                        Interface iface = Service.Hosting.Interface.Single(operation.InterfaceId, this.dataCenterList.ToArray(), this.ipAddresseList.ToArray());
+
+                        this.AddResource(new InterfaceResource(iface), 20, 20);
+                    }
+                    else if (operation is IpAddressOperation)
+                    {
+                        //IpAddress ipAddress = Service.Hosting.IpAddress.Single(operation.IpAddressId, this.dataCenterList.ToArray());
+                    }
+                    else if (operation is VirtualMachineOperation)
+                    {
+                        VirtualMachine virtualMachine = Service.Hosting.VirtualMachine.Single(operation.VirtualMachineId.Value, this.dataCenterList.ToArray(), this.interfaceList.ToArray(), this.diskList.ToArray());
 
                         this.AddResource(new VirtualMachineResource(virtualMachine), 20, 20);
+                    }
+                }
+                else if ((operationViewModel.Type & OperationType.Detach) == OperationType.Detach)
+                {
+                    if ((operationViewModel.Type & OperationType.Disk) == OperationType.Disk)
+                    {
+                        this.AddResource(new DiskResource(operation.Disk), 20, 20);
+                    }
+                    else if ((operationViewModel.Type & OperationType.Interface) == OperationType.Interface)
+                    {
+                        this.AddResource(new DiskResource(operation.Interface), 20, 20);
                     }
                 }
             }
@@ -235,7 +232,7 @@ namespace GandiDesktop.Presentation.ViewModel
                 this.ipAddresseList.Add(resource.Resource as IpAddress);
             else if (resource.Resource is VirtualMachine)
                 this.virtualMachineList.Add(resource.Resource as VirtualMachine);
-
+            
             ResourceViewModel resourceViewModel = new ResourceViewModel(resource)
             {
                 Left = left,
