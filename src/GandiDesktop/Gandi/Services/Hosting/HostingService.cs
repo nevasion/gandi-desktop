@@ -10,6 +10,7 @@ namespace GandiDesktop.Gandi.Services.Hosting
         public ImageService Image { get; private set; }
         public IpAddressService IpAddress { get; private set; }
         public VirtualMachineService VirtualMachine { get; private set; }
+        public OperationService Operation { get; private set; }
 
         public HostingService(string apiKey)
         {
@@ -21,6 +22,7 @@ namespace GandiDesktop.Gandi.Services.Hosting
             this.Image = new ImageService(service, apiKey);
             this.IpAddress = new IpAddressService(service, apiKey);
             this.VirtualMachine = new VirtualMachineService(service, apiKey);
+            this.Operation = new OperationService(service, apiKey);
         }
     }
 }

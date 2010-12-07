@@ -54,29 +54,22 @@ namespace GandiDesktop.Gandi.Services.Hosting
         Cancelled
     }
 
+    [Flags]
     public enum OperationType
     {
-        VirtualMachineCreate,
-        VirtualMachineUpdate,
-        VirtualMachineDelete,
-        VirtualMachineStart,
-        VirtualMachineStop,
-        VirtualMachineReboot,
-        DiskCreate,
-        DiskUpdate,
-        DiskDelete,
-        DiskAttach,
-        DiskDetach,
-        InterfaceCreate,
-        InterfaceUpdate,
-        InterfaceDelete,
-        InterfaceAttach,
-        InterfaceDetach,
-        IpAddressCreate,
-        IpAddressUpdate,
-        IpAddressDelete,
-        IpAddressAttach,
-        IpAddressDetach
+        None = 0,
+        Create = 1 << 0,
+        Update = 1 << 1,
+        Delete = 1 << 2,
+        Attach = 1 << 3,
+        Detach = 1 << 4,
+        Start = 1 << 5,
+        Stop = 1 << 6,
+        Reboot = 1 << 7,
+        VirtualMachine = 1 << 8,
+        Disk = 1 << 9,
+        Interface = 1 << 10,
+        IpAddress = 1 << 11
     }
 
     public enum VirtualMachineStatus
@@ -311,47 +304,47 @@ namespace GandiDesktop.Gandi.Services.Hosting
             switch (operationType)
             {
                 case Converter.OperationTypeVirtualMachineCreate:
-                    return OperationType.VirtualMachineCreate;
+                    return OperationType.Create | OperationType.VirtualMachine;
                 case Converter.OperationTypeVirtualMachineUpdate:
-                    return OperationType.VirtualMachineUpdate;
+                    return OperationType.Update | OperationType.VirtualMachine;
                 case Converter.OperationTypeVirtualMachineDelete:
-                    return OperationType.VirtualMachineDelete;
+                    return OperationType.Delete | OperationType.VirtualMachine;
                 case Converter.OperationTypeVirtualMachineStart:
-                    return OperationType.VirtualMachineStart;
+                    return OperationType.Start | OperationType.VirtualMachine;
                 case Converter.OperationTypeVirtualMachineStop:
-                    return OperationType.VirtualMachineStop;
+                    return OperationType.Stop | OperationType.VirtualMachine;
                 case Converter.OperationTypeVirtualMachineReboot:
-                    return OperationType.VirtualMachineReboot;
+                    return OperationType.Reboot | OperationType.VirtualMachine;
                 case Converter.OperationTypeDiskCreate:
-                    return OperationType.DiskCreate;
+                    return OperationType.Create | OperationType.Disk;
                 case Converter.OperationTypeDiskUpdate:
-                    return OperationType.DiskUpdate;
+                    return OperationType.Update | OperationType.Disk;
                 case Converter.OperationTypeDiskDelete:
-                    return OperationType.DiskDelete;
+                    return OperationType.Delete | OperationType.Disk;
                 case Converter.OperationTypeDiskAttach:
-                    return OperationType.DiskAttach;
+                    return OperationType.Attach | OperationType.Disk;
                 case Converter.OperationTypeDiskDetach:
-                    return OperationType.DiskDetach;
+                    return OperationType.Detach | OperationType.Disk;
                 case Converter.OperationTypeInterfaceCreate:
-                    return OperationType.InterfaceCreate;
+                    return OperationType.Create | OperationType.Interface;
                 case Converter.OperationTypeInterfaceUpdate:
-                    return OperationType.InterfaceUpdate;
+                    return OperationType.Update | OperationType.Interface;
                 case Converter.OperationTypeInterfaceDelete:
-                    return OperationType.InterfaceDelete;
+                    return OperationType.Delete | OperationType.Interface;
                 case Converter.OperationTypeInterfaceAttach:
-                    return OperationType.InterfaceAttach;
+                    return OperationType.Attach | OperationType.Interface;
                 case Converter.OperationTypeInterfaceDetach:
-                    return OperationType.InterfaceDetach;
+                    return OperationType.Detach | OperationType.Interface;
                 case Converter.OperationTypeIpAddressCreate:
-                    return OperationType.IpAddressCreate;
+                    return OperationType.Create | OperationType.IpAddress;
                 case Converter.OperationTypeIpAddressUpdate:
-                    return OperationType.IpAddressUpdate;
+                    return OperationType.Update | OperationType.IpAddress;
                 case Converter.OperationTypeIpAddressDelete:
-                    return OperationType.IpAddressDelete;
+                    return OperationType.Delete | OperationType.IpAddress;
                 case Converter.OperationTypeIpAddressAttach:
-                    return OperationType.IpAddressAttach;
+                    return OperationType.Attach | OperationType.IpAddress;
                 case Converter.OperationTypeIpAddressDetach:
-                    return OperationType.IpAddressDetach;
+                    return OperationType.Detach | OperationType.IpAddress;
                 default:
                     throw new InvalidCastException();
             }

@@ -5,7 +5,6 @@
     SnapsToDevicePixels="True" Height="Auto" Width="Auto">
 
     <UserControl.Resources>
-
         <Style x:Key="ResourceTypeBorder" TargetType="Border">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Type}" Value="VirtualMachine">
@@ -35,7 +34,7 @@
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="TextBlock.Foreground">
                         <Setter.Value>
-                            <SolidColorBrush Color="#FFF3F3F3" Opacity="0.125" />
+                            <SolidColorBrush Color="#FFF3F3F3" Opacity="0.75" />
                         </Setter.Value>
                     </Setter>
                 </Trigger>
@@ -191,9 +190,20 @@
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
 
+        <Storyboard x:Key="FirstFadeIn" AccelerationRatio="0.875" DecelerationRatio="0.125">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="gridRoot" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.5" Value="1" />
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
     </UserControl.Resources>
-
-    <Grid x:Name="gridRoot">
+    
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="UserControl.Loaded">
+            <BeginStoryboard Storyboard="{StaticResource FirstFadeIn}" />
+        </EventTrigger>
+    </UserControl.Triggers>
+    
+    <Grid x:Name="gridRoot" Opacity="0">
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition />

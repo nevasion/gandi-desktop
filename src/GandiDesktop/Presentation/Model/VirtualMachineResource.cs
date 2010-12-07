@@ -12,6 +12,8 @@ namespace GandiDesktop.Presentation.Model
         private const string MemoryName = "RAM";
         private const string MemoryValueTemplate = "{0} Mo";
 
+        public int Id { get; private set; }
+
         public string Name { get; private set; }
 
         public string Status { get; private set; }
@@ -23,16 +25,27 @@ namespace GandiDesktop.Presentation.Model
 
         public IResourceDetail[] Details { get; private set; }
 
+        public object Resource { get; private set; }
+
         public event ResourceDetailActionHandler DetailAction;
 
         public VirtualMachineResource(VirtualMachine virtualMachine)
         {
+            this.Id = virtualMachine.Id;
             this.Name = virtualMachine.Hostname;
             this.Status = virtualMachine.Status.ToString();
+            this.Resource = virtualMachine;
 
             List<IResourceDetail> details = new List<IResourceDetail>();
 
-            details.Add(new StatusResourceDetail(virtualMachine));
+            StatusResourceDetail statusResourceDetail = new StatusResourceDetail(virtualMachine);
+            statusResourceDetail.DetailAction += (sender, e) =>
+            {
+                if (this.DetailAction != null)
+                    this.DetailAction(this, e);
+            };
+            details.Add(statusResourceDetail);
+
             details.Add(new DataCenterResourceDetail(virtualMachine.DataCenter));
 
             foreach (Disk disk in virtualMachine.AttachedDisks)
@@ -43,7 +56,6 @@ namespace GandiDesktop.Presentation.Model
                     if (this.DetailAction != null)
                         this.DetailAction(this, e);
                 };
-
                 details.Add(diskResourceDetail);
             }
 
@@ -52,10 +64,8 @@ namespace GandiDesktop.Presentation.Model
                 InterfaceResourceDetail ifaceResourceDetail = new InterfaceResourceDetail(iface, virtualMachine);
                 ifaceResourceDetail.DetailAction += (sender, e) =>
                 {
-                    if (this.DetailAction != null)
-                        this.DetailAction(this, e);
+                    if (this.DetailAction != null) this.DetailAction(this, e);
                 };
-
                 details.Add(ifaceResourceDetail);
             }
 

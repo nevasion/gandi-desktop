@@ -102,15 +102,20 @@
     </UserControl.Resources>
 
     <Grid>
-        <ItemsControl x:Name="desktopView" ItemsSource="{Binding ResourceViewModeCollection}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        
+        <Border Grid.Row="1" BorderThickness="1" BorderBrush="LightGray" CornerRadius="5" Width="50" Height="50" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="20" />
+        
+        <ItemsControl x:Name="desktopView" Grid.Row="1" ItemsSource="{Binding ResourceViewModeCollection}">
             <ItemsControl.Template>
                 <ControlTemplate TargetType="ItemsControl">
                     <Canvas 
                         IsItemsHost="True" 
                         MouseMove="OnCanvasMouseMove">
-                        <Canvas.Background>
-                            <SolidColorBrush Color="#FFD6CBBA" Opacity="0.5" />
-                        </Canvas.Background>
                     </Canvas>
                 </ControlTemplate>
             </ItemsControl.Template>
@@ -129,7 +134,15 @@
                 </Style>
             </ItemsControl.ItemContainerStyle>
         </ItemsControl>
+        
+        <Grid Grid.Row="0" Background="Black" Height="18" Opacity="0.1">
 
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <v:OperationsView DataContext="{Binding OperationsViewModel}" />
+        </Grid>
+        
         <Grid Style="{StaticResource GridError}">
             <Border Style="{StaticResource BorderError}">
                 <Grid>

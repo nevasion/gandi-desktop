@@ -15,10 +15,12 @@ namespace GandiDesktop.Gandi.Services.Hosting
         public const string DiskCreateFrom = "disk.create_from";
         public const string DiskUpdate = "disk.update";
         public const string DiskDelete = "disk.delete";
+        public const string DiskInfo = "disk.info";
         public const string InterfaceList = "iface.list";
         public const string InterfaceCreate = "iface.create";
         public const string InterfaceUpdate = "iface.update";
         public const string InterfaceDelete = "iface.delete";
+        public const string InterfaceInfo = "iface.info";
         public const string InterfaceAttachIp = "iface.ip_attach";
         public const string InterfaceDetachIp = "iface.ip_detach";
         public const string ImageList = "image.list";
@@ -26,6 +28,7 @@ namespace GandiDesktop.Gandi.Services.Hosting
         public const string IpAddressCreate = "ip.create";
         public const string IpAddressUpdate = "ip.update";
         public const string IpAddressDelete = "ip.delete";
+        public const string IpAddressInfo = "ip.info";
         public const string VirtualMachineList = "vm.list";
         public const string VirtualMachineCreate = "vm.create";
         public const string VirtualMachineCreateFrom = "vm.create_from";
@@ -34,6 +37,7 @@ namespace GandiDesktop.Gandi.Services.Hosting
         public const string VirtualMachineStart = "vm.start";
         public const string VirtualMachineStop = "vm.stop";
         public const string VirtualMachineReboot = "vm.reboot";
+        public const string VirtualMachineInfo = "vm.info";
         public const string VirtualMachineAttachDisk = "vm.disk_attach";
         public const string VirtualMachineDetachDisk = "vm.disk_detach";
         public const string VirtualMachineAttachInterface = "vm.iface_attach";
@@ -64,6 +68,9 @@ namespace GandiDesktop.Gandi.Services.Hosting
 
         [XmlRpcMethod(XmlRpcMethodNames.DiskDelete)]
         Mapping.DiskOperation DiskDelete(string apiKey, int diskId);
+
+        [XmlRpcMethod(XmlRpcMethodNames.DiskInfo)]
+        Mapping.Disk DiskInfo(string apiKey, int diskId);
         #endregion
 
         #region Interface
@@ -78,6 +85,9 @@ namespace GandiDesktop.Gandi.Services.Hosting
 
         [XmlRpcMethod(XmlRpcMethodNames.InterfaceDelete)]
         Mapping.InterfaceOperation InterfaceDelete(string apiKey, int ifaceId);
+
+        [XmlRpcMethod(XmlRpcMethodNames.InterfaceInfo)]
+        Mapping.Interface InterfaceInfo(string apiKey, int ifaceId);
 
         [XmlRpcMethod(XmlRpcMethodNames.InterfaceAttachIp)]
         Mapping.InterfaceOperation InterfaceAttachIp(string apiKey, int ifaceId, int ipAddressId);
@@ -103,6 +113,9 @@ namespace GandiDesktop.Gandi.Services.Hosting
 
         [XmlRpcMethod(XmlRpcMethodNames.IpAddressDelete)]
         Mapping.IpAddressOperation IpAddressDelete(string apiKey, int ipAddressId);
+
+        [XmlRpcMethod(XmlRpcMethodNames.IpAddressInfo)]
+        Mapping.IpAddress IpAddressInfo(string apiKey, int ipAddressId);
         #endregion
 
         #region VirtualMachine
@@ -129,6 +142,9 @@ namespace GandiDesktop.Gandi.Services.Hosting
 
         [XmlRpcMethod(XmlRpcMethodNames.VirtualMachineReboot)]
         Mapping.VirtualMachineOperation VirtualMachineReboot(string apiKey, int virtualMachineId);
+
+        [XmlRpcMethod(XmlRpcMethodNames.VirtualMachineInfo)]
+        Mapping.VirtualMachine VirtualMachineInfo(string apiKey, int virtualMachineId);
 
         [XmlRpcMethod(XmlRpcMethodNames.VirtualMachineAttachDisk)]
         Mapping.VirtualMachineOperation VirtualMachineAttachDisk(string apiKey, int virtualMachineId, int diskId);

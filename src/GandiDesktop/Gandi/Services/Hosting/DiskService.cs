@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace GandiDesktop.Gandi.Services.Hosting
 {
@@ -40,9 +39,14 @@ namespace GandiDesktop.Gandi.Services.Hosting
             return new DiskOperation(this.service.DiskDelete(this.apiKey, disk.Id), disk);
         }
 
-        public Disk[] List()
+        public Disk Single(int diskId, DataCenter[] dataCenters)
         {
-            return this.List(null);
+            Mapping.Disk mappingDisk = this.service.DiskInfo(this.apiKey, diskId);
+
+            if (mappingDisk != null)
+                return new Disk(mappingDisk, dataCenters);
+            else
+                return null;
         }
 
         public Disk[] List(DataCenter[] dataCenters)

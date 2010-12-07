@@ -5,6 +5,9 @@
         Detach,
         Edit,
         Copy,
-        SeeIpAddresses
+        SeeIpAddresses,
+        Start,
+        Stop,
+        Reboot
     }
 }

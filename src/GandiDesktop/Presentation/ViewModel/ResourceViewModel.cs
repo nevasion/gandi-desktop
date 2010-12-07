@@ -11,6 +11,8 @@ namespace GandiDesktop.Presentation.ViewModel
     {
         public ObservableCollection<ResourceDetailViewModel> ResourceDetailViewModelCollection { get; set; }
 
+        public int Id { get; private set; }
+
         private string name;
         public string Name
         {
@@ -67,6 +69,8 @@ namespace GandiDesktop.Presentation.ViewModel
             }
         }
 
+        public object Resource { get; private set; }
+
         private double left;
         public double Left
         {
@@ -113,6 +117,12 @@ namespace GandiDesktop.Presentation.ViewModel
 
         public ResourceViewModel(IResource resource)
         {
+            this.InitializeResource(resource);
+        }
+
+        private void InitializeResource(IResource resource)
+        {
+            this.Id = resource.Id;
             this.Name = resource.Name;
             this.Status = resource.Status;
             if (!String.IsNullOrEmpty(this.Status))
@@ -122,8 +132,13 @@ namespace GandiDesktop.Presentation.ViewModel
             }
             this.IsRunning = (this.Status == "Running");
             this.Type = resource.Type;
+            this.Resource = resource;
 
-            this.ResourceDetailViewModelCollection = new ObservableCollection<ResourceDetailViewModel>();
+            if (this.ResourceDetailViewModelCollection == null)
+                this.ResourceDetailViewModelCollection = new ObservableCollection<ResourceDetailViewModel>();
+            else
+                this.ResourceDetailViewModelCollection.Clear();
+
             foreach (IResourceDetail detail in resource.Details)
             {
                 ResourceDetailViewModel resourceDetailViewModel = new ResourceDetailViewModel(detail);
@@ -151,31 +166,19 @@ namespace GandiDesktop.Presentation.ViewModel
                             foreach (IpAddress ipAddress in iface.IpAddresses)
                                 this.ResourceDetailViewModelCollection.Insert(++i, new ResourceDetailViewModel(new IpAddressResourceDetail(ipAddress)));
                         }
-                        else if (e.Type == ResourceDetailActionType.Detach)
-                        {
-                            this.ResourceDetailViewModelCollection.Remove(resourceDetailViewModel);
-                        }
-                        else if (e.Type == ResourceDetailActionType.Edit)
-                        {
-                        }
                     }
-                    else
-                    {
-                        if (this.DetailAction != null)
-                            this.DetailAction(this, e);
-                    }
+
+                    if (this.DetailAction != null)
+                        this.DetailAction(this, e);
                 };
 
                 this.ResourceDetailViewModelCollection.Add(resourceDetailViewModel);
             }
         }
 
-        public ResourceViewModel(string name, ResourceType type, double left, double top)
+        public void Update(IResource resource)
         {
-            this.Name = name;
-            this.Type = type;
-            this.Left = left;
-            this.Top = top;
+            this.InitializeResource(resource);
         }
     }
 }

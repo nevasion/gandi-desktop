@@ -10,6 +10,8 @@ namespace GandiDesktop.Presentation.Model
         private const string DetailSizeValueTemplate = "{0} Mo";
         private const string DetailTypeName = "Type";
 
+        public int Id { get; private set; }
+
         public string Name { get; private set; }
 
         public string Status { get; private set; }
@@ -21,9 +23,13 @@ namespace GandiDesktop.Presentation.Model
 
         public IResourceDetail[] Details { get; private set; }
 
+        public object Resource { get; private set; }
+
         public DiskResource(Disk disk)
         {
+            this.Id = disk.Id;
             this.Name = disk.Name;
+            this.Resource = disk;
 
             List<IResourceDetail> details = new List<IResourceDetail>();
 

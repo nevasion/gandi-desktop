@@ -1,4 +1,5 @@
-﻿using GandiDesktop.Gandi.Services.Hosting;
+﻿using System;
+using GandiDesktop.Gandi.Services.Hosting;
 
 namespace GandiDesktop.Presentation.Model
 {
@@ -60,7 +61,23 @@ namespace GandiDesktop.Presentation.Model
 
         public void Start(object parameter)
         {
-            VirtualMachineOperation operation = Service.Hosting.VirtualMachine.Start(this.virtualMachine);
+            ResourceDetailActionEventArgs actionEventArgs = new ResourceDetailActionEventArgs(ResourceDetailActionType.Start);
+            Operation operation = null;
+
+            try { operation = Service.Hosting.VirtualMachine.Start(this.virtualMachine); }
+            catch (Exception x)
+            {
+                actionEventArgs.Resource = this;
+                actionEventArgs.Error = true;
+                actionEventArgs.ErrorMessage = x.Message;
+            }
+
+            if (this.DetailAction != null)
+            {
+                actionEventArgs.Operation = operation;
+
+                this.DetailAction(this, actionEventArgs);
+            }
         }
 
         public bool CanStop(object parameter)
@@ -70,7 +87,23 @@ namespace GandiDesktop.Presentation.Model
 
         public void Stop(object parameter)
         {
-            VirtualMachineOperation operation = Service.Hosting.VirtualMachine.Stop(this.virtualMachine);
+            ResourceDetailActionEventArgs actionEventArgs = new ResourceDetailActionEventArgs(ResourceDetailActionType.Stop);
+            Operation operation = null;
+
+            try { operation = Service.Hosting.VirtualMachine.Stop(this.virtualMachine); }
+            catch (Exception x)
+            {
+                actionEventArgs.Resource = this;
+                actionEventArgs.Error = true;
+                actionEventArgs.ErrorMessage = x.Message;
+            }
+
+            if (this.DetailAction != null)
+            {
+                actionEventArgs.Operation = operation;
+
+                this.DetailAction(this, actionEventArgs);
+            }
         }
 
         public bool CanReboot(object parameter)
@@ -80,7 +113,23 @@ namespace GandiDesktop.Presentation.Model
 
         public void Reboot(object parameter)
         {
-            Service.Hosting.VirtualMachine.Reboot(this.virtualMachine);
+            ResourceDetailActionEventArgs actionEventArgs = new ResourceDetailActionEventArgs(ResourceDetailActionType.Reboot);
+            Operation operation = null;
+
+            try { operation = Service.Hosting.VirtualMachine.Reboot(this.virtualMachine); }
+            catch (Exception x)
+            {
+                actionEventArgs.Resource = this;
+                actionEventArgs.Error = true;
+                actionEventArgs.ErrorMessage = x.Message;
+            }
+
+            if (this.DetailAction != null)
+            {
+                actionEventArgs.Operation = operation;
+
+                this.DetailAction(this, actionEventArgs);
+            }
         }
     }
 }

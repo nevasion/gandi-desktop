@@ -1,6 +1,5 @@
-
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GandiDesktop.Presentation", "GandiDesktop\Presentation\GandiDesktop.Presentation.csproj", "{159EA6B2-9811-4ED0-8BE0-3D6509937455}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CookComputing.XmlRpc-2.5.0", "CookComputing\XmlRpc-2.5.0\CookComputing.XmlRpc-2.5.0.csproj", "{1B4B0A58-0AFB-4090-91DD-18912CC7DE65}"

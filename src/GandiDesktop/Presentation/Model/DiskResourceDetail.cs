@@ -48,8 +48,9 @@ namespace GandiDesktop.Presentation.Model
         public void Detach(object parameter)
         {
             ResourceDetailActionEventArgs actionEventArgs = new ResourceDetailActionEventArgs(ResourceDetailActionType.Detach);
+            Operation operation = null;
 
-            try { Service.Hosting.VirtualMachine.DetachDisk(this.virtualMachine, this.disk); }
+            try { operation = Service.Hosting.VirtualMachine.DetachDisk(this.virtualMachine, this.disk); }
             catch (Exception x)
             {
                 actionEventArgs.Resource = this;
@@ -58,7 +59,11 @@ namespace GandiDesktop.Presentation.Model
             }
 
             if (this.DetailAction != null)
+            {
+                actionEventArgs.Operation = operation;
+
                 this.DetailAction(this, actionEventArgs);
+            }
         }
 
         public void Edit(object parameter)

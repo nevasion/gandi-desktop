@@ -36,9 +36,14 @@ namespace GandiDesktop.Gandi.Services.Hosting
             return new IpAddressOperation(this.service.IpAddressDelete(this.apiKey, ipAddress.Id), ipAddress);
         }
 
-        public IpAddress[] List()
+        public IpAddress Single(int ipAddressId, DataCenter[] dataCenters)
         {
-            return this.List(null);
+            Mapping.IpAddress mappingIpAddress = this.service.IpAddressInfo(this.apiKey, ipAddressId);
+
+            if (mappingIpAddress != null)
+                return new IpAddress(mappingIpAddress, dataCenters);
+            else
+                return null;
         }
 
         public IpAddress[] List(DataCenter[] dataCenters)

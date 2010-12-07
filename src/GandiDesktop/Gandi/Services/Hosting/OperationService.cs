@@ -51,6 +51,11 @@
             return ipAddressOperation;
         }
 
+        public Operation Update(Operation operation)
+        {
+            return this.Info(operation.Id);
+        }
+
         private Operation Info(int operationId)
         {
             return new Operation(this.service.OperationInfo(this.apiKey, operationId));

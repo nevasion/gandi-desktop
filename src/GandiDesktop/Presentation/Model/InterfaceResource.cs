@@ -10,6 +10,8 @@ namespace GandiDesktop.Presentation.Model
         private const string NameTemplate = "{0} Kbps";
         private const string IpAddressName = "IP";
 
+        public int Id { get; private set; }
+
         public string Name { get; private set; }
 
         public string Status { get; private set; }
@@ -21,9 +23,13 @@ namespace GandiDesktop.Presentation.Model
 
         public IResourceDetail[] Details { get; private set; }
 
+        public object Resource { get; private set; }
+
         public InterfaceResource(Interface iface)
         {
+            this.Id = iface.Id;
             this.Name = String.Format(InterfaceResource.NameTemplate, iface.Bandwidth);
+            this.Resource = iface;
 
             List<IResourceDetail> details = new List<IResourceDetail>();
 

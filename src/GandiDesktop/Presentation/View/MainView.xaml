@@ -7,6 +7,11 @@
     Title="Gandi Desktop">
     
     <Grid>
+        <Grid.Background>
+            <SolidColorBrush Color="#FFD6CBBA" Opacity="0.5" />
+        </Grid.Background>
+        
+        <Image Source="/GandiDesktop;component/Resources/Logo.png" Height="78" Width="51.5" Opacity="0.05" />
         <v:DesktopView DataContext="{Binding DesktopViewModel}" />
     </Grid>
     

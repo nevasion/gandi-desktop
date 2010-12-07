@@ -99,14 +99,14 @@ namespace GandiDesktop.Presentation.View
             double bottom = top + view.ActualHeight;
 
             bool leftOutBound = left < 0;
-            bool rightOutBound = right > this.ActualWidth;
+            bool rightOutBound = right > desktopView.ActualWidth;
             bool topOutBound = top < 0;
-            bool bottomOutBound = bottom > this.ActualHeight;
+            bool bottomOutBound = bottom > desktopView.ActualHeight;
 
             if (leftOutBound || rightOutBound)
             {
                 double from = left;
-                double to = (leftOutBound ? offset : (this.ActualWidth - view.ActualWidth - offset));
+                double to = (leftOutBound ? offset : (desktopView.ActualWidth - view.ActualWidth - offset));
 
                 DoubleAnimationUsingKeyFrames animation = new DoubleAnimationUsingKeyFrames()
                 {
@@ -132,7 +132,7 @@ namespace GandiDesktop.Presentation.View
             if (topOutBound || bottomOutBound)
             {
                 double from = top;
-                double to = (topOutBound ? offset : (this.ActualHeight - view.ActualHeight - offset));
+                double to = (topOutBound ? offset : (desktopView.ActualHeight - view.ActualHeight - offset));
 
                 DoubleAnimationUsingKeyFrames animation = new DoubleAnimationUsingKeyFrames()
                 {

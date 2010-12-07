@@ -55,6 +55,16 @@ namespace GandiDesktop.Gandi.Services.Hosting
             return new VirtualMachineOperation(this.service.VirtualMachineReboot(this.apiKey, virtualMachine.Id), virtualMachine);
         }
 
+        public VirtualMachine Single(int virtualMachineId, DataCenter[] dataCenters, Interface[] interfaces, Disk[] disks)
+        {
+            Mapping.VirtualMachine mappingVirtualMachine = this.service.VirtualMachineInfo(this.apiKey, virtualMachineId);
+
+            if (mappingVirtualMachine != null)
+                return new VirtualMachine(mappingVirtualMachine, dataCenters, interfaces, disks);
+            else
+                return null;
+        }
+
         public VirtualMachineOperation AttachDisk(VirtualMachine virtualMachine, Disk disk)
         {
             return new VirtualMachineOperation(this.service.VirtualMachineAttachDisk(this.apiKey, virtualMachine.Id, disk.Id), virtualMachine, disk);
@@ -73,41 +83,6 @@ namespace GandiDesktop.Gandi.Services.Hosting
         public VirtualMachineOperation DetachInterface(VirtualMachine virtualMachine, Interface iface)
         {
             return new VirtualMachineOperation(this.service.VirtualMachineDetachInterface(this.apiKey, virtualMachine.Id, iface.Id), virtualMachine, iface);
-        }
-
-        public VirtualMachine[] List()
-        {
-            return this.List(null, null, null);
-        }
-
-        public VirtualMachine[] List(Disk[] disks)
-        {
-            return this.List(null, null, disks);
-        }
-
-        public VirtualMachine[] List(Interface[] interfaces)
-        {
-            return this.List(null, interfaces, null);
-        }
-
-        public VirtualMachine[] List(Interface[] interfaces, Disk[] disks)
-        {
-            return this.List(null, interfaces, disks);
-        }
-
-        public VirtualMachine[] List(DataCenter[] dataCenters)
-        {
-            return this.List(dataCenters, null, null);
-        }
-
-        public VirtualMachine[] List(DataCenter[] dataCenters, Disk[] disks)
-        {
-            return this.List(dataCenters, null, disks);
-        }
-
-        public VirtualMachine[] List(DataCenter[] dataCenters, Interface[] interfaces)
-        {
-            return this.List(dataCenters, interfaces, null);
         }
 
         public VirtualMachine[] List(DataCenter[] dataCenters, Interface[] interfaces, Disk[] disks)

@@ -12,7 +12,6 @@ namespace GandiDesktop.Gandi.Services.Hosting.Mapping
             public const string Source = "source";
             public const string Created = "date_created";
             public const string LastUpdated = "date_updated";
-            public const string Scheduled = "date_start";
             public const string Step = "step";
         }
 
@@ -30,9 +29,6 @@ namespace GandiDesktop.Gandi.Services.Hosting.Mapping
 
         [XmlRpcMember(XmlRpcMappingNames.LastUpdated)]
         public DateTime LastUpdated { get; set; }
-
-        [XmlRpcMember(XmlRpcMappingNames.Scheduled)]
-        public DateTime? Scheduled { get; set; }
 
         [XmlRpcMember(XmlRpcMappingNames.Step)]
         public string Step { get; set; }
