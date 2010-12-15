@@ -1,0 +1,239 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--***********-->
+    <!--* Brushes *-->
+    <!--***********-->
+
+    <SolidColorBrush x:Key="PanelBackground" Color="#FFE4E5DC" />
+    <SolidColorBrush x:Key="VirtualMachineBrush" Color="LightBlue" Opacity="0.75" />
+    <SolidColorBrush x:Key="DiskBrush" Color="Green" Opacity="0.25" />
+    <SolidColorBrush x:Key="InterfaceBrush" Color="Orange" Opacity="0.25" />
+
+    <SolidColorBrush x:Key="LabelMouseOverBrush" Color="#FFF3F3F3" Opacity="0.75" />
+
+    <SolidColorBrush x:Key="SeparatorColor" Color="Gray" />
+
+    <!--***************-->
+    <!--* Storyboards *-->
+    <!--***************-->
+
+    <Storyboard x:Key="LoadFadeIn">
+        <DoubleAnimation To="1" Duration="00:00:00.5" Storyboard.TargetProperty="(UIElement.Opacity)" />
+    </Storyboard>
+
+    <Storyboard x:Key="Expand">
+        <!--InnerPanel Initialization-->
+        <ObjectAnimationUsingKeyFrames BeginTime="0" Duration="0" Storyboard.TargetName="gridInnerPanel" Storyboard.TargetProperty="(UIElement.Visibility)">
+            <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}"/>
+        </ObjectAnimationUsingKeyFrames>
+        <DoubleAnimation From="0" To="0" BeginTime="0" Duration="0" Storyboard.TargetName="gridInnerPanel" Storyboard.TargetProperty="(FrameworkElement.Width)" />
+        <DoubleAnimation From="0" To="0" BeginTime="0" Duration="0" Storyboard.TargetName="gridInnerPanel" Storyboard.TargetProperty="(FrameworkElement.Height)" />
+        <DoubleAnimation From="0" To="1" BeginTime="0" Duration="0" Storyboard.TargetName="gridInnerPanel" Storyboard.TargetProperty="(UIElement.Opacity)" />
+
+        <!--Label Hiding / Status Fading Out-->
+        <ThicknessAnimation From="0" To="0,-20,0,0" BeginTime="0" Duration="00:00:00.1" Storyboard.TargetName="textBlockLabel" Storyboard.TargetProperty="(FrameworkElement.Margin)" />
+        <DoubleAnimation From="0.5" To="0" BeginTime="0" Duration="00:00:00.1" Storyboard.TargetName="ellipseIconStatus" Storyboard.TargetProperty="(UIElement.Opacity)" />
+
+        <!--Icon Moving-->
+        <ThicknessAnimation From="1" To="4" BeginTime="00:00:00.05" Duration="00:00:00.1" Storyboard.TargetName="borderIcon" Storyboard.TargetProperty="(FrameworkElement.Margin)" />
+
+        <!--Icon Shrinking-->
+        <DoubleAnimation From="50" To="30" BeginTime="00:00:00.1" Duration="00:00:00.1" Storyboard.TargetName="borderIcon" Storyboard.TargetProperty="(FrameworkElement.Width)" />
+        <DoubleAnimation From="50" To="30" BeginTime="00:00:00.1" Duration="00:00:00.1" Storyboard.TargetName="borderIcon" Storyboard.TargetProperty="(FrameworkElement.Height)" />
+
+        <!--Icon Corners-->
+        <ObjectAnimationUsingKeyFrames BeginTime="00:00:00.15" Duration="0" Storyboard.TargetName="borderIcon" Storyboard.TargetProperty="(Border.CornerRadius)">
+            <DiscreteObjectKeyFrame>
+                <DiscreteObjectKeyFrame.Value>
+                    <CornerRadius>2</CornerRadius>
+                </DiscreteObjectKeyFrame.Value>
+            </DiscreteObjectKeyFrame>
+        </ObjectAnimationUsingKeyFrames>
+
+        <!--InnerPanel Growing-->
+        <DoubleAnimation x:Name="gridInnerPanelHeight" From="0" BeginTime="00:00:00.2" Duration="00:00:00.1" Storyboard.TargetName="gridInnerPanel" Storyboard.TargetProperty="(FrameworkElement.Height)" />
+        <DoubleAnimation x:Name="gridInnerPanelWidth" From="0" BeginTime="00:00:00.25" Duration="00:00:00.05" Storyboard.TargetName="gridInnerPanel" Storyboard.TargetProperty="(FrameworkElement.Width)" />
+    </Storyboard>
+
+    <Storyboard x:Key="Collapse">
+        <!--InnerPanel Shrinking-->
+        <DoubleAnimation x:Name="gridInnerPanelHeight" To="0" BeginTime="0" Duration="00:00:00.1" Storyboard.TargetName="gridInnerPanel" Storyboard.TargetProperty="(FrameworkElement.Height)" />
+        <DoubleAnimation x:Name="gridInnerPanelWidth" To="0" BeginTime="0" Duration="00:00:00.1" Storyboard.TargetName="gridInnerPanel" Storyboard.TargetProperty="(FrameworkElement.Width)" />
+
+        <!--Icon Moving & Growing-->
+        <ThicknessAnimation From="4" To="1" BeginTime="00:00:00.1" Duration="00:00:00.1" Storyboard.TargetName="borderIcon" Storyboard.TargetProperty="(FrameworkElement.Margin)" />
+        <DoubleAnimation From="30" To="50" BeginTime="00:00:00.1" Duration="00:00:00.1" Storyboard.TargetName="borderIcon" Storyboard.TargetProperty="(FrameworkElement.Width)" />
+        <DoubleAnimation From="30" To="50" BeginTime="00:00:00.1" Duration="00:00:00.1" Storyboard.TargetName="borderIcon" Storyboard.TargetProperty="(FrameworkElement.Height)" />
+
+        <!--Icon Corners-->
+        <ObjectAnimationUsingKeyFrames BeginTime="00:00:00.15" Duration="0" Storyboard.TargetName="borderIcon" Storyboard.TargetProperty="(Border.CornerRadius)">
+            <DiscreteObjectKeyFrame>
+                <DiscreteObjectKeyFrame.Value>
+                    <CornerRadius>5</CornerRadius>
+                </DiscreteObjectKeyFrame.Value>
+            </DiscreteObjectKeyFrame>
+        </ObjectAnimationUsingKeyFrames>
+
+        <!--Label Showing / Status Fading In-->
+        <ThicknessAnimation From="0,-20,0,0" To="0" BeginTime="00:00:00.3" Duration="00:00:00.1" Storyboard.TargetName="textBlockLabel" Storyboard.TargetProperty="(FrameworkElement.Margin)" />
+        <DoubleAnimation From="0" To="0.5" BeginTime="00:00:00.3" Duration="00:00:00.1" Storyboard.TargetName="ellipseIconStatus" Storyboard.TargetProperty="(UIElement.Opacity)" />
+    </Storyboard>
+
+    <Storyboard x:Key="FadeOut" AccelerationRatio="0.875" DecelerationRatio="0.125">
+        <DoubleAnimation From="1" To="0.75" BeginTime="0" Duration="00:00:00.25" Storyboard.TargetName="gridRoot" Storyboard.TargetProperty="(UIElement.Opacity)" />
+    </Storyboard>
+
+    <Storyboard x:Key="FadeIn" AccelerationRatio="0.875" DecelerationRatio="0.125">
+        <DoubleAnimation From="0.75" To="1" BeginTime="0" Duration="00:00:00.25" Storyboard.TargetName="gridRoot" Storyboard.TargetProperty="(UIElement.Opacity)" />
+    </Storyboard>
+
+    <!--**********-->
+    <!--* Styles *-->
+    <!--**********-->
+
+    <Style x:Key="Root" TargetType="Grid">
+        <Setter Property="Opacity" Value="0" />
+
+        <Style.Triggers>
+            <EventTrigger RoutedEvent="Grid.Loaded">
+                <BeginStoryboard Storyboard="{StaticResource LoadFadeIn}" />
+            </EventTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="Label" TargetType="TextBlock">
+        <Setter Property="Text" Value="{Binding Name}" />
+        <Setter Property="ToolTip" Value="{Binding Name}" />
+        <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+        <Setter Property="MaxWidth" Value="46" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="FontSize" Value="10" />
+
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Type}" Value="Interface">
+                <Setter Property="FontSize" Value="9" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="Panel" TargetType="Border">
+        <Setter Property="CornerRadius" Value="5" />
+        <Setter Property="Background" Value="{StaticResource PanelBackground}" />
+        <Setter Property="MaxWidth" Value="200" />
+        <Setter Property="BitmapEffect">
+            <Setter.Value>
+                <DropShadowBitmapEffect Opacity="0.25" ShadowDepth="2" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="InnerPanel" TargetType="Grid">
+        <Setter Property="Opacity" Value="0" />
+        <Setter Property="Margin" Value="38,4,4,4" />
+        <Setter Property="Visibility" Value="Collapsed" />
+    </Style>
+
+    <Style x:Key="InnerPanelLabel" TargetType="TextBlock">
+        <Setter Property="Text" Value="{Binding Name}" />
+        <Setter Property="ToolTip" Value="{Binding Name}" />
+        <Setter Property="FontFamily" Value="Calibri" />
+        <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+    </Style>
+
+    <Style x:Key="InnerPanelSeparator" TargetType="Grid">
+        <Setter Property="Background" Value="{StaticResource SeparatorColor}" />
+        <Setter Property="Height" Value="1" />
+    </Style>
+
+    <Style x:Key="InnerPanelDetails" TargetType="ItemsControl">
+        <Setter Property="Margin" Value="0,2,0,0" />
+        <Setter Property="ItemsSource" Value="{Binding ResourceDetailViewModelCollection}" />
+    </Style>
+
+    <Style x:Key="Icon" TargetType="Border">
+        <Setter Property="Height" Value="50" />
+        <Setter Property="Width" Value="50" />
+        <Setter Property="Margin" Value="1" />
+        <Setter Property="CornerRadius" Value="5" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="TextBlock.Foreground" Value="{StaticResource LabelMouseOverBrush}" />
+            </Trigger>
+            <DataTrigger Binding="{Binding Type}" Value="VirtualMachine">
+                <Setter Property="Background" Value="{StaticResource VirtualMachineBrush}" />
+                <Setter Property="ToolTip">
+                    <Setter.Value>
+                        <TextBlock><Run Text="VirtualMachine: " /><Run Text="{Binding Name}" /></TextBlock>
+                    </Setter.Value>
+                </Setter>                
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Type}" Value="Disk">
+                <Setter Property="Background" Value="{StaticResource DiskBrush}" />
+                <Setter Property="ToolTip">
+                    <Setter.Value>
+                        <TextBlock><Run Text="Disk: " /><Run Text="{Binding Name}" /></TextBlock>
+                    </Setter.Value>
+                </Setter>                
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Type}" Value="Interface">
+                <Setter Property="Background" Value="{StaticResource InterfaceBrush}" />
+                <Setter Property="ToolTip">
+                    <Setter.Value>
+                        <TextBlock><Run Text="Interface: " /><Run Text="{Binding Name}" /></TextBlock>
+                    </Setter.Value>
+                </Setter>                
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="IconLabel" TargetType="TextBlock">
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Opacity" Value="0.5" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Margin" Value="0,0,0,2" />
+
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Type}" Value="VirtualMachine">
+                <Setter Property="Text" Value="VM" />
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="Margin" Value="0,0,0,1" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Type}" Value="Disk">
+                <Setter Property="Text" Value="D" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Type}" Value="Interface">
+                <Setter Property="Text" Value="I" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="IconStatus" TargetType="Ellipse">
+        <Setter Property="ToolTip" Value="{Binding Status}" />
+        <Setter Property="Visibility" Value="Collapsed" />
+        <Setter Property="Opacity" Value="0.5" />
+        <Setter Property="Fill" Value="Red" />
+        <Setter Property="Stroke" Value="LightGray" />
+        <Setter Property="StrokeThickness" Value="0.5" />
+        <Setter Property="Width" Value="5" />
+        <Setter Property="Height" Value="5" />
+        <Setter Property="Margin" Value="4" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="HorizontalAlignment" Value="Right" />
+
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Type}" Value="VirtualMachine">
+                <Setter Property="Visibility" Value="Visible" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding IsRunning}" Value="True">
+                <Setter Property="Fill" Value="Green" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+</ResourceDictionary>

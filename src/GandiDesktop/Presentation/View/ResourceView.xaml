@@ -1,263 +1,52 @@
 ﻿<UserControl x:Class="GandiDesktop.Presentation.View.ResourceView"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:v="clr-namespace:GandiDesktop.Presentation.View"
-    SnapsToDevicePixels="True" Height="Auto" Width="Auto">
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:v="clr-namespace:GandiDesktop.Presentation.View"
+             SnapsToDevicePixels="True">
 
     <UserControl.Resources>
-        <Style x:Key="ResourceTypeBorder" TargetType="Border">
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding Type}" Value="VirtualMachine">
-                    <Setter Property="ToolTip" Value="Virtual Machine" />
-                    <Setter Property="Background">
-                        <Setter.Value>
-                            <SolidColorBrush Color="LightBlue" Opacity="0.75" />
-                        </Setter.Value>
-                    </Setter>
-                </DataTrigger>
-                <DataTrigger Binding="{Binding Type}" Value="Disk">
-                    <Setter Property="ToolTip" Value="Disk" />
-                    <Setter Property="Background">
-                        <Setter.Value>
-                            <SolidColorBrush Color="Green" Opacity="0.25" />
-                        </Setter.Value>
-                    </Setter>
-                </DataTrigger>
-                <DataTrigger Binding="{Binding Type}" Value="Interface">
-                    <Setter Property="ToolTip" Value="Interface" />
-                    <Setter Property="Background">
-                        <Setter.Value>
-                            <SolidColorBrush Color="Orange" Opacity="0.25" />
-                        </Setter.Value>
-                    </Setter>
-                </DataTrigger>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="TextBlock.Foreground">
-                        <Setter.Value>
-                            <SolidColorBrush Color="#FFF3F3F3" Opacity="0.75" />
-                        </Setter.Value>
-                    </Setter>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-
-        <Style x:Key="ResourceTypeTextBlock" TargetType="TextBlock">
-            <Setter Property="FontWeight" Value="Bold" />
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding Type}" Value="VirtualMachine">
-                    <Setter Property="Text" Value="VM" />
-                    <Setter Property="FontSize" Value="12" />
-                </DataTrigger>
-                <DataTrigger Binding="{Binding Type}" Value="Disk">
-                    <Setter Property="Text" Value="D" />
-                    <Setter Property="FontSize" Value="14" />
-                </DataTrigger>
-                <DataTrigger Binding="{Binding Type}" Value="Interface">
-                    <Setter Property="Text" Value="I" />
-                    <Setter Property="FontSize" Value="14" />
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
-
-        <Style x:Key="StateSphere" TargetType="Ellipse">
-            <Setter Property="ToolTip" Value="{Binding Status}" />
-            <Setter Property="Visibility" Value="Collapsed" />
-            <Setter Property="Opacity" Value="0.5" />
-            <Setter Property="Fill" Value="Red" />
-            <Setter Property="Stroke" Value="LightGray" />
-            <Setter Property="StrokeThickness" Value="0.5" />
-            <Setter Property="Width" Value="5" />
-            <Setter Property="Height" Value="5" />
-            <Setter Property="Margin" Value="4" />
-            <Setter Property="VerticalAlignment" Value="Top" />
-            <Setter Property="HorizontalAlignment" Value="Right" />
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding Type}" Value="VirtualMachine">
-                    <Setter Property="Visibility" Value="Visible" />
-                </DataTrigger>
-                <DataTrigger Binding="{Binding IsRunning}" Value="True">
-                    <Setter Property="Fill" Value="Green" />
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
-        
-        <Style x:Key="ResourceNameUnder" TargetType="TextBlock">
-            <Setter Property="TextTrimming" Value="CharacterEllipsis" />
-            <Setter Property="MaxWidth" Value="46" />
-            <Setter Property="HorizontalAlignment" Value="Center" />
-            <Setter Property="FontSize" Value="10" />
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding Type}" Value="Interface">
-                    <Setter Property="FontSize" Value="9" />
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
-
-        <Storyboard x:Key="Collapse" AccelerationRatio="0.875" DecelerationRatio="0.125">
-            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="borderResource" Storyboard.TargetProperty="(FrameworkElement.Width)">
-                <SplineDoubleKeyFrame KeyTime="00:00:00.1" Value="50" />
-            </DoubleAnimationUsingKeyFrames>
-
-            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="gridResourceOverview" Storyboard.TargetProperty="(UIElement.Opacity)">
-                <SplineDoubleKeyFrame KeyTime="00:00:00.05" Value="0" />
-            </DoubleAnimationUsingKeyFrames>
-
-            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="borderResourceType" Storyboard.TargetProperty="(FrameworkElement.Width)">
-                <SplineDoubleKeyFrame KeyTime="00:00:00.1" Value="50" />
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="borderResourceType" Storyboard.TargetProperty="(FrameworkElement.Height)">
-                <SplineDoubleKeyFrame KeyTime="00:00:00.1" Value="50" />
-            </DoubleAnimationUsingKeyFrames>
-            <ThicknessAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="borderResourceType" Storyboard.TargetProperty="(FrameworkElement.Margin)">
-                <SplineThicknessKeyFrame KeyTime="00:00:00.1" Value="0" />
-            </ThicknessAnimationUsingKeyFrames>
-            <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="borderResourceType" Storyboard.TargetProperty="(Border.CornerRadius)">
-                <DiscreteObjectKeyFrame KeyTime="00:00:00.1">
-                    <DiscreteObjectKeyFrame.Value>
-                        <CornerRadius>5</CornerRadius>
-                    </DiscreteObjectKeyFrame.Value>
-                </DiscreteObjectKeyFrame>
-            </ObjectAnimationUsingKeyFrames>
-
-            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00.3" Storyboard.TargetName="stateSphere" Storyboard.TargetProperty="(UIElement.Opacity)">
-                <SplineDoubleKeyFrame KeyTime="00:00:00.05" Value="0.5" />
-            </DoubleAnimationUsingKeyFrames>
-
-            <ObjectAnimationUsingKeyFrames BeginTime="00:00:00.0" Storyboard.TargetName="gridResourceDetails" Storyboard.TargetProperty="(UIElement.Visibility)">
-                <DiscreteObjectKeyFrame KeyTime="00:00:00.05" Value="{x:Static Visibility.Collapsed}"/>
-            </ObjectAnimationUsingKeyFrames>
-
-            <ThicknessAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="labelResourceName" Storyboard.TargetProperty="(FrameworkElement.Margin)">
-                <SplineThicknessKeyFrame KeyTime="00:00:00" Value="0,-20,0,0" />
-                <SplineThicknessKeyFrame KeyTime="00:00:00.3" Value="0" />
-            </ThicknessAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00.2" Storyboard.TargetName="labelResourceName" Storyboard.TargetProperty="(UIElement.Opacity)">
-                <SplineDoubleKeyFrame KeyTime="00:00:00.3" Value="1" />
-            </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
-
-        <Storyboard x:Key="Expand" AccelerationRatio="0.875" DecelerationRatio="0.125">
-            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00.1" Storyboard.TargetName="borderResource" Storyboard.TargetProperty="(FrameworkElement.Width)">
-                <SplineDoubleKeyFrame KeyTime="00:00:00.15" Value="150" />
-            </DoubleAnimationUsingKeyFrames>
-
-            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00.1" Storyboard.TargetName="gridResourceOverview" Storyboard.TargetProperty="(UIElement.Opacity)">
-                <SplineDoubleKeyFrame KeyTime="00:00:00.05" Value="1" />
-            </DoubleAnimationUsingKeyFrames>
-
-            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00.1" Storyboard.TargetName="borderResourceType" Storyboard.TargetProperty="(FrameworkElement.Width)">
-                <SplineDoubleKeyFrame KeyTime="00:00:00.1" Value="30" />
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00.1" Storyboard.TargetName="borderResourceType" Storyboard.TargetProperty="(FrameworkElement.Height)">
-                <SplineDoubleKeyFrame KeyTime="00:00:00.1" Value="30" />
-            </DoubleAnimationUsingKeyFrames>
-            <ThicknessAnimationUsingKeyFrames BeginTime="00:00:00.1" Storyboard.TargetName="borderResourceType" Storyboard.TargetProperty="(FrameworkElement.Margin)">
-                <SplineThicknessKeyFrame KeyTime="00:00:00.1" Value="4,4,0,4" />
-            </ThicknessAnimationUsingKeyFrames>
-            <ObjectAnimationUsingKeyFrames BeginTime="00:00:00.1" Storyboard.TargetName="borderResourceType" Storyboard.TargetProperty="(Border.CornerRadius)">
-                <DiscreteObjectKeyFrame KeyTime="00:00:00.1">
-                    <DiscreteObjectKeyFrame.Value>
-                        <CornerRadius>2</CornerRadius>
-                    </DiscreteObjectKeyFrame.Value>
-                </DiscreteObjectKeyFrame>
-            </ObjectAnimationUsingKeyFrames>
-
-            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="stateSphere" Storyboard.TargetProperty="(UIElement.Opacity)">
-                <SplineDoubleKeyFrame KeyTime="00:00:00.05" Value="0" />
-            </DoubleAnimationUsingKeyFrames>
-
-            <ObjectAnimationUsingKeyFrames BeginTime="00:00:00.0" Storyboard.TargetName="gridResourceDetails" Storyboard.TargetProperty="(UIElement.Visibility)">
-                <DiscreteObjectKeyFrame KeyTime="00:00:00.10" Value="{x:Static Visibility.Visible}"/>
-            </ObjectAnimationUsingKeyFrames>
-
-            <ThicknessAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="labelResourceName" Storyboard.TargetProperty="(FrameworkElement.Margin)">
-                <SplineThicknessKeyFrame KeyTime="00:00:00.2" Value="0,-20,0,0" />
-            </ThicknessAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="labelResourceName" Storyboard.TargetProperty="(UIElement.Opacity)">
-                <SplineDoubleKeyFrame KeyTime="00:00:00.25" Value="0" />
-            </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
-
-        <Storyboard x:Key="FadeOut" AccelerationRatio="0.875" DecelerationRatio="0.125">
-            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="gridRoot" Storyboard.TargetProperty="(UIElement.Opacity)">
-                <SplineDoubleKeyFrame KeyTime="00:00:00.25" Value="0.75" />
-            </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
-
-        <Storyboard x:Key="FadeIn" AccelerationRatio="0.875" DecelerationRatio="0.125">
-            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="gridRoot" Storyboard.TargetProperty="(UIElement.Opacity)">
-                <SplineDoubleKeyFrame KeyTime="00:00:00.25" Value="1" />
-            </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
-
-        <Storyboard x:Key="FirstFadeIn" AccelerationRatio="0.875" DecelerationRatio="0.125">
-            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="gridRoot" Storyboard.TargetProperty="(UIElement.Opacity)">
-                <SplineDoubleKeyFrame KeyTime="00:00:00.5" Value="1" />
-            </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
+        <ResourceDictionary Source="/GandiDesktop;component/Resources/Resource.xaml" />
     </UserControl.Resources>
     
-    <UserControl.Triggers>
-        <EventTrigger RoutedEvent="UserControl.Loaded">
-            <BeginStoryboard Storyboard="{StaticResource FirstFadeIn}" />
-        </EventTrigger>
-    </UserControl.Triggers>
-    
-    <Grid x:Name="gridRoot" Opacity="0">
+    <Grid x:Name="gridRoot" Style="{StaticResource Root}">
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <TextBlock x:Name="labelResourceName" Grid.Row="1" Text="{Binding Name}" ToolTip="{Binding Name}" Style="{StaticResource ResourceNameUnder}" />
+        <TextBlock x:Name="textBlockLabel" Grid.Row="1" Style="{StaticResource Label}" />
 
-        <Grid Grid.Row="0">
-            <Border x:Name="borderResource" CornerRadius="5" Background="#FFE4E5DC" Width="50">
-                <Border.BitmapEffect>
-                    <DropShadowBitmapEffect Opacity="0.25" ShadowDepth="2" />
-                </Border.BitmapEffect>
+        <Border Grid.Row="0" Style="{StaticResource Panel}">
+            <Grid x:Name="gridInnerPanel" Style="{StaticResource InnerPanel}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="1*" />
-                    </Grid.ColumnDefinitions>
+                <TextBlock Grid.Row="0" Style="{StaticResource InnerPanelLabel}" />
+                <Grid Grid.Row="1" Style="{StaticResource InnerPanelSeparator}" />
+                <ItemsControl Grid.Row="2" Style="{StaticResource InnerPanelDetails}">
+                    <ItemsControl.Template>
+                        <ControlTemplate TargetType="ItemsControl">
+                            <StackPanel IsItemsHost="True" Orientation="Vertical" />
+                        </ControlTemplate>
+                    </ItemsControl.Template>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <v:ResourceDetailView Margin="0,2,0,0" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Grid>
+        </Border>
 
-                    <Border x:Name="borderResourceType" Grid.Column="0" Style="{StaticResource ResourceTypeBorder}" MouseLeftButtonUp="OnResourceTypeMouseLeftButtonUp" CornerRadius="5" Width="50" Height="50" VerticalAlignment="Top" HorizontalAlignment="Left">
-                        <Grid>
-                            <TextBlock Style="{StaticResource ResourceTypeTextBlock}" FontFamily="Courrier" Opacity="0.5" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                            <Ellipse x:Name="stateSphere" Style="{StaticResource StateSphere}" />
-                        </Grid>
-                    </Border>
-
-                    <Grid x:Name="gridResourceOverview" Grid.Column="1" Margin="4">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="1" />
-                            <RowDefinition Height="1*" />
-                        </Grid.RowDefinitions>
-
-                        <TextBlock Grid.Row="0" Text="{Binding Name}" ToolTip="{Binding Name}" FontFamily="Calibri" TextTrimming="CharacterEllipsis" VerticalAlignment="Top" HorizontalAlignment="Left" />
-                        <Grid Grid.Row="1" Background="Gray" />
-
-                        <Grid x:Name="gridResourceDetails" Grid.Row="2" Visibility="Collapsed">
-                            <ItemsControl ItemsSource="{Binding ResourceDetailViewModelCollection}" Margin="0,2,0,0">
-                                <ItemsControl.Template>
-                                    <ControlTemplate TargetType="ItemsControl">
-                                        <StackPanel IsItemsHost="True" Orientation="Vertical" />
-                                    </ControlTemplate>
-                                </ItemsControl.Template>
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <v:ResourceDetailView Margin="0,2,0,0" />
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                        </Grid>
-                    </Grid>
-                </Grid>
-            </Border>
-        </Grid>
+        <Border x:Name="borderIcon" Grid.Row="0" Style="{StaticResource Icon}">
+            <Grid>
+                <TextBlock Style="{StaticResource IconLabel}" />
+                <Ellipse x:Name="ellipseIconStatus" Style="{StaticResource IconStatus}" />
+            </Grid>
+        </Border>
     </Grid>
 
 </UserControl>

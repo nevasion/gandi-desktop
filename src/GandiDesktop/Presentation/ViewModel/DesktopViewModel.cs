@@ -242,7 +242,7 @@ namespace GandiDesktop.Presentation.ViewModel
 
         private void RemoveResource(ResourceViewModel resourceViewModel)
         {
-            Service.Hosting.Remove(resourceViewModel.Resource);
+            Service.Hosting.Remove(resourceViewModel.HostingResource);
 
             this.ResourceViewModeCollection.Remove(resourceViewModel);
         }

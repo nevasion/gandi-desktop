@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
 using GandiDesktop.Presentation.ViewModel;
+using System.Collections.Generic;
 
 namespace GandiDesktop.Presentation.View
 {
@@ -20,8 +21,8 @@ namespace GandiDesktop.Presentation.View
 
             this.SizeChanged += delegate { this.MoveResourcesInBounds(); };
             this.MouseLeftButtonUp += delegate { this.MoveResourcesInBounds(); };
-            this.MouseLeave += delegate 
-            { 
+            this.MouseLeave += delegate
+            {
                 this.MoveResourcesInBounds();
 
                 this.isDraggingResource = false;
@@ -47,7 +48,9 @@ namespace GandiDesktop.Presentation.View
             if (e.LeftButton == MouseButtonState.Pressed && this.isDraggingResource)
             {
                 Point resourceMousePosition = e.GetPosition(this.resourceDragged);
+                Point desktopMousePosition = e.GetPosition(desktopView);
 
+                DesktopViewModel desktopViewModel = (DesktopViewModel)this.DataContext;
                 ResourceViewModel viewModel = (ResourceViewModel)this.resourceDragged.DataContext;
                 Point viewPosition = new Point(viewModel.Left, viewModel.Top);
 
@@ -58,6 +61,28 @@ namespace GandiDesktop.Presentation.View
                 viewModel.Top = top;
 
                 this.resourceDragged.IsDragging = true;
+
+                //Canvas canvas = (Canvas)sender;
+
+                //IEnumerable<FrameworkElement> resourcesUnder = canvas.Children.OfType<FrameworkElement>().Where(r => 
+                //    DesktopView.IsMouseOverResource(desktopMousePosition, r) 
+                //    && r.DataContext != viewModel 
+                //    && ((ResourceViewModel)r.DataContext).CanReceiveAttachement(viewModel.HostingResource));
+
+                //FrameworkElement resourceUnder = resourcesUnder.OrderBy(r => ((ResourceViewModel)r.DataContext).ZIndex).FirstOrDefault();
+
+                //if (resourceUnder != null)
+                //{
+                //    ResourceViewModel viewModelUnder = (ResourceViewModel)resourceUnder.DataContext;
+
+                //    viewModelUnder.Name = DateTime.Now.Ticks.ToString();
+
+                //    viewModel.DropToAttach = true;
+                //}
+                //else
+                //{
+                //    viewModel.DropToAttach = false;
+                //}
             }
         }
 
@@ -123,7 +148,7 @@ namespace GandiDesktop.Presentation.View
                     double current = animation.GetCurrentValue(from, to, clock);
                     resourceViewModel.Left = current;
                 };
-                
+
                 storyboard.Children.Add(animation);
 
                 Storyboard.SetTargetProperty(animation, new PropertyPath(ResourceView.DummyLeftProperty));
@@ -165,6 +190,18 @@ namespace GandiDesktop.Presentation.View
             int maxZIndex = viewModel.ResourceViewModeCollection.Max(r => r.ZIndex);
 
             return maxZIndex;
+        }
+
+        private static bool IsMouseOverResource(Point desktopMousePosition, FrameworkElement resource)
+        {
+            ResourceViewModel viewModel = (ResourceViewModel)resource.DataContext;
+
+            double offset = 4;
+
+            bool horizontalCross = desktopMousePosition.X > (viewModel.Left + offset) && desktopMousePosition.X < ((viewModel.Left - offset) + resource.ActualWidth);
+            bool verticalCross = desktopMousePosition.Y > (viewModel.Top + offset) && desktopMousePosition.Y < ((viewModel.Top - offset) + resource.ActualHeight);
+
+            return horizontalCross && verticalCross;
         }
     }
 }

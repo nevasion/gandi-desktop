@@ -1,7 +1,8 @@
-﻿using System.Windows;
+﻿using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using System.Windows.Media.Animation;
+using GandiDesktop.Presentation.ViewModel;
 
 namespace GandiDesktop.Presentation.View
 {
@@ -83,17 +84,48 @@ namespace GandiDesktop.Presentation.View
         public ResourceView()
         {
             InitializeComponent();
+
+            InitializeInnerPanel();
+
+            InitializeIcon();
         }
 
-        private void OnResourceTypeMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        private void InitializeInnerPanel()
         {
-            if (!this.IsDragging)
-                this.IsExpanded = !this.IsExpanded;
+            gridInnerPanel.Visibility = System.Windows.Visibility.Visible;
+
+            gridInnerPanel.Loaded += delegate
+            {
+                ((DoubleAnimation)ExpandStoryboard.Children.Single(c => c.Name == "gridInnerPanelWidth")).To = gridInnerPanel.ActualWidth;
+                ((DoubleAnimation)ExpandStoryboard.Children.Single(c => c.Name == "gridInnerPanelHeight")).To = gridInnerPanel.ActualHeight;
+
+                ((DoubleAnimation)CollapseStoryboard.Children.Single(c => c.Name == "gridInnerPanelWidth")).From = gridInnerPanel.ActualWidth;
+                ((DoubleAnimation)CollapseStoryboard.Children.Single(c => c.Name == "gridInnerPanelHeight")).From = gridInnerPanel.ActualHeight;
+
+                gridInnerPanel.Visibility = System.Windows.Visibility.Collapsed;
+            };
+
+            this.ExpandStoryboard.Completed += delegate
+            {
+                gridInnerPanel.BeginAnimation(Grid.HeightProperty, null);
+            };
+        }
+
+        private void InitializeIcon()
+        {
+            this.borderIcon.MouseLeftButtonUp += delegate
+            {
+                if (!this.IsDragging)
+                    this.IsExpanded = !this.IsExpanded;
+            };
         }
 
         private static void OnIsExpandedPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
             ResourceView view = (ResourceView)sender;
+            ResourceViewModel viewModel = (ResourceViewModel)view.DataContext;
+
+            viewModel.IsExpanded = (bool)e.NewValue;
 
             if ((bool)e.NewValue)
             {

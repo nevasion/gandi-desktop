@@ -9,9 +9,25 @@ namespace GandiDesktop.Presentation.ViewModel
 {
     public class ResourceViewModel : ViewModelBase
     {
+        private IResource resource;
+
         public ObservableCollection<ResourceDetailViewModel> ResourceDetailViewModelCollection { get; set; }
 
         public int Id { get; private set; }
+
+        private double height = 50;
+        public double Height
+        {
+            get { return this.height; }
+            set
+            {
+                if (this.height != value)
+                {
+                    this.height = value;
+                    base.OnPropertyChanged(() => Height);
+                }
+            }
+        }
 
         private string name;
         public string Name
@@ -69,7 +85,35 @@ namespace GandiDesktop.Presentation.ViewModel
             }
         }
 
-        public IHostingResource Resource { get; private set; }
+        private bool isExpanded;
+        public bool IsExpanded
+        {
+            get { return this.isExpanded; }
+            set
+            {
+                if (this.isExpanded != value)
+                {
+                    this.isExpanded = value;
+                    base.OnPropertyChanged(() => IsExpanded);
+                }
+            }
+        }
+
+        public IHostingResource HostingResource { get; private set; }
+
+        private bool dropToAttach;
+        public bool DropToAttach
+        {
+            get { return this.dropToAttach; }
+            set
+            {
+                if (this.dropToAttach != value)
+                {
+                    this.dropToAttach = value;
+                    base.OnPropertyChanged(() => DropToAttach);
+                }
+            }
+        }
 
         private double left;
         public double Left
@@ -122,6 +166,8 @@ namespace GandiDesktop.Presentation.ViewModel
 
         private void InitializeResource(IResource resource)
         {
+            this.resource = resource;
+
             this.Id = resource.Id;
             this.Name = resource.Name;
             this.Status = resource.Status;
@@ -132,7 +178,7 @@ namespace GandiDesktop.Presentation.ViewModel
             }
             this.IsRunning = (this.Status == "Running");
             this.Type = resource.Type;
-            this.Resource = resource.Resource;
+            this.HostingResource = resource.Resource;
 
             if (this.ResourceDetailViewModelCollection == null)
                 this.ResourceDetailViewModelCollection = new ObservableCollection<ResourceDetailViewModel>();
@@ -174,6 +220,11 @@ namespace GandiDesktop.Presentation.ViewModel
 
                 this.ResourceDetailViewModelCollection.Add(resourceDetailViewModel);
             }
+        }
+
+        public bool CanReceiveAttachement(IHostingResource hostingResource)
+        {
+            return this.resource.CanReceiveAttachement(hostingResource);
         }
 
         public void Update(IResource resource)
